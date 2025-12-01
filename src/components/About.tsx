@@ -1,27 +1,44 @@
-import { Award, Users, Lightbulb, Heart, Star } from 'lucide-react';
+import { Award, Users, Lightbulb, Heart, Star, Shield, CheckCircle, MessageCircle } from 'lucide-react';
 import avatarFuturistic from '@/assets/avatar-futuristic.webp';
+import { handleWhatsAppClick } from '@/lib/whatsapp';
 
 const About = () => {
   const achievements = [
     {
       icon: Lightbulb,
       title: 'Inovação com IA',
-      description: 'Utilizamos Inteligência Artificial avançada para criar soluções personalizadas e automatizar processos, garantindo a sua liderança no mercado.'
+      description: 'Utilizamos Inteligência Artificial avançada para criar soluções personalizadas e automatizar processos, garantindo a sua liderança no mercado.',
+      badge: '🏆 Inovador'
+    },
+    {
+      icon: Shield,
+      title: 'Certificado ISO 27001',
+      description: 'Segurança da informação certificada internacionalmente. Seus dados estão protegidos com os mais altos padrões globais.',
+      badge: '🔒 Seguro'
     },
     {
       icon: Users,
       title: 'Plataforma Única',
-      description: 'Elimine a gestão de múltiplos fornecedores. Criamos, assistimos e operamos: tudo a partir de um único ponto de contacto.'
+      description: 'Elimine a gestão de múltiplos fornecedores. Criamos, assistimos e operamos: tudo a partir de um único ponto de contacto.',
+      badge: '🎯 Completo'
     },
     {
       icon: Star,
       title: 'Vantagem Exclusiva',
-      description: 'Enquanto membro do Ecossistema Tchova, você desbloqueia descontos e condições especiais inalcançáveis no acesso direto aos serviços curados e selecionados da plataforma.'
+      description: 'Enquanto membro do Ecossistema Tchova, você desbloqueia descontos e condições especiais inalcançáveis no acesso direto aos serviços.',
+      badge: '💎 Premium'
+    },
+    {
+      icon: CheckCircle,
+      title: 'Garantia 30 Dias',
+      description: 'Satisfação garantida ou devolvemos seu investimento. Confiança total no nosso trabalho.',
+      badge: '✅ Garantido'
     },
     {
       icon: Heart,
       title: 'Suporte Total 360º',
-      description: 'Garantia de suporte estratégico (marketing) e suporte operacional especializado (Aluguer de Ferramentas Técnicas), assegurando que a sua performance e a sua operação são sempre máximas.'
+      description: 'Garantia de suporte estratégico (marketing) e suporte operacional especializado, assegurando que sua performance é sempre máxima.',
+      badge: '💙 Dedicado'
     }
   ];
 
@@ -77,13 +94,18 @@ const About = () => {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6 mt-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 mt-8">
               {achievements.map((achievement, index) => (
                 <div
                   key={index}
-                  className="neo p-6 text-center hover-lift group animate-fade-up"
+                  className="neo p-6 text-center hover-lift group animate-fade-up relative"
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
+                  {/* Trust Badge */}
+                  <div className="absolute -top-2 -right-2 bg-gradient-to-r from-primary to-accent text-white text-xs font-bold px-2 py-1 rounded-full shadow-lg">
+                    {achievement.badge}
+                  </div>
+
                   <div className="w-12 h-12 mx-auto mb-4 neo-inset rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                     <achievement.icon className="w-6 h-6 text-primary" />
                   </div>
@@ -97,12 +119,20 @@ const About = () => {
               ))}
             </div>
 
-            <div className="mt-8">
-              <button 
-                className="glass-card hover-glow px-8 py-4 rounded-2xl font-semibold text-primary border border-primary/30 hover:bg-primary/10 transition-all duration-300"
+            <div className="mt-8 space-y-3">
+              <button
+                className="w-full glass-card hover-glow px-8 py-4 rounded-2xl font-semibold text-primary border border-primary/30 hover:bg-primary/10 transition-all duration-300"
+                onClick={() => handleWhatsAppClick('contact', 'consultation')}
+              >
+                <MessageCircle className="w-5 h-5 inline mr-2" />
+                Agendar Consulta Gratuita
+              </button>
+
+              <button
+                className="w-full bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-2xl font-semibold transition-all duration-300 hover-lift"
                 onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
               >
-                Vamos Trabalhar Juntos
+                Enviar Mensagem
               </button>
             </div>
           </div>

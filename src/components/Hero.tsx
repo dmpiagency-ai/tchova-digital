@@ -190,7 +190,8 @@ const Hero = () => {
 
                 setTimeout(() => {
                   ripple.remove();
-                  window.open(`https://wa.me/${env.WHATSAPP_NUMBER}`, '_blank');
+                  const message = encodeURIComponent('Olá! Vi seu site e quero transformar meu negócio em digital. Podemos conversar sobre como a TchovaDigital pode ajudar?');
+                  window.open(`https://wa.me/${env.WHATSAPP_NUMBER}?text=${message}`, '_blank');
                 }, 300);
               }}
             >
@@ -200,22 +201,41 @@ const Hero = () => {
             </Button>
           </div>
 
-          {/* Enhanced Stats with counter animation */}
-          <div className={`grid grid-cols-3 gap-2 sm:gap-3 max-w-sm sm:max-w-lg mx-auto transition-all duration-700 delay-1000 ${isLoaded ? 'animate-fade-up opacity-100' : 'opacity-0 translate-y-10'}`}>
-            {[
-              { number: '100+', label: 'Projetos', suffix: '' },
-              { number: '50+', label: 'Clientes', suffix: '' },
-              { number: '3+', label: 'Anos', suffix: '' }
-            ].map((stat, index) => (
-              <div key={index} className="text-center p-2 sm:p-3 rounded-lg sm:rounded-xl transition-all duration-300 hover:bg-primary/10 dark:hover:bg-primary/5 hover:scale-105 group cursor-pointer">
-                <div className="text-sm sm:text-base lg:text-lg font-bold text-yellow-300 dark:text-yellow-400 mb-1 drop-shadow-md group-hover:scale-110 transition-transform duration-300">
-                  {stat.number}
-                </div>
-                <div className="text-xs sm:text-sm text-yellow-100 dark:text-yellow-200 font-medium leading-tight drop-shadow-sm">
-                  {stat.label}
-                </div>
+          {/* Trust Signals & Stats */}
+          <div className={`space-y-4 transition-all duration-700 delay-1000 ${isLoaded ? 'animate-fade-up opacity-100' : 'opacity-0 translate-y-10'}`}>
+            {/* Trust Badges */}
+            <div className="flex justify-center items-center gap-3 sm:gap-4 flex-wrap">
+              <div className="flex items-center gap-1.5 bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-full border border-white/20">
+                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                <span className="text-xs font-medium text-white">100% Seguro</span>
               </div>
-            ))}
+              <div className="flex items-center gap-1.5 bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-full border border-white/20">
+                <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
+                <span className="text-xs font-medium text-white">Suporte 24/7</span>
+              </div>
+              <div className="flex items-center gap-1.5 bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-full border border-white/20">
+                <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
+                <span className="text-xs font-medium text-white">Garantia 30 dias</span>
+              </div>
+            </div>
+
+            {/* Enhanced Stats with counter animation */}
+            <div className="grid grid-cols-3 gap-2 sm:gap-3 max-w-sm sm:max-w-lg mx-auto">
+              {[
+                { number: '100+', label: 'Projetos', suffix: '', icon: '🚀' },
+                { number: '50+', label: 'Clientes', suffix: '', icon: '👥' },
+                { number: '3+', label: 'Anos', suffix: '', icon: '⭐' }
+              ].map((stat, index) => (
+                <div key={index} className="text-center p-2 sm:p-3 rounded-lg sm:rounded-xl transition-all duration-300 hover:bg-primary/10 dark:hover:bg-primary/5 hover:scale-105 group cursor-pointer">
+                  <div className="text-sm sm:text-base lg:text-lg font-bold text-yellow-300 dark:text-yellow-400 mb-1 drop-shadow-md group-hover:scale-110 transition-transform duration-300">
+                    {stat.icon} {stat.number}
+                  </div>
+                  <div className="text-xs sm:text-sm text-yellow-100 dark:text-yellow-200 font-medium leading-tight drop-shadow-sm">
+                    {stat.label}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

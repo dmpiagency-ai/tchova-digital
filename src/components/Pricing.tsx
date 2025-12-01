@@ -4,6 +4,8 @@ import { useAuth } from '@/contexts/AuthContext';
 import { useAdmin } from '@/contexts/AdminContext';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { handleWhatsAppClick, getPricingMessage } from '@/lib/whatsapp';
+import { env } from '@/config/env';
 
 const Pricing = () => {
   const navigate = useNavigate();
@@ -37,6 +39,12 @@ const Pricing = () => {
 
   const handleCustomizePlan = (plan: { name: string; price: string; }) => {
     navigate(`/customize-services?plan=${encodeURIComponent(plan.name)}&price=${plan.price}`);
+  };
+
+  const handlePlanWhatsApp = (plan: { name: string; }) => {
+    const message = getPricingMessage(plan.name);
+    const whatsappUrl = `https://wa.me/${env.WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
   };
 
   const plans = [
@@ -248,8 +256,8 @@ const Pricing = () => {
                 </ul>
               </div>
 
-              {/* Botão Principal */}
-              <div className="relative z-10">
+              {/* Botões */}
+              <div className="relative z-10 space-y-2">
                 <Button
                   onClick={() => handlePlanPurchase(plan)}
                   className={`w-full ${plan.buttonColor} text-white py-1.5 sm:py-2 px-2 sm:px-3 rounded-lg font-bold text-xs transition-all duration-300 hover-lift shadow-md hover:shadow-lg hover:scale-105 active:scale-95`}
@@ -257,6 +265,16 @@ const Pricing = () => {
                   <CreditCard className="w-3 h-3 mr-1" />
                   <span className="hidden sm:inline">Comprar Agora</span>
                   <span className="sm:hidden">Comprar</span>
+                </Button>
+
+                <Button
+                  onClick={() => handlePlanWhatsApp(plan)}
+                  variant="outline"
+                  className="w-full bg-white/10 border-white/30 text-white hover:bg-green-600 hover:border-green-600 py-1 sm:py-1.5 px-2 sm:px-3 rounded-lg font-semibold text-xs transition-all duration-300 hover-lift"
+                >
+                  <MessageCircle className="w-3 h-3 mr-1" />
+                  <span className="hidden sm:inline">Conversar</span>
+                  <span className="sm:hidden">💬</span>
                 </Button>
               </div>
             </div>

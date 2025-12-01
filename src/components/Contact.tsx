@@ -1,9 +1,12 @@
-import { useState } from 'react';
-import { Send, MapPin, Phone, Mail, Instagram, Facebook, CheckCircle, AlertCircle } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Send, MapPin, Phone, Mail, Instagram, Facebook, CheckCircle, AlertCircle, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
+import { handleWhatsAppClick } from '@/lib/whatsapp';
+import { useAnalytics } from '@/hooks/useAnalytics';
+import { useMozambiqueMobile, useTouchFriendly } from '@/hooks/useMozambiqueMobile';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -13,7 +16,11 @@ const Contact = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<{[key: string]: string}>({});
+  const [touched, setTouched] = useState<{[key: string]: boolean}>({});
+  const [isValid, setIsValid] = useState(false);
   const { toast } = useToast();
+  const { trackFormInteraction, trackButtonClick, trackWhatsAppClick } = useAnalytics();
+  const { shouldUseLargeButtons } = useTouchFriendly();
 
   const validateForm = () => {
     const newErrors: {[key: string]: string} = {};
@@ -44,10 +51,12 @@ const Contact = () => {
     e.preventDefault();
 
     if (!validateForm()) {
+      trackFormInteraction('contact_form', 'error');
       return;
     }
 
     setIsSubmitting(true);
+    trackFormInteraction('contact_form', 'submit');
 
     // Simulate form submission
     try {
@@ -60,7 +69,10 @@ const Contact = () => {
 
       setFormData({ name: '', email: '', message: '' });
       setErrors({});
+      setTouched({});
+      setIsValid(false);
     } catch (error) {
+      trackFormInteraction('contact_form', 'error');
       toast({
         title: "Erro ao enviar",
         description: "Tente novamente ou entre em contacto pelo WhatsApp.",
@@ -71,11 +83,57 @@ const Contact = () => {
     }
   };
 
+  // Real-time validation
+  useEffect(() => {
+    const newErrors: {[key: string]: string} = {};
+
+    if (touched.name && !formData.name.trim()) {
+      newErrors.name = 'Nome é obrigatório';
+    } else if (touched.name && formData.name.trim().length < 2) {
+      newErrors.name = 'Nome deve ter pelo menos 2 caracteres';
+    }
+
+    if (touched.email && !formData.email.trim()) {
+      newErrors.email = 'E-mail é obrigatório';
+    } else if (touched.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = 'E-mail inválido';
+    }
+
+    if (touched.message && !formData.message.trim()) {
+      newErrors.message = 'Mensagem é obrigatória';
+    } else if (touched.message && formData.message.trim().length < 10) {
+      newErrors.message = 'Mensagem deve ter pelo menos 10 caracteres';
+    }
+
+    setErrors(newErrors);
+    setIsValid(Object.keys(newErrors).length === 0 && Boolean(formData.name.trim()) && Boolean(formData.email.trim()) && Boolean(formData.message.trim()));
+  }, [formData, touched]);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+
+    // Mark field as touched
+    if (!touched[name]) {
+      setTouched(prev => ({
+        ...prev,
+        [name]: true
+      }));
+    }
+
+    // Track form interaction
+    trackFormInteraction('contact_form', 'start', name);
+  };
+
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name } = e.target;
+    setTouched(prev => ({
+      ...prev,
+      [name]: true
+    }));
   };
 
   const socialLinks = [
@@ -134,8 +192,12 @@ const Contact = () => {
                 type="button"
                 aria-label="Abrir conversa no WhatsApp"
                 className="glass-card hover-glow px-8 py-4 rounded-2xl font-semibold text-primary border border-primary/30 hover:bg-primary/10 transition-all duration-300"
-                onClick={() => window.open('https://wa.me/258123456789', '_blank')}
+                onClick={() => {
+                  trackWhatsAppClick('contact_header', 'general');
+                  handleWhatsAppClick('contact', 'general');
+                }}
               >
+                <MessageCircle className="w-5 h-5 inline mr-2" />
                 Falar no WhatsApp
               </button>
               <button
@@ -185,8 +247,15 @@ const Contact = () => {
                     placeholder="O seu nome completo"
                     value={formData.name}
                     onChange={handleChange}
+                    onBlur={handleBlur}
                     required
-                    className={`neo-inset border-0 focus:ring-2 focus:ring-primary/50 text-foreground placeholder:text-muted-foreground ${errors.name ? 'ring-2 ring-red-500/50' : ''}`}
+                    className={`neo-inset border-0 focus:ring-2 focus:ring-primary/50 text-foreground placeholder:text-muted-foreground transition-all duration-200 ${
+                      errors.name
+                        ? 'ring-2 ring-red-500/50 focus:ring-red-500/50'
+                        : touched.name && !errors.name
+                        ? 'ring-2 ring-green-500/50 focus:ring-green-500/50'
+                        : ''
+                    }`}
                   />
                   {errors.name && (
                     <p className="text-red-500 text-sm mt-1 flex items-center gap-1">
@@ -203,8 +272,15 @@ const Contact = () => {
                     placeholder="O seu melhor e-mail"
                     value={formData.email}
                     onChange={handleChange}
+                    onBlur={handleBlur}
                     required
-                    className={`neo-inset border-0 focus:ring-2 focus:ring-primary/50 text-foreground placeholder:text-muted-foreground ${errors.email ? 'ring-2 ring-red-500/50' : ''}`}
+                    className={`neo-inset border-0 focus:ring-2 focus:ring-primary/50 text-foreground placeholder:text-muted-foreground transition-all duration-200 ${
+                      errors.email
+                        ? 'ring-2 ring-red-500/50 focus:ring-red-500/50'
+                        : touched.email && !errors.email && formData.email
+                        ? 'ring-2 ring-green-500/50 focus:ring-green-500/50'
+                        : ''
+                    }`}
                   />
                   {errors.email && (
                     <p className="text-red-500 text-sm mt-1 flex items-center gap-1">
@@ -221,8 +297,15 @@ const Contact = () => {
                     rows={6}
                     value={formData.message}
                     onChange={handleChange}
+                    onBlur={handleBlur}
                     required
-                    className={`neo-inset border-0 focus:ring-2 focus:ring-primary/50 text-foreground placeholder:text-muted-foreground resize-none ${errors.message ? 'ring-2 ring-red-500/50' : ''}`}
+                    className={`neo-inset border-0 focus:ring-2 focus:ring-primary/50 text-foreground placeholder:text-muted-foreground resize-none transition-all duration-200 ${
+                      errors.message
+                        ? 'ring-2 ring-red-500/50 focus:ring-red-500/50'
+                        : touched.message && !errors.message && formData.message
+                        ? 'ring-2 ring-green-500/50 focus:ring-green-500/50'
+                        : ''
+                    }`}
                   />
                   {errors.message && (
                     <p className="text-red-500 text-sm mt-1 flex items-center gap-1">
@@ -234,8 +317,16 @@ const Contact = () => {
                 
                 <Button
                   type="submit"
-                  disabled={isSubmitting}
-                  className="w-full bg-primary hover:bg-primary/90 text-white font-semibold py-3 lg:py-4 rounded-2xl text-base lg:text-lg hover-lift animate-glow relative overflow-hidden focus-visible"
+                  disabled={isSubmitting || !isValid}
+                  className={`w-full font-semibold rounded-2xl hover-lift animate-glow relative overflow-hidden focus-visible transition-all duration-300 ${
+                    shouldUseLargeButtons
+                      ? 'py-4 text-lg min-h-[48px]' // Larger touch targets for mobile
+                      : 'py-3 lg:py-4 text-base lg:text-lg'
+                  } ${
+                    isValid
+                      ? 'bg-primary hover:bg-primary/90 text-white'
+                      : 'bg-gray-400 text-gray-200 cursor-not-allowed'
+                  }`}
                   aria-describedby={Object.keys(errors).length > 0 ? "form-errors" : undefined}
                 >
                   {isSubmitting ? (
@@ -310,7 +401,10 @@ const Contact = () => {
               <Button
                 aria-label="Abrir conversa no WhatsApp"
                 className="bg-green-500 hover:bg-green-600 text-white font-semibold px-4 lg:px-6 py-2 lg:py-2.5 rounded-xl lg:rounded-2xl hover-lift relative overflow-hidden group focus-visible text-xs lg:text-sm w-full max-w-xs mx-auto"
-                onClick={() => window.open('https://wa.me/258123456789', '_blank')}
+                onClick={() => {
+                  trackWhatsAppClick('contact_footer', 'consultation');
+                  handleWhatsAppClick('contact', 'consultation');
+                }}
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-green-400/0 via-green-400/20 to-green-400/0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out"></div>
                 <Phone className="w-3 h-3 lg:w-4 lg:h-4 mr-1 lg:mr-2 relative z-10 flex-shrink-0" aria-hidden="true" focusable="false" />

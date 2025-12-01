@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Carousel } from '@/components/ui/carousel';
 import { logger } from '@/lib/logger';
+import { handleWhatsAppClick, getServiceMessage } from '@/lib/whatsapp';
+import { env } from '@/config/env';
 
 const Services = () => {
   const navigate = useNavigate();
@@ -187,6 +189,12 @@ const Services = () => {
     navigate(`/service-details?id=${service.id}&title=${encodeURIComponent(service.title)}&category=${encodeURIComponent(service.category)}`);
   };
 
+  const handleServiceWhatsApp = (service: { title: string; category: string; }) => {
+    const message = getServiceMessage(service.title);
+    const whatsappUrl = `https://wa.me/${env.WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+  };
+
   return (
     <section id="services" className="py-4 sm:py-6 lg:py-12 relative overflow-hidden">
       {/* Enhanced Background with liquid glass effects - More subtle */}
@@ -304,11 +312,31 @@ const Services = () => {
                         {item.description}
                       </p>
 
-                      {/* CTA Button */}
-                      <div className="bg-white/20 backdrop-blur-sm rounded-lg p-2 sm:p-2.5 lg:p-3 border border-white/30 mt-1">
-                        <div className="flex items-center justify-between">
-                          <span className="text-xs font-medium text-shadow-sm">Saiba mais</span>
-                          <ExternalLink className="w-3 h-3 sm:w-3.5 sm:h-3.5 lg:w-4 lg:h-4" />
+                      {/* CTA Buttons */}
+                      <div className="space-y-2 mt-1">
+                        <div
+                          className="bg-white/20 backdrop-blur-sm rounded-lg p-2 sm:p-2.5 lg:p-3 border border-white/30 cursor-pointer hover:bg-white/30 transition-colors"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleServiceWhatsApp(item);
+                          }}
+                        >
+                          <div className="flex items-center justify-between">
+                            <span className="text-xs font-medium text-shadow-sm">Conversar no WhatsApp</span>
+                            <span className="text-green-400 text-sm">💬</span>
+                          </div>
+                        </div>
+                        <div
+                          className="bg-white/10 backdrop-blur-sm rounded-lg p-2 sm:p-2.5 lg:p-3 border border-white/20 cursor-pointer hover:bg-white/20 transition-colors"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleServiceDetails(item);
+                          }}
+                        >
+                          <div className="flex items-center justify-between">
+                            <span className="text-xs font-medium text-shadow-sm">Ver detalhes</span>
+                            <ExternalLink className="w-3 h-3 sm:w-3.5 sm:h-3.5 lg:w-4 lg:h-4" />
+                          </div>
                         </div>
                       </div>
                     </div>
