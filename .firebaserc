@@ -1,0 +1,16 @@
+{
+  "projects": {
+    "default": "tchova-digital-prod",
+    "development": "tchova-digital-dev",
+    "staging": "tchova-digital-staging"
+  },
+  "targets": {
+    "tchova-digital-prod": {
+      "hosting": {
+        "tchova-site": [
+          "tchova-digital-prod"
+        ]
+      }
+    }
+  }
+}
