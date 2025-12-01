@@ -44,42 +44,48 @@ const Services = () => {
       category: 'Design Gráfico',
       description: 'Transformamos marcas em presença visual forte e memorável.',
       features: ['Logotipos exclusivos', 'Identidade visual completa'],
-      popular: true
+      popular: true,
+      badge: 'Revisões Incluídas'
     },
     {
       id: 2,
       title: 'Web & Mobile',
       category: 'Desenvolvimento Web',
       description: 'Sites e apps modernos com tecnologia de ponta.',
-      features: ['Sites responsivos', 'Apps iOS/Android']
+      features: ['Sites responsivos', 'Apps iOS/Android'],
+      badge: 'SEO Otimizado'
     },
     {
       id: 3,
       title: 'Marketing Digital',
       category: 'Marketing Digital',
       description: 'Campanhas com resultados mensuráveis e ROI otimizado.',
-      features: ['Redes sociais', 'Tráfego pago']
+      features: ['Redes sociais', 'Tráfego pago'],
+      badge: 'Relatórios Mensais'
     },
     {
       id: 4,
       title: 'Audiovisual',
       category: 'Produção Audiovisual',
       description: 'Vídeos profissionais que comunicam e impactam.',
-      features: ['Vídeos institucionais', 'Motion graphics']
+      features: ['Vídeos institucionais', 'Motion graphics'],
+      badge: 'Qualidade 4K'
     },
     {
       id: 5,
       title: 'Importação',
       category: 'Importação',
       description: 'Produtos internacionais com logística especializada.',
-      features: ['Compra sob encomenda', 'Fornecedores verificados']
+      features: ['Compra sob encomenda', 'Fornecedores verificados'],
+      badge: 'Entrega Segura'
     },
     {
       id: 6,
       title: 'Assistência Técnica GSM',
       category: 'Assistência GSM',
       description: 'Reparos especializados com garantia alargada.',
-      features: ['Desbloqueio seguro', 'Suporte técnico']
+      features: ['Desbloqueio seguro', 'Suporte técnico'],
+      badge: 'Peças Originais'
     }
   ];
 
@@ -293,11 +299,18 @@ const Services = () => {
                       <span className="font-bold text-white bg-black/40 backdrop-blur-sm px-2 py-0.5 sm:px-3 sm:py-1 rounded-lg text-xs text-shadow-sm">
                         {item.category}
                       </span>
-                      {item.popular && (
-                        <span className="bg-yellow-400 text-black px-1.5 py-0.5 sm:px-2 sm:py-1 rounded-full text-xs font-bold animate-pulse text-shadow-xs">
-                          Popular
-                        </span>
-                      )}
+                      <div className="flex flex-col gap-1">
+                        {item.badge && (
+                          <span className="bg-blue-500 text-white px-1.5 py-0.5 sm:px-2 sm:py-1 rounded-full text-xs font-bold text-shadow-xs">
+                            {item.badge}
+                          </span>
+                        )}
+                        {item.popular && (
+                          <span className="bg-yellow-400 text-black px-1.5 py-0.5 sm:px-2 sm:py-1 rounded-full text-xs font-bold animate-pulse text-shadow-xs">
+                            Popular
+                          </span>
+                        )}
+                      </div>
                     </div>
 
                     {/* Spacer to push content down - More space for image */}

@@ -61,7 +61,7 @@ const Pricing = () => {
         'Website básico responsivo',
         'Identidade visual inicial',
         'Gestão de redes sociais básica',
-        'Suporte inicial 30 dias',
+        'Suporte inicial incluído',
         'Tutorial de configuração'
       ],
       highlighted: false,

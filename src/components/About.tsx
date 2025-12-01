@@ -7,37 +7,37 @@ const About = () => {
     {
       icon: Lightbulb,
       title: 'Inovação com IA',
-      description: 'Utilizamos Inteligência Artificial avançada para criar soluções personalizadas e automatizar processos, garantindo a sua liderança no mercado.',
-      badge: '🏆 Inovador'
+      description: 'Utilizamos Inteligência Artificial avançada para criar soluções personalizadas e automatizar processos criativos.',
+      badge: '🤖 Inovador'
     },
     {
       icon: Shield,
       title: 'Certificado ISO 27001',
-      description: 'Segurança da informação certificada internacionalmente. Seus dados estão protegidos com os mais altos padrões globais.',
+      description: 'Segurança da informação certificada internacionalmente. Seus dados e projetos estão protegidos.',
       badge: '🔒 Seguro'
     },
     {
       icon: Users,
       title: 'Plataforma Única',
-      description: 'Elimine a gestão de múltiplos fornecedores. Criamos, assistimos e operamos: tudo a partir de um único ponto de contacto.',
+      description: 'Elimine a gestão de múltiplos fornecedores. Design, desenvolvimento e marketing em um só lugar.',
       badge: '🎯 Completo'
     },
     {
       icon: Star,
-      title: 'Vantagem Exclusiva',
-      description: 'Enquanto membro do Ecossistema Tchova, você desbloqueia descontos e condições especiais inalcançáveis no acesso direto aos serviços.',
-      badge: '💎 Premium'
+      title: 'Revisões Incluídas',
+      description: 'Múltiplas rodadas de revisões em todos os projetos até sua completa satisfação.',
+      badge: '✨ Perfeito'
     },
     {
       icon: CheckCircle,
-      title: 'Garantia 30 Dias',
-      description: 'Satisfação garantida ou devolvemos seu investimento. Confiança total no nosso trabalho.',
-      badge: '✅ Garantido'
+      title: 'Suporte Pós-Entrega',
+      description: 'Acompanhamento completo após entrega com suporte técnico e orientações de uso.',
+      badge: '🛠️ Apoiado'
     },
     {
       icon: Heart,
       title: 'Suporte Total 360º',
-      description: 'Garantia de suporte estratégico (marketing) e suporte operacional especializado, assegurando que sua performance é sempre máxima.',
+      description: 'Suporte estratégico em marketing e operacional especializado para máxima performance.',
       badge: '💙 Dedicado'
     }
   ];
