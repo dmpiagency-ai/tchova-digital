@@ -1,73 +1,197 @@
-# Welcome to your Lovable project
+# 🌟 TchovaDigital - Ecossistema Digital 360
 
-## Project info
+[![Firebase](https://img.shields.io/badge/Firebase-039BE5?style=for-the-badge&logo=Firebase&logoColor=white)](https://firebase.google.com/)
+[![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 
-**URL**: https://lovable.dev/projects/e3c01b19-20c5-4782-9a3c-9e3520e41724
+> **Ecossistema completo de serviços digitais para Moçambique** - Design, Desenvolvimento Web, Marketing Digital, Assistência GSM e muito mais.
 
-## How can I edit this code?
+## 🚀 Demonstração
 
-There are several ways of editing your application.
+[🔗 **Ver Site Ao Vivo**](https://tchovadigital.com) *(em breve)*
 
-**Use Lovable**
+## ✨ Funcionalidades
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/e3c01b19-20c5-4782-9a3c-9e3520e41724) and start prompting.
+### 🔐 Sistema de Autenticação
+- Login obrigatório para controle de acesso
+- Autenticação com Email/Senha + Google OAuth
+- Dashboard administrativo completo
+- Controle de permissões por usuário
 
-Changes made via Lovable will be committed automatically to this repo.
+### 📊 Analytics Avançado
+- Google Analytics 4 integrado
+- Tracking de conversões em tempo real
+- Funil de vendas otimizado
+- Relatórios de performance
 
-**Use your preferred IDE**
+### 🎣 Captura Inteligente de Leads
+- Formulários contextuais por serviço
+- Progressive profiling automático
+- Qualificação automática de leads
+- Integração direta com WhatsApp
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### 💰 Sistema de Pagamentos
+- M-Pesa e eMola integrados
+- Processamento seguro de pagamentos
+- Recibos automáticos
+- Controle financeiro completo
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### 📱 Experiência Mobile-First
+- Design responsivo otimizado
+- Performance excepcional em redes móveis
+- PWA (Progressive Web App) pronto
+- Interface intuitiva e imersiva
 
-Follow these steps:
+## 🛠️ Tecnologias Utilizadas
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+- **Frontend**: React 18 + TypeScript + Vite
+- **Backend**: Firebase (Auth, Firestore, Analytics, Hosting)
+- **Styling**: Tailwind CSS + shadcn/ui
+- **Deploy**: Firebase Hosting com CI/CD
+- **Analytics**: Google Analytics 4
+- **Pagamentos**: M-Pesa API + eMola
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+## 📦 Instalação e Configuração
 
-# Step 3: Install the necessary dependencies.
-npm i
+### Pré-requisitos
+- Node.js 18+ e npm
+- Firebase CLI (`npm install -g firebase-tools`)
+- Conta Google com acesso ao Firebase Console
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+### 1. Clone o Repositório
+```bash
+git clone https://github.com/dmpiagency-ai/tchova-digital.git
+cd tchova-digital
+```
+
+### 2. Instale as Dependências
+```bash
+npm install
+```
+
+### 3. Configure o Firebase
+```bash
+# Configuração automatizada
+npm run setup:firebase
+
+# Ou manualmente
+npm run init:firebase
+```
+
+### 4. Configure Variáveis de Ambiente
+```bash
+cp .env.example .env.local
+# Edite .env.local com suas chaves do Firebase
+```
+
+### 5. Configure Projetos Firebase
+Siga o guia completo em [`FIREBASE_CONSOLE_SETUP.md`](./FIREBASE_CONSOLE_SETUP.md)
+
+### 6. Execute em Desenvolvimento
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+## 🚀 Deploy
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### Desenvolvimento
+```bash
+npm run deploy:dev
+```
 
-**Use GitHub Codespaces**
+### Produção
+```bash
+npm run deploy:prod
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+### Verificação
+```bash
+npm run config:check
+```
 
-## What technologies are used for this project?
+## 📁 Estrutura do Projeto
 
-This project is built with:
+```
+src/
+├── components/          # Componentes React
+├── config/             # Configurações modulares 🔌
+│   ├── firebase.ts     # Firebase App & Services
+│   ├── features.ts     # Feature flags
+│   └── environment.ts  # Environment variables
+├── hooks/              # Custom hooks especializados
+├── integrations/       # Integrações Firebase
+├── pages/              # Páginas da aplicação
+└── services/           # Serviços externos
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+scripts/                # Scripts de automação
+├── init-firebase.js          # Inicialização completa
+└── setup-firebase-projects.js # Configuração de projetos
 
-## How can I deploy this project?
+📚 Documentação
+├── FIREBASE_SETUP.md          # Setup Firebase técnico
+├── FIREBASE_CONSOLE_SETUP.md  # Guia Console Firebase
+├── FIREBASE_CHECKLIST.md      # Checklist completo
+└── PLUG_IN_SYSTEM_README.md   # Sistema plug-in
+```
 
-Simply open [Lovable](https://lovable.dev/projects/e3c01b19-20c5-4782-9a3c-9e3520e41724) and click on Share -> Publish.
+## 🔌 Sistema Plug-in
 
-## Can I connect a custom domain to my Lovable project?
+Este projeto usa uma arquitetura **modular plug-in** que permite:
+- ✅ Ligar/desligar funcionalidades sem quebrar código
+- ✅ Configurações centralizadas e seguras
+- ✅ Desenvolvimento em múltiplos ambientes
+- ✅ Sincronização automática Git ↔ Firebase
 
-Yes, you can!
+### Como Usar
+```typescript
+// Em qualquer componente
+import { useFirebaseIntegrations } from '@/integrations/firebase';
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+function MyComponent() {
+  const { auth, analytics, trackWhatsAppClick } = useFirebaseIntegrations();
+  // Tudo conectado automaticamente!
+}
+```
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+## 📊 Scripts Disponíveis
+
+```bash
+# Desenvolvimento
+npm run dev              # Servidor de desenvolvimento
+npm run build           # Build para produção
+npm run preview         # Preview do build
+
+# Firebase
+npm run emulators       # Emuladores locais
+npm run deploy:dev      # Deploy desenvolvimento
+npm run deploy:prod     # Deploy produção
+npm run config:check    # Verificar configuração
+
+# Utilitários
+npm run init:firebase   # Inicialização Firebase
+npm run setup:firebase  # Setup projetos Firebase
+npm run lint            # Verificar código
+```
+
+## 🤝 Contribuição
+
+1. Fork o projeto
+2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
+3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
+4. Push para a branch (`git push origin feature/AmazingFeature`)
+5. Abra um Pull Request
+
+## 📝 Licença
+
+Este projeto está sob a licença MIT. Veja o arquivo `LICENSE` para mais detalhes.
+
+## 📞 Contato
+
+**TchovaDigital**
+- 🌐 Website: [tchovadigital.com](https://tchovadigital.com)
+- 📱 WhatsApp: +258 84 123 4567
+- 📧 Email: hello@tchovadigital.com
+- 🐙 GitHub: [dmpiagency-ai](https://github.com/dmpiagency-ai)
+
+**Desenvolvido com ❤️ em Moçambique**
