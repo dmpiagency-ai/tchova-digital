@@ -97,6 +97,7 @@
   },
   "scripts": {
     "init:firebase": "node scripts/init-firebase.js",
-    "setup:firebase": "node scripts/setup-firebase-projects.js"
+    "setup:firebase": "node scripts/setup-firebase-projects.js",
+    "setup:github": "node scripts/setup-github-repo.js"
   }
 }
