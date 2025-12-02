@@ -24,7 +24,7 @@ export const firebaseEnv = {
 
 // 🔌 PLUG-IN: WhatsApp Configuration
 export const whatsappConfig = {
-  number: import.meta.env.VITE_WHATSAPP_NUMBER || '+258841234567',
+  number: import.meta.env.VITE_WHATSAPP_NUMBER || '+258879097249',
   defaultMessage: 'Olá! Gostaria de saber mais sobre os serviços da TchovaDigital.',
   serviceMessages: {
     design: 'Olá! Estou interessado em serviços de design gráfico.',

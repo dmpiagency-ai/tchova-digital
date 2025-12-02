@@ -49,7 +49,7 @@ function setupEnvironmentFiles() {
 VITE_FIREBASE_API_KEY=your_api_key
 VITE_FIREBASE_PROJECT_ID=your_project_id
 VITE_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
-VITE_WHATSAPP_NUMBER=+258841234567
+VITE_WHATSAPP_NUMBER=+258879097249
 VITE_ENABLE_ANALYTICS=true
 `;
       fs.writeFileSync(envLocal, basicEnv);

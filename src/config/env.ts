@@ -2,7 +2,7 @@
 // SECURITY NOTE: Never store passwords or sensitive credentials in frontend environment variables!
 export const env = {
   // WhatsApp
-  WHATSAPP_NUMBER: import.meta.env.VITE_WHATSAPP_NUMBER || '258123456789',
+  WHATSAPP_NUMBER: import.meta.env.VITE_WHATSAPP_NUMBER || '258879097249',
 
   // GSM URLs
   GSM_SITE_URL: import.meta.env.VITE_GSM_SITE_URL || 'https://gsm.tchova.digital',

@@ -118,7 +118,7 @@ const validateDeployment = (environment) => {
   };
 };
 
-module.exports = {
+export {
   config,
   getCurrentEnvironment,
   getConfig,

@@ -2,6 +2,7 @@
 // Context-aware WhatsApp messaging for better conversion
 
 import { env } from '@/config/env';
+import { sendWhatsAppMessage } from '@/config/whatsapp';
 
 // 🔌 PLUG-IN: WhatsApp message templates by context
 export const WHATSAPP_MESSAGES = {
@@ -57,8 +58,35 @@ export const generateWhatsAppUrl = (context: keyof typeof WHATSAPP_MESSAGES, sub
   return `https://wa.me/${env.WHATSAPP_NUMBER}?text=${encodedMessage}`;
 };
 
-// 🔌 PLUG-IN: Open WhatsApp with contextual message
-export const openWhatsApp = (context: keyof typeof WHATSAPP_MESSAGES, subContext?: string): void => {
+// 🔌 PLUG-IN: Open WhatsApp with contextual message (with API support)
+export const openWhatsApp = async (context: keyof typeof WHATSAPP_MESSAGES, subContext?: string): Promise<void> => {
+  let message = '';
+
+  if (context === 'services' && subContext) {
+    message = WHATSAPP_MESSAGES.services[subContext as keyof typeof WHATSAPP_MESSAGES.services] || WHATSAPP_MESSAGES.hero;
+  } else if (context === 'pricing' && subContext) {
+    message = WHATSAPP_MESSAGES.pricing[subContext as keyof typeof WHATSAPP_MESSAGES.pricing] || WHATSAPP_MESSAGES.hero;
+  } else if (context === 'contact' && subContext) {
+    message = WHATSAPP_MESSAGES.contact[subContext as keyof typeof WHATSAPP_MESSAGES.contact] || WHATSAPP_MESSAGES.contact.general;
+  } else {
+    // Handle string contexts (hero, support)
+    const contextValue = WHATSAPP_MESSAGES[context];
+    message = typeof contextValue === 'string' ? contextValue : WHATSAPP_MESSAGES.hero;
+  }
+
+  try {
+    // Try to use WhatsApp API first (if configured)
+    const result = await sendWhatsAppMessage(env.WHATSAPP_NUMBER, message);
+
+    if (result.success && result.method === 'api') {
+      console.log('✅ WhatsApp message sent via API');
+      return;
+    }
+  } catch (error) {
+    console.warn('WhatsApp API failed, using fallback:', error);
+  }
+
+  // Fallback to wa.me URL
   const url = generateWhatsAppUrl(context, subContext);
   window.open(url, '_blank');
 };
@@ -79,9 +107,9 @@ export const trackWhatsAppInteraction = (context: string, subContext?: string): 
 };
 
 // 🔌 PLUG-IN: Combined function for components
-export const handleWhatsAppClick = (context: keyof typeof WHATSAPP_MESSAGES, subContext?: string): void => {
+export const handleWhatsAppClick = async (context: keyof typeof WHATSAPP_MESSAGES, subContext?: string): Promise<void> => {
   trackWhatsAppInteraction(context, subContext);
-  openWhatsApp(context, subContext);
+  await openWhatsApp(context, subContext);
 };
 
 // 🔌 PLUG-IN: Service-specific message generator
