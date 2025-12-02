@@ -6,6 +6,7 @@ import Header from '@/components/Header';
 import ScrollStack, { ScrollStackItem } from '@/components/ui/ScrollStack';
 import { INDIVIDUAL_SERVICES, getWhatsAppMessage } from '@/config/pricing';
 import { env } from '@/config/env';
+import { useAuth } from '@/contexts/AuthContext';
 import {
   ArrowLeft,
   Package,
@@ -49,6 +50,7 @@ const ServiceDetails = () => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [showGsmLogin, setShowGsmLogin] = useState(false);
   const [user, setUser] = useState<User | null>(null);
+  const { isAuthenticated } = useAuth();
 
   const serviceId = searchParams.get('id');
   const serviceTitle = searchParams.get('title') || 'Serviço';
@@ -83,7 +85,13 @@ const ServiceDetails = () => {
 
   // GSM-specific handlers
   const handleGsmRent = () => {
-    setShowGsmLogin(true);
+    // Se usuário já está logado no site geral, vai direto para GSM dashboard
+    if (isAuthenticated) {
+      navigate('/gsm-dashboard');
+    } else {
+      // Senão, mostra modal de login GSM
+      setShowGsmLogin(true);
+    }
   };
 
   const handleGSMLogin = (credentials: LoginCredentials) => {
@@ -402,8 +410,12 @@ const ServiceDetails = () => {
                     >
                       <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out"></div>
                       <Zap className="w-5 h-5 sm:w-6 sm:h-6 mr-2 relative z-10" />
-                      <span className="hidden sm:inline relative z-10">Alugar Ferramentas GSM</span>
-                      <span className="sm:hidden relative z-10">Alugar GSM</span>
+                      <span className="hidden sm:inline relative z-10">
+                        {isAuthenticated ? 'Acessar GSM Dashboard' : 'Alugar Ferramentas GSM'}
+                      </span>
+                      <span className="sm:hidden relative z-10">
+                        {isAuthenticated ? 'GSM Dashboard' : 'Alugar GSM'}
+                      </span>
                     </Button>
                   ) : (
                     <Button

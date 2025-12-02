@@ -278,13 +278,7 @@ const Services = () => {
                 <div
                   className="relative h-full rounded-xl sm:rounded-2xl shadow-xl overflow-hidden group transition-all duration-500 hover:scale-[1.02] cursor-pointer"
                   onClick={() => {
-                    if (item.category === 'Assistência GSM') {
-                      if (window.handleServiceAccess) {
-                        window.handleServiceAccess('gsm-rental', { title: item.title, type: 'gsm', requiresLogin: true });
-                      }
-                    } else {
-                      handleServiceDetails(item);
-                    }
+                    handleServiceDetails(item);
                   }}
                   role="button"
                   tabIndex={0}
@@ -357,13 +351,15 @@ const Services = () => {
                         >
                           <div className="flex items-center justify-between">
                             <span className="text-xs font-medium text-shadow-sm">
-                              {isAuthenticated ? 'Ver detalhes' : 'Login necessário'}
+                              {item.category === 'Assistência GSM' ? 'Ver detalhes' : (isAuthenticated ? 'Ver detalhes' : 'Login necessário')}
                             </span>
-                            {isAuthenticated ? (
+                            {item.category === 'Assistência GSM' ? (
+                              <ExternalLink className="w-3 h-3 sm:w-3.5 sm:h-3.5 lg:w-4 lg:h-4" />
+                            ) : (isAuthenticated ? (
                               <ExternalLink className="w-3 h-3 sm:w-3.5 sm:h-3.5 lg:w-4 lg:h-4" />
                             ) : (
                               <Lock className="w-3 h-3 sm:w-3.5 sm:h-3.5 lg:w-4 lg:h-4" />
-                            )}
+                            ))}
                           </div>
                         </div>
                       </div>

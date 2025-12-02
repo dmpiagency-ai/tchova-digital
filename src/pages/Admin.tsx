@@ -1,5 +1,5 @@
 import React from 'react';
-import { AdminPanel } from '@/components/AdminPanel';
+import AdminPanel from '@/components/AdminPanel';
 
 const Admin: React.FC = () => {
   return <AdminPanel />;
