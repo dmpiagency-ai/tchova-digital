@@ -1,16 +1,20 @@
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Menu, X, MessageCircle, ArrowLeft } from 'lucide-react';
+import { Menu, X, MessageCircle, ArrowLeft, LogIn, LogOut, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import DarkModeToggle from '@/components/DarkModeToggle';
+import LoginModal from '@/components/LoginModal';
+import { useAuth } from '@/contexts/AuthContext';
 import logo from '@/assets/logo.svg';
 import { env } from '@/config/env';
 
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  const { user, isAuthenticated, logout } = useAuth();
 
   const isPaymentPage = location.pathname === '/payment';
 
@@ -92,19 +96,52 @@ const Header = () => {
                 ))}
               </nav>
 
-            {/* WhatsApp Button - Desktop */}
-            <div className="hidden lg:flex">
+            {/* User Authentication & WhatsApp - Desktop */}
+            <div className="hidden lg:flex items-center space-x-2 xl:space-x-3">
+              {/* WhatsApp Button */}
               <Button
-                variant="default"
+                variant="outline"
                 size="sm"
                 aria-label="Abrir conversa no WhatsApp"
-                className="bg-primary hover:bg-primary/90 text-white font-medium px-4 xl:px-6 focus-visible text-sm xl:text-base"
+                className="border-primary/20 hover:bg-primary/10 text-primary hover:text-primary font-medium px-3 xl:px-4 focus-visible text-sm xl:text-base"
                 onClick={() => window.open(`https://wa.me/${env.WHATSAPP_NUMBER}`, '_blank')}
               >
                 <MessageCircle className="w-3 h-3 xl:w-4 xl:h-4 mr-1.5 xl:mr-2" aria-hidden="true" focusable="false" />
                 <span className="hidden xl:inline">WhatsApp</span>
                 <span className="xl:hidden">WA</span>
               </Button>
+
+              {/* Login/Logout Button */}
+              {isAuthenticated ? (
+                <div className="flex items-center space-x-2">
+                  <div className="flex items-center space-x-2 bg-primary/10 rounded-lg px-3 py-1.5">
+                    <User className="w-4 h-4 text-primary" />
+                    <span className="text-sm font-medium text-primary hidden xl:inline">
+                      {user?.name || 'Usuário'}
+                    </span>
+                  </div>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={logout}
+                    className="border-red-200 hover:bg-red-50 text-red-600 hover:text-red-700"
+                  >
+                    <LogOut className="w-3 h-3 xl:w-4 xl:h-4 mr-1.5 xl:mr-2" />
+                    <span className="hidden xl:inline">Sair</span>
+                  </Button>
+                </div>
+              ) : (
+                <Button
+                  variant="default"
+                  size="sm"
+                  onClick={() => setIsLoginModalOpen(true)}
+                  className="bg-primary hover:bg-primary/90 text-white font-medium px-4 xl:px-6 focus-visible text-sm xl:text-base"
+                >
+                  <LogIn className="w-3 h-3 xl:w-4 xl:h-4 mr-1.5 xl:mr-2" />
+                  <span className="hidden xl:inline">Entrar</span>
+                  <span className="xl:hidden">Login</span>
+                </Button>
+              )}
             </div>
 
             {/* Mobile Menu Button */}
@@ -159,7 +196,15 @@ const Header = () => {
           </div>
         )}
       </header>
-      
+
+      {/* Login Modal */}
+      <LoginModal
+        isOpen={isLoginModalOpen}
+        onClose={() => setIsLoginModalOpen(false)}
+        title="Acesso TchovaDigital"
+        description="Entre na sua conta para acessar todos os recursos exclusivos"
+      />
+
       {/* Spacer for fixed header */}
       <div className="h-14 sm:h-16 lg:h-[72px] xl:h-20" />
     </>

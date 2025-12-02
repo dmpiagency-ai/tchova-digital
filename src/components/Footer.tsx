@@ -1,4 +1,4 @@
-import { Heart, ArrowUp } from 'lucide-react';
+import { Heart, ArrowUp, Facebook, Instagram } from 'lucide-react';
 import { env } from '@/config/env';
 
 const Footer = () => {
@@ -69,6 +69,28 @@ const Footer = () => {
               <p>Maputo, Moçambique</p>
               <p>+258 123 456 789</p>
               <p>hello@tchovadigital.com</p>
+            </div>
+
+            {/* Social Media Links */}
+            <div className="mt-4 flex justify-center md:justify-end space-x-3">
+              <a
+                href="https://www.facebook.com/profile.php?id=61582720743448"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-blue-600 transition-colors"
+                aria-label="Facebook"
+              >
+                <Facebook className="w-5 h-5" />
+              </a>
+              <a
+                href="https://www.instagram.com/tchovadigitalmz/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-pink-600 transition-colors"
+                aria-label="Instagram"
+              >
+                <Instagram className="w-5 h-5" />
+              </a>
             </div>
             
             {/* Compact Back to Top Button */}

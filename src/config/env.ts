@@ -6,7 +6,7 @@ export const env = {
 
   // GSM URLs
   GSM_SITE_URL: import.meta.env.VITE_GSM_SITE_URL || 'https://gsm.tchova.digital',
-  GSM_TOOLS_REFERRAL_URL: import.meta.env.VITE_GSM_TOOLS_REFERRAL_URL || 'https://gsm-tools-site.com',
+  GSM_TOOLS_REFERRAL_URL: import.meta.env.VITE_GSM_TOOLS_REFERRAL_URL || 'https://4youtechservice.com/',
 
   // App Info
   APP_NAME: import.meta.env.VITE_APP_NAME || 'TchovaDigital',

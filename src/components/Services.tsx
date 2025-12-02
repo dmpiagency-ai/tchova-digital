@@ -1,14 +1,18 @@
-import { ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ExternalLink, ChevronLeft, ChevronRight, Lock, LogIn } from 'lucide-react';
 import { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Carousel } from '@/components/ui/carousel';
+import { Button } from '@/components/ui/button';
 import { logger } from '@/lib/logger';
 import { handleWhatsAppClick, getServiceMessage } from '@/lib/whatsapp';
 import { env } from '@/config/env';
+import { useAuth } from '@/contexts/AuthContext';
+import LoginModal from '@/components/LoginModal';
 
 const Services = () => {
   const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
   const [activeCategory, setActiveCategory] = useState('Todos');
@@ -16,6 +20,7 @@ const Services = () => {
   const [isWebVersion, setIsWebVersion] = useState(false);
   const [imagesLoaded, setImagesLoaded] = useState<Record<string, boolean>>({});
   const [isAutoAdvancing, setIsAutoAdvancing] = useState(false);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
   // Image mapping function - URLs from Cloudinary
   const getServiceImage = (item: { id: number; }) => {
@@ -192,6 +197,10 @@ const Services = () => {
   };
 
   const handleServiceDetails = (service: { id: number; title: string; category: string; }) => {
+    if (!isAuthenticated) {
+      setIsLoginModalOpen(true);
+      return;
+    }
     navigate(`/service-details?id=${service.id}&title=${encodeURIComponent(service.title)}&category=${encodeURIComponent(service.category)}`);
   };
 
@@ -347,8 +356,14 @@ const Services = () => {
                           }}
                         >
                           <div className="flex items-center justify-between">
-                            <span className="text-xs font-medium text-shadow-sm">Ver detalhes</span>
-                            <ExternalLink className="w-3 h-3 sm:w-3.5 sm:h-3.5 lg:w-4 lg:h-4" />
+                            <span className="text-xs font-medium text-shadow-sm">
+                              {isAuthenticated ? 'Ver detalhes' : 'Login necessário'}
+                            </span>
+                            {isAuthenticated ? (
+                              <ExternalLink className="w-3 h-3 sm:w-3.5 sm:h-3.5 lg:w-4 lg:h-4" />
+                            ) : (
+                              <Lock className="w-3 h-3 sm:w-3.5 sm:h-3.5 lg:w-4 lg:h-4" />
+                            )}
                           </div>
                         </div>
                       </div>
@@ -378,6 +393,14 @@ const Services = () => {
           />
         </div>
       </div>
+
+      {/* Login Modal */}
+      <LoginModal
+        isOpen={isLoginModalOpen}
+        onClose={() => setIsLoginModalOpen(false)}
+        title="Acesso aos Serviços"
+        description="Faça login para ver detalhes completos dos serviços e acessar recursos exclusivos"
+      />
     </section>
   );
 };

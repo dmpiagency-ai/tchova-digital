@@ -1,4 +1,4 @@
-import { Check, Star, Zap, Smartphone, MessageCircle, LogOut, Shield, CreditCard } from 'lucide-react';
+import { Check, Star, Zap, Smartphone, MessageCircle, LogOut, Shield, CreditCard, Lock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/contexts/AuthContext';
 import { useAdmin } from '@/contexts/AdminContext';
@@ -7,11 +7,13 @@ import { useNavigate } from 'react-router-dom';
 import { handleWhatsAppClick, getPricingMessage } from '@/lib/whatsapp';
 import { env } from '@/config/env';
 import { SERVICE_PLANS, getWhatsAppMessage } from '@/config/pricing';
+import LoginModal from '@/components/LoginModal';
 
 const Pricing = () => {
   const navigate = useNavigate();
   const { isAuthenticated, user, logout } = useAuth();
   const { isAdmin } = useAdmin();
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
   type HandleServiceAccess = (serviceType: string, serviceData?: { title?: string; type?: string; requiresLogin?: boolean }) => void;
 
@@ -38,6 +40,10 @@ const Pricing = () => {
   };
 
   const handleCustomizePlan = (plan: { name: string; price: number; }) => {
+    if (!isAuthenticated) {
+      setIsLoginModalOpen(true);
+      return;
+    }
     navigate(`/customize-services?plan=${encodeURIComponent(plan.name)}&price=${plan.price.toString()}`);
   };
 
@@ -213,6 +219,13 @@ const Pricing = () => {
 
       </div>
 
+      {/* Login Modal */}
+      <LoginModal
+        isOpen={isLoginModalOpen}
+        onClose={() => setIsLoginModalOpen(false)}
+        title="Personalizar Plano"
+        description="Faça login para personalizar seu plano e acessar recursos exclusivos"
+      />
     </section>
   );
 };

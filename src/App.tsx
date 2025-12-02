@@ -14,6 +14,7 @@ import { PageLoader } from "@/components/PageLoader";
 // Code splitting: Lazy load pages for better performance
 const Index = lazy(() => import("./pages/Index"));
 const Admin = lazy(() => import("./pages/Admin"));
+const AdminPanel = lazy(() => import("./components/AdminPanel"));
 const Login = lazy(() => import("./pages/Login"));
 const ServiceDetails = lazy(() => import("./pages/ServiceDetails"));
 const Payment = lazy(() => import("./pages/Payment"));
@@ -43,6 +44,7 @@ const App = () => (
                   <Routes>
                     <Route path="/" element={<Index />} />
                     <Route path="/admin/gsm" element={<Admin />} />
+                    <Route path="/admin" element={<AdminPanel />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/service-details" element={<ServiceDetails />} />
                     <Route path="/payment" element={<Payment />} />
