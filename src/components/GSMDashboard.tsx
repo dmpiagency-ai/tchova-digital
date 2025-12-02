@@ -59,7 +59,7 @@ const GSMDashboard: React.FC = () => {
 
   const handleAccessPlatform = () => {
     if (canAccessPlatform) {
-      window.open('https://gsm.tchova.digital', '_blank');
+      window.open('https://4youtech-rent-painel.com/', '_blank');
     }
   };
 

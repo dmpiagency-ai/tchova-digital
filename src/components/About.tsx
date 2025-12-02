@@ -79,60 +79,36 @@ const About = () => {
 
           {/* Content Side */}
           <div className="order-1 lg:order-2 animate-fade-up">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
-              <span className="gradient-text">A força que seu negócio precisa para vencer no digital.</span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-8">
+              <span className="gradient-text">Por que escolher a TchovaDigital?</span>
             </h2>
 
-            <div className="space-y-4 text-muted-foreground leading-relaxed">
-              <div className="space-y-3">
-                <p className="text-lg font-medium text-primary">Tudo em Um Lugar</p>
-                <p className="text-base">Design, desenvolvimento web, marketing e suporte técnico reunidos para facilitar sua vida.</p>
-              </div>
-              <div className="space-y-3">
-                <p className="text-lg font-medium text-primary">Soluções Completas</p>
-                <p className="text-base">Do conceito inicial ao lançamento e suporte contínuo do seu negócio digital.</p>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 mt-8">
-              {achievements.map((achievement, index) => (
+            {/* Simplified achievement cards - focus on essentials */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
+              {achievements.slice(0, 6).map((achievement, index) => (
                 <div
                   key={index}
-                  className="neo p-6 text-center hover-lift group animate-fade-up relative"
+                  className="neo p-4 text-center hover-lift group animate-fade-up relative"
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
-                  {/* Trust Badge */}
-                  <div className="absolute -top-2 -right-2 bg-gradient-to-r from-primary to-accent text-white text-xs font-bold px-2 py-1 rounded-full shadow-lg">
-                    {achievement.badge}
+                  <div className="w-10 h-10 mx-auto mb-3 neo-inset rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <achievement.icon className="w-5 h-5 text-primary" />
                   </div>
-
-                  <div className="w-12 h-12 mx-auto mb-4 neo-inset rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                    <achievement.icon className="w-6 h-6 text-primary" />
-                  </div>
-                  <h3 className="font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
+                  <h3 className="font-bold text-foreground text-sm group-hover:text-primary transition-colors">
                     {achievement.title}
                   </h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    {achievement.description}
-                  </p>
                 </div>
               ))}
             </div>
 
-            <div className="mt-8 space-y-3">
+            {/* Single focused CTA */}
+            <div className="mt-8">
               <button
-                className="w-full glass-card hover-glow px-8 py-4 rounded-2xl font-semibold text-primary border border-primary/30 hover:bg-primary/10 transition-all duration-300"
+                className="w-full bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-2xl font-semibold transition-all duration-300 hover-lift"
                 onClick={() => handleWhatsAppClick('contact', 'consultation')}
               >
                 <MessageCircle className="w-5 h-5 inline mr-2" />
-                Agendar Consulta Gratuita
-              </button>
-
-              <button
-                className="w-full bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-2xl font-semibold transition-all duration-300 hover-lift"
-                onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
-              >
-                Enviar Mensagem
+                Falar Conosco
               </button>
             </div>
           </div>

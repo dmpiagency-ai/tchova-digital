@@ -15,7 +15,10 @@
     "emulators": "firebase emulators:start",
     "preview:dev": "npm run build && firebase serve --only hosting",
     "firebase:init": "firebase init hosting --project tchova-digital-dev",
-    "config:check": "node -e \"console.log(JSON.stringify(require('./deploy.config.js').validateDeployment(process.argv[2] || 'development'), null, 2))\""
+    "config:check": "node -e \"console.log(JSON.stringify(require('./deploy.config.js').validateDeployment(process.argv[2] || 'development'), null, 2))\"",
+    "init:firebase": "node scripts/init-firebase.js",
+    "setup:firebase": "node scripts/setup-firebase-projects.js",
+    "setup:github": "node scripts/setup-github-repo.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
@@ -94,10 +97,5 @@
     "typescript-eslint": "^8.38.0",
     "vite": "^5.4.19",
     "firebase-tools": "^13.15.1"
-  },
-  "scripts": {
-    "init:firebase": "node scripts/init-firebase.js",
-    "setup:firebase": "node scripts/setup-firebase-projects.js",
-    "setup:github": "node scripts/setup-github-repo.js"
   }
 }

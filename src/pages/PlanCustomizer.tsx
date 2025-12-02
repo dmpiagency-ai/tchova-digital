@@ -55,6 +55,7 @@ const PlanCustomizer = () => {
   
   const planName = searchParams.get('plan') || 'Plano Personalizado';
   const basePrice = parseInt(searchParams.get('price') || '0');
+  const serviceTitle = searchParams.get('service') || '';
   
   // Check screen size for responsive tooltip
   useEffect(() => {
@@ -77,68 +78,264 @@ const PlanCustomizer = () => {
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
   const [quantities, setQuantities] = useState<Record<string, number>>({});
 
-  const availableServices: Service[] = [
-    {
-      id: 'design-extra',
-      name: 'Design Extra',
-      category: 'Design',
-      basePrice: 1500,
-      description: 'Materiais adicionais de design e branding',
-      features: ['Logos extras', 'Materiais promocionais', 'Guia de identidade'],
-      popular: true,
-      savings: 15
-    },
-    {
-      id: 'marketing-extra',
-      name: 'Marketing Avançado',
-      category: 'Marketing',
-      basePrice: 2500,
-      description: 'Campanhas avançadas de marketing digital',
-      features: ['Google Ads', 'Facebook Ads', 'SEO avançado', 'Analytics completo'],
-      popular: false,
-      savings: 10
-    },
-    {
-      id: 'dev-extra',
-      name: 'Desenvolvimento Extra',
-      category: 'Desenvolvimento',
-      basePrice: 3500,
-      description: 'Funcionalidades extras no desenvolvimento',
-      features: ['APIs customizadas', 'Integrações especiais', 'Painel admin'],
-      popular: true,
-      savings: 20
-    },
-    {
-      id: 'support-extra',
-      name: 'Suporte Premium',
-      category: 'Suporte',
-      basePrice: 1200,
-      description: 'Suporte prioritário e consultoria mensal',
-      features: ['Suporte 24/7', 'Consultoria mensal', 'Manutenção preventiva'],
-      popular: false,
-      savings: 25
-    },
-    {
-      id: 'ecommerce-extra',
-      name: 'E-commerce Plus',
-      category: 'E-commerce',
-      basePrice: 4000,
-      description: 'Loja online completa com gestão',
-      features: ['Catálogo ilimitado', 'Gestão de estoque', 'Múltiplos gateways'],
-      popular: false,
-      savings: 18
-    },
-    {
-      id: 'social-extra',
-      name: 'Gestão de Redes Sociais',
-      category: 'Social Media',
-      basePrice: 2000,
-      description: 'Gestão profissional de redes sociais',
-      features: ['Conteúdo diário', 'Interação com comunidade', 'Relatórios mensais'],
-      popular: true,
-      savings: 12
+  // Service-specific customization options
+  const getAvailableServices = (): Service[] => {
+    // Design services customization
+    if (serviceTitle.includes('Design') || serviceTitle.includes('Identidade Visual')) {
+      return [
+        {
+          id: 'design-pack-premium',
+          name: 'Pacote Premium de Design',
+          category: 'Design',
+          basePrice: 2500,
+          description: 'Materiais completos de identidade visual premium',
+          features: ['Manual da marca completo', 'Versões para todos os meios', 'Arquivos editáveis', 'Orientação de uso'],
+          popular: true,
+          savings: 20
+        },
+        {
+          id: 'design-mockups',
+          name: 'Mockups Profissionais',
+          category: 'Design',
+          basePrice: 1200,
+          description: 'Apresentação profissional dos seus designs',
+          features: ['Mockups de alta qualidade', 'Diferentes contextos', 'Para apresentações', 'Versões digitais'],
+          popular: false,
+          savings: 15
+        },
+        {
+          id: 'design-print-materials',
+          name: 'Materiais para Impressão',
+          category: 'Design',
+          basePrice: 800,
+          description: 'Preparação completa para impressão',
+          features: ['Ajustes de cor CMYK', 'Sangria e marca de corte', 'Arquivos otimizados', 'Orientação gráfica'],
+          popular: false,
+          savings: 10
+        }
+      ];
     }
-  ];
+
+    // Web development services customization
+    if (serviceTitle.includes('Website') || serviceTitle.includes('Web')) {
+      return [
+        {
+          id: 'web-seo-package',
+          name: 'Pacote SEO Completo',
+          category: 'Web',
+          basePrice: 1800,
+          description: 'Otimização completa para motores de busca',
+          features: ['Otimização on-page', 'Meta tags avançadas', 'Schema markup', 'Sitemap XML', 'Robots.txt'],
+          popular: true,
+          savings: 25
+        },
+        {
+          id: 'web-ecommerce-integration',
+          name: 'Integração E-commerce',
+          category: 'Web',
+          basePrice: 2200,
+          description: 'Transforme seu site em loja online',
+          features: ['Sistema de pagamentos', 'Gestão de produtos', 'Carrinho de compras', 'Área do cliente'],
+          popular: true,
+          savings: 18
+        },
+        {
+          id: 'web-blog-system',
+          name: 'Sistema de Blog',
+          category: 'Web',
+          basePrice: 1200,
+          description: 'Plataforma completa para conteúdo',
+          features: ['CMS integrado', 'Sistema de comentários', 'SEO para blog', 'Analytics integrado'],
+          popular: false,
+          savings: 15
+        },
+        {
+          id: 'web-multilingual',
+          name: 'Versão Multilíngue',
+          category: 'Web',
+          basePrice: 1500,
+          description: 'Expanda para mercados internacionais',
+          features: ['Até 3 idiomas', 'Tradução incluída', 'SEO internacional', 'Switch automático'],
+          popular: false,
+          savings: 20
+        }
+      ];
+    }
+
+    // Marketing services customization
+    if (serviceTitle.includes('Marketing')) {
+      return [
+        {
+          id: 'marketing-ads-boost',
+          name: 'Impulsionamento Anúncios',
+          category: 'Marketing',
+          basePrice: 3000,
+          description: 'Campanhas pagas otimizadas para resultados',
+          features: ['Google Ads + Facebook Ads', 'Otimização diária', 'Relatórios semanais', 'A/B testing'],
+          popular: true,
+          savings: 15
+        },
+        {
+          id: 'marketing-content-creation',
+          name: 'Criação de Conteúdo',
+          category: 'Marketing',
+          basePrice: 2000,
+          description: 'Conteúdo estratégico para todas as plataformas',
+          features: ['Posts para redes sociais', 'Artigos para blog', 'Email marketing', 'Calendário editorial'],
+          popular: true,
+          savings: 12
+        },
+        {
+          id: 'marketing-analytics-pro',
+          name: 'Analytics Profissional',
+          category: 'Marketing',
+          basePrice: 1800,
+          description: 'Acompanhamento avançado de resultados',
+          features: ['Google Analytics 4', 'Dashboards customizados', 'Relatórios automatizados', 'Insights estratégicos'],
+          popular: false,
+          savings: 18
+        }
+      ];
+    }
+
+    // Audiovisual event packages
+    if (planName === 'Pacotes Audiovisuais') {
+      return [
+        {
+          id: 'pacote-basico',
+          name: '🎬 Pacote Básico - 10.000 MZN',
+          category: 'Evento',
+          basePrice: 10000,
+          description: 'Cobertura essencial do seu evento',
+          features: ['Filmagem de vídeos', 'Seção fotográfica', 'Edição de vídeo', 'USB de Fotos', 'USB de Vídeo', 'Edição de vídeo do evento'],
+          popular: true,
+          savings: 0
+        },
+        {
+          id: 'pacote-medio',
+          name: '🎥 Pacote Médio - 15.000 MZN',
+          category: 'Evento',
+          basePrice: 15000,
+          description: 'Cobertura completa com efeitos especiais',
+          features: ['Filmagem de vídeos', 'Seção fotográfica', 'Edição de vídeo', 'Fogo de artifício', 'USB de Fotos', 'USB de Vídeo', 'Edição de vídeo do evento'],
+          popular: true,
+          savings: 0
+        },
+        {
+          id: 'pacote-classico',
+          name: '🎪 Pacote Clássico - 25.000 MZN',
+          category: 'Evento',
+          basePrice: 25000,
+          description: 'Experiência premium com efeitos visuais',
+          features: ['Filmagem de vídeo', 'Seção fotográfica', 'Edição de vídeo', 'Bolas de Fumaça', 'USB de Fotos', 'USB de Vídeo', 'Edição de vídeo do evento'],
+          popular: false,
+          savings: 0
+        },
+        {
+          id: 'pacote-vip',
+          name: '👑 Pacote VIP - 35.000 MZN',
+          category: 'Evento',
+          basePrice: 35000,
+          description: 'Cobertura completa com drone e todos os efeitos',
+          features: ['Filmagem de vídeo', 'Filmagem com drone', 'Seção fotográfica', 'Edição de vídeo', 'Bolas de Fumaça', 'Fogo de artifício', 'USB de Fotos', 'USB de Vídeo', 'Edição de vídeo do evento'],
+          popular: false,
+          savings: 0
+        },
+        {
+          id: 'adicional-drone',
+          name: '✈️ Filmagem com Drone - 5.000 MZN',
+          category: 'Adicional',
+          basePrice: 5000,
+          description: 'Imagens aéreas profissionais',
+          features: ['Filmagem com drone 4K', 'Edição incluída', 'Autorização de voo', 'Seguro de equipamento'],
+          popular: false,
+          savings: 0
+        },
+        {
+          id: 'adicional-fumaca',
+          name: '💨 Bolas de Fumaça - 5.000 MZN',
+          category: 'Adicional',
+          basePrice: 5000,
+          description: 'Efeitos especiais de fumaça',
+          features: ['Bolas de fumaça profissionais', 'Cores variadas', 'Controle remoto', 'Segurança garantida'],
+          popular: false,
+          savings: 0
+        },
+        {
+          id: 'adicional-fogos',
+          name: '🎆 Fogo de Artifício - 5.000 MZN',
+          category: 'Adicional',
+          basePrice: 5000,
+          description: 'Show de fogos de artifício',
+          features: ['Fogos profissionais', 'Coordenação completa', 'Autorização incluída', 'Segurança total'],
+          popular: false,
+          savings: 0
+        }
+      ];
+    }
+
+    // Audiovisual services customization (generic)
+    if (serviceTitle.includes('Audiovisual') || serviceTitle.includes('Vídeo')) {
+      return [
+        {
+          id: 'video-professional-editing',
+          name: 'Edição Profissional Premium',
+          category: 'Vídeo',
+          basePrice: 2500,
+          description: 'Edição avançada com efeitos especiais',
+          features: ['Color grading profissional', 'Efeitos visuais', 'Motion graphics', 'Sound design'],
+          popular: true,
+          savings: 20
+        },
+        {
+          id: 'video-multiple-formats',
+          name: 'Múltiplos Formatos',
+          category: 'Vídeo',
+          basePrice: 1200,
+          description: 'Adaptação para todas as plataformas',
+          features: ['Versões para YouTube, Instagram, TikTok', 'Thumbnails customizadas', 'Legendas', 'Otimização para cada plataforma'],
+          popular: false,
+          savings: 15
+        },
+        {
+          id: 'video-drone-footage',
+          name: 'Filmagem com Drone',
+          category: 'Vídeo',
+          basePrice: 3000,
+          description: 'Imagens aéreas profissionais',
+          features: ['Filmagem com drone 4K', 'Edição incluída', 'Autorização de voo', 'Seguro de equipamento'],
+          popular: false,
+          savings: 10
+        }
+      ];
+    }
+
+    // Default fallback for any other services
+    return [
+      {
+        id: 'consultoria-especializada',
+        name: 'Consultoria Especializada',
+        category: 'Consultoria',
+        basePrice: 1500,
+        description: 'Orientação especializada para otimizar resultados',
+        features: ['Análise detalhada', 'Recomendações estratégicas', 'Plano de ação', 'Acompanhamento'],
+        popular: true,
+        savings: 20
+      },
+      {
+        id: 'suporte-premium',
+        name: 'Suporte Premium',
+        category: 'Suporte',
+        basePrice: 1000,
+        description: 'Suporte prioritário e manutenção',
+        features: ['Suporte 24/7', 'Atualizações incluídas', 'Backup automático', 'Monitoramento'],
+        popular: false,
+        savings: 15
+      }
+    ];
+  };
+
+  const availableServices = getAvailableServices();
 
   const calculateTotal = () => {
     let total = basePrice;
@@ -187,8 +384,9 @@ const PlanCustomizer = () => {
       return `${service?.name} ${qty > 1 ? `x${qty}` : ''}`;
     });
 
+    const serviceContext = serviceTitle ? ` para o serviço "${serviceTitle}"` : '';
     const message = encodeURIComponent(
-      `🤝 Olá! Gostaria de negociar um plano personalizado baseado no "${planName}".\n\n` +
+      `🤝 Olá! Gostaria de personalizar meu plano${serviceContext}.\n\n` +
       `📋 Personalizações Selecionadas:\n${customizations.map(item => `- ${item}`).join('\n')}\n\n` +
       `💰 Valor Estimado: ${calculateTotal().toLocaleString()} MZN\n` +
       `💎 Economia: ${calculateSavings().toLocaleString()} MZN\n\n` +
@@ -217,25 +415,37 @@ const PlanCustomizer = () => {
       <Header />
 
       <main className="container relative z-10 mx-auto px-3 sm:px-4 lg:px-6 py-3 sm:py-4 lg:py-6 max-w-7xl">
-        {/* Header Compacto */}
+        {/* Mobile-First Navigation */}
         <div className="mb-3 sm:mb-4 lg:mb-6 animate-fade-up">
           <div className="flex items-center justify-between">
             <Button
               variant="ghost"
               onClick={() => navigate(-1)}
-              className="h-8 sm:h-10 px-3 sm:px-4 rounded-lg sm:rounded-xl backdrop-blur-md bg-white/10 hover:bg-white/20 border border-white/20 hover:border-primary/30 text-foreground hover:text-primary transition-all duration-300"
+              className="h-10 sm:h-12 px-3 sm:px-4 rounded-xl backdrop-blur-md bg-white/10 hover:bg-white/20 border border-white/20 hover:border-primary/30 text-foreground hover:text-primary transition-all duration-300"
             >
-              <ArrowLeft className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
+              <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
               <span className="hidden sm:inline">Voltar</span>
+              <span className="sm:hidden">←</span>
             </Button>
 
-            <div className="text-center sm:text-right">
-              <h1 className="text-base sm:text-lg lg:text-xl font-bold text-foreground">
-                <span className="hidden sm:inline">Personalizar Plano</span>
-                <span className="sm:hidden">Personalizar</span>
-              </h1>
-              <p className="text-xs text-muted-foreground">Adicione serviços extras</p>
+            {/* Service Badge - Mobile */}
+            <div className="sm:hidden">
+              <Badge className="bg-gradient-to-r from-primary/90 to-accent/90 backdrop-blur-md text-white px-3 py-1 rounded-full text-xs font-semibold">
+                {serviceTitle || 'Personalização'}
+              </Badge>
             </div>
+          </div>
+
+          {/* Title Section - Better mobile layout */}
+          <div className="mt-4 text-center">
+            <h1 className="text-lg sm:text-xl lg:text-2xl font-bold text-foreground mb-2">
+              <span className="hidden sm:inline">Personalizar {serviceTitle || 'Plano'}</span>
+              <span className="sm:hidden">Personalizar Plano</span>
+            </h1>
+            <p className="text-sm text-muted-foreground max-w-md mx-auto">
+              <span className="hidden sm:inline">Adicione funcionalidades extras para potencializar seu projeto</span>
+              <span className="sm:hidden">Adicione funcionalidades extras</span>
+            </p>
           </div>
         </div>
 
@@ -293,6 +503,7 @@ const PlanCustomizer = () => {
               </div>
 
               <div className="p-4 sm:p-6">
+                {/* Mobile-First Service Cards */}
                 <div className="grid gap-4 sm:gap-6 grid-cols-1">
                   {availableServices.map((service) => {
                     const isSelected = selectedServices.includes(service.id);
@@ -302,91 +513,101 @@ const PlanCustomizer = () => {
                     return (
                       <Card
                         key={service.id}
-                        className={`cursor-pointer transition-all duration-300 ${
+                        className={`cursor-pointer transition-all duration-300 touch-manipulation ${
                           isSelected
-                            ? 'border-primary bg-primary/5 shadow-lg scale-[1.01]'
-                            : 'border-white/20 hover:border-primary/30 hover:shadow-md'
+                            ? 'border-primary bg-primary/5 shadow-lg scale-[1.01] ring-2 ring-primary/20'
+                            : 'border-white/20 hover:border-primary/30 hover:shadow-md active:scale-[0.99]'
                         } ${service.popular ? 'ring-1 ring-yellow-400/30' : ''}`}
                         onClick={() => handleServiceToggle(service.id, !isSelected)}
                       >
-                        <CardContent className="p-4">
-                          <div className="flex items-start space-x-3">
-                            {/* Checkbox */}
-                            <Checkbox
-                              id={service.id}
-                              checked={isSelected}
-                              onCheckedChange={(checked) => handleServiceToggle(service.id, checked as boolean)}
-                              className="mt-1"
-                            />
+                        <CardContent className="p-4 sm:p-5">
+                          <div className="flex items-start space-x-3 sm:space-x-4">
+                            {/* Mobile-First Checkbox */}
+                            <div className="flex-shrink-0 mt-1">
+                              <Checkbox
+                                id={service.id}
+                                checked={isSelected}
+                                onCheckedChange={(checked) => handleServiceToggle(service.id, checked as boolean)}
+                                className="w-5 h-5 sm:w-4 sm:h-4"
+                              />
+                            </div>
 
                             <div className="flex-1 min-w-0">
-                              {/* Header */}
-                              <div className="flex items-start justify-between mb-2">
-                                <div className="flex-1">
-                                  <Label htmlFor={service.id} className="font-bold text-base cursor-pointer text-foreground">
-                                    {service.name}
-                                  </Label>
-                                  {service.popular && (
-                                    <Badge className="ml-2 bg-yellow-100 text-yellow-800 text-xs">Popular</Badge>
-                                  )}
+                              {/* Header - Better mobile hierarchy */}
+                              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-3">
+                                <div className="flex-1 mb-2 sm:mb-0">
+                                  <div className="flex items-center gap-2 mb-1">
+                                    <Label htmlFor={service.id} className="font-bold text-base sm:text-lg cursor-pointer text-foreground leading-tight">
+                                      {service.name}
+                                    </Label>
+                                    {service.popular && (
+                                      <Badge className="bg-yellow-100 text-yellow-800 text-xs px-2 py-0.5">Popular</Badge>
+                                    )}
+                                  </div>
+                                  <p className="text-sm text-muted-foreground leading-relaxed">{service.description}</p>
                                 </div>
-                                <div className="text-right ml-2">
-                                  <div className="text-lg font-bold text-primary">
+
+                                {/* Price - Mobile-first positioning */}
+                                <div className="flex flex-col items-end sm:ml-4">
+                                  <div className="text-lg sm:text-xl font-bold text-primary">
                                     {discountedPrice.toLocaleString()} MZN
                                   </div>
                                   {service.savings && (
-                                    <div className="text-xs text-green-600 font-medium">
-                                      -{service.savings}%
+                                    <div className="text-xs text-green-600 font-medium bg-green-50 dark:bg-green-900/20 px-2 py-0.5 rounded-full">
+                                      -{service.savings}% desconto
                                     </div>
                                   )}
                                 </div>
                               </div>
 
-                              {/* Description */}
-                              <p className="text-sm text-muted-foreground mb-2">{service.description}</p>
-
-                              {/* Features - Compact */}
-                              <div className="flex flex-wrap gap-2 mb-3">
-                                {service.features.slice(0, 2).map((feature, index) => (
-                                  <div key={index} className="flex items-center space-x-1">
-                                    <CheckCircle className="w-3 h-3 text-green-500 flex-shrink-0" />
-                                    <span className="text-xs text-foreground">{feature}</span>
-                                  </div>
-                                ))}
-                                {service.features.length > 2 && (
-                                  <span className="text-xs text-muted-foreground">+{service.features.length - 2} mais</span>
-                                )}
+                              {/* Features - Mobile-optimized */}
+                              <div className="mb-4">
+                                <div className="flex flex-wrap gap-2">
+                                  {service.features.slice(0, isMobile ? 1 : 2).map((feature, index) => (
+                                    <div key={index} className="flex items-center space-x-1.5 bg-green-50 dark:bg-green-900/10 rounded-full px-2 py-1">
+                                      <CheckCircle className="w-3 h-3 text-green-500 flex-shrink-0" />
+                                      <span className="text-xs text-green-700 dark:text-green-300 font-medium">{feature}</span>
+                                    </div>
+                                  ))}
+                                  {service.features.length > (isMobile ? 1 : 2) && (
+                                    <div className="text-xs text-muted-foreground bg-gray-50 dark:bg-gray-800/50 rounded-full px-2 py-1">
+                                      +{service.features.length - (isMobile ? 1 : 2)} mais
+                                    </div>
+                                  )}
+                                </div>
                               </div>
 
-                              {/* Quantity Controls */}
+                              {/* Quantity Controls - Enhanced mobile UX */}
                               {isSelected && (
-                                <div className="flex items-center justify-between">
-                                  <span className="text-sm text-muted-foreground">Quantidade:</span>
-                                  <div className="flex items-center space-x-2 bg-white/50 dark:bg-gray-800/50 rounded-lg p-1 border">
-                                    <Button
-                                      variant="outline"
-                                      size="sm"
-                                      onClick={(e) => {
-                                        e.stopPropagation();
-                                        handleQuantityChange(service.id, quantity - 1);
-                                      }}
-                                      disabled={quantity <= 1}
-                                      className="h-6 w-6 p-0"
-                                    >
-                                      <Minus className="w-3 h-3" />
-                                    </Button>
-                                    <span className="w-6 text-center font-bold text-sm">{quantity}</span>
-                                    <Button
-                                      variant="outline"
-                                      size="sm"
-                                      onClick={(e) => {
-                                        e.stopPropagation();
-                                        handleQuantityChange(service.id, quantity + 1);
-                                      }}
-                                      className="h-6 w-6 p-0"
-                                    >
-                                      <Plus className="w-3 h-3" />
-                                    </Button>
+                                <div className="bg-primary/5 rounded-lg p-3 border border-primary/20">
+                                  <div className="flex items-center justify-between">
+                                    <span className="text-sm font-medium text-foreground">Quantidade:</span>
+                                    <div className="flex items-center space-x-3 bg-white dark:bg-gray-800 rounded-lg p-1 border shadow-sm">
+                                      <Button
+                                        variant="outline"
+                                        size="sm"
+                                        onClick={(e) => {
+                                          e.stopPropagation();
+                                          handleQuantityChange(service.id, quantity - 1);
+                                        }}
+                                        disabled={quantity <= 1}
+                                        className="h-8 w-8 p-0 touch-manipulation"
+                                      >
+                                        <Minus className="w-4 h-4" />
+                                      </Button>
+                                      <span className="w-8 text-center font-bold text-base">{quantity}</span>
+                                      <Button
+                                        variant="outline"
+                                        size="sm"
+                                        onClick={(e) => {
+                                          e.stopPropagation();
+                                          handleQuantityChange(service.id, quantity + 1);
+                                        }}
+                                        className="h-8 w-8 p-0 touch-manipulation"
+                                      >
+                                        <Plus className="w-4 h-4" />
+                                      </Button>
+                                    </div>
                                   </div>
                                 </div>
                               )}
@@ -414,67 +635,82 @@ const PlanCustomizer = () => {
               </div>
 
               <div className="p-4 sm:p-6 space-y-4">
-                {/* Valores */}
-                <div className="space-y-3">
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm text-muted-foreground">Plano base</span>
-                    <span className="font-semibold text-sm">{basePrice.toLocaleString()} MZN</span>
-                  </div>
-
-                  {selectedServices.length > 0 && (
+                {/* Mobile-First Price Breakdown */}
+                <div className="bg-gradient-to-r from-gray-50/50 to-slate-50/50 dark:from-gray-800/20 dark:to-slate-800/20 rounded-xl p-4 border border-gray-200/30 dark:border-gray-700/30 mb-4">
+                  <h4 className="font-semibold text-foreground mb-3 text-sm">Resumo do Pedido</h4>
+                  <div className="space-y-2">
                     <div className="flex justify-between items-center">
-                      <span className="text-sm text-muted-foreground">Serviços extras ({selectedServices.length})</span>
-                      <span className="font-semibold text-sm">{(totalPrice - basePrice).toLocaleString()} MZN</span>
+                      <span className="text-sm text-muted-foreground">Plano base</span>
+                      <span className="font-semibold text-sm">{basePrice.toLocaleString()} MZN</span>
                     </div>
-                  )}
 
-                  {totalSavings > 0 && (
-                    <div className="flex justify-between items-center text-green-600">
-                      <span className="text-sm">Desconto</span>
-                      <span className="font-bold text-sm">-{totalSavings.toLocaleString()} MZN</span>
+                    {selectedServices.length > 0 && (
+                      <div className="flex justify-between items-center">
+                        <span className="text-sm text-muted-foreground">Extras ({selectedServices.length})</span>
+                        <span className="font-semibold text-sm text-primary">+{(totalPrice - basePrice).toLocaleString()} MZN</span>
+                      </div>
+                    )}
+
+                    {totalSavings > 0 && (
+                      <div className="flex justify-between items-center text-green-600 bg-green-50/50 dark:bg-green-900/10 rounded-lg px-2 py-1">
+                        <span className="text-sm font-medium">Desconto</span>
+                        <span className="font-bold text-sm">-{totalSavings.toLocaleString()} MZN</span>
+                      </div>
+                    )}
+
+                    <Separator className="bg-white/20 my-3" />
+
+                    <div className="flex justify-between items-center">
+                      <span className="font-bold text-foreground text-base">Total Final</span>
+                      <span className="font-bold text-primary text-lg">
+                        {finalPrice.toLocaleString()} MZN
+                      </span>
                     </div>
-                  )}
-
-                  <Separator className="bg-white/20" />
-
-                  <div className="flex justify-between items-center text-lg sm:text-xl">
-                    <span className="font-bold text-foreground">Total</span>
-                    <span className="font-bold text-primary">
-                      {finalPrice.toLocaleString()} MZN
-                    </span>
                   </div>
                 </div>
 
-                {/* Economia */}
+                {/* Savings Highlight */}
                 {totalSavings > 0 && (
-                  <div className="text-center p-3 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800">
-                    <div className="flex items-center justify-center space-x-2 text-green-600">
-                      <Gift className="w-4 h-4" />
-                      <span className="font-bold text-sm">Economia: {totalSavings.toLocaleString()} MZN</span>
+                  <div className="text-center p-3 bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-xl border border-green-200 dark:border-green-800 mb-4">
+                    <div className="flex items-center justify-center space-x-2 text-green-700 dark:text-green-300">
+                      <Gift className="w-5 h-5" />
+                      <span className="font-bold">Você economiza {totalSavings.toLocaleString()} MZN!</span>
                     </div>
                   </div>
                 )}
 
-                {/* Ações */}
-                <div className="space-y-3 pt-2">
+                {/* Mobile-First Action Buttons */}
+                <div className="space-y-3">
                   <Button
                     onClick={handleDirectPurchase}
-                    className="w-full h-10 sm:h-12 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white shadow-xl hover:shadow-2xl transform hover:scale-[1.01] transition-all duration-300 rounded-lg font-bold text-sm sm:text-base"
+                    className="w-full h-12 sm:h-14 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white shadow-xl hover:shadow-2xl transform hover:scale-[1.01] transition-all duration-300 rounded-xl font-bold text-sm sm:text-base touch-manipulation"
                   >
-                    <CreditCard className="w-4 h-4 mr-2" />
-                    <span className="hidden sm:inline">Comprar Agora</span>
-                    <span className="sm:hidden">Comprar</span>
+                    <CreditCard className="w-5 h-5 mr-2" />
+                    <span className="hidden sm:inline">Finalizar Compra</span>
+                    <span className="sm:hidden">Comprar Agora</span>
                   </Button>
 
-                  <Button
-                    onClick={handleSendProposal}
-                    variant="outline"
-                    className="w-full h-9 sm:h-10 border-2 border-primary/30 hover:bg-primary/10 hover:border-primary text-primary hover:text-primary font-semibold rounded-lg text-xs sm:text-sm"
-                  >
-                    <MessageCircle className="w-4 h-4 mr-2" />
-                    <span className="hidden sm:inline">Negociar</span>
-                    <span className="sm:hidden">Falar</span>
-                  </Button>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <Button
+                      onClick={handleSendProposal}
+                      variant="outline"
+                      className="h-10 sm:h-12 border-2 border-primary/30 hover:bg-primary/10 hover:border-primary text-primary hover:text-primary font-semibold rounded-xl text-sm touch-manipulation"
+                    >
+                      <MessageCircle className="w-4 h-4 mr-2" />
+                      <span className="hidden sm:inline">Negociar</span>
+                      <span className="sm:hidden">Falar</span>
+                    </Button>
+
+                    <Button
+                      onClick={() => navigate(-1)}
+                      variant="outline"
+                      className="h-10 sm:h-12 border-2 border-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 font-semibold rounded-xl text-sm touch-manipulation"
+                    >
+                      <ArrowLeft className="w-4 h-4 mr-2" />
+                      <span className="hidden sm:inline">Voltar</span>
+                      <span className="sm:hidden">←</span>
+                    </Button>
+                  </div>
                 </div>
 
                 {/* Confiança */}
