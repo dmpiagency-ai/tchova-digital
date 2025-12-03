@@ -750,7 +750,7 @@ const ServiceDetails = () => {
                       >
                         <Package className="w-4 h-4 mr-2" />
                         <span className="hidden sm:inline">Personalizar</span>
-                        <span className="sm:hidden">✨</span>
+                        <span className="sm:hidden">Personalizar</span>
                       </Button>
                     )}
 
@@ -763,7 +763,7 @@ const ServiceDetails = () => {
                       >
                         <Package className="w-4 h-4 mr-2" />
                         <span className="hidden sm:inline">Escolher Pacote</span>
-                        <span className="sm:hidden">📹</span>
+                        <span className="sm:hidden">Escolher Pacote</span>
                       </Button>
                     )}
 
@@ -775,7 +775,7 @@ const ServiceDetails = () => {
                     >
                       <MessageCircle className="w-4 h-4 mr-2" />
                       <span className="hidden sm:inline">WhatsApp</span>
-                      <span className="sm:hidden">💬</span>
+                      <span className="sm:hidden">WhatsApp</span>
                     </Button>
                   </div>
                 </div>

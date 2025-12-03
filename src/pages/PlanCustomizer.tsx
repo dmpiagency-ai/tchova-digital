@@ -534,44 +534,46 @@ const PlanCustomizer = () => {
 
                             <div className="flex-1 min-w-0">
                               {/* Header - Better mobile hierarchy */}
-                              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-3">
-                                <div className="flex-1 mb-2 sm:mb-0">
-                                  <div className="flex items-center gap-2 mb-1">
-                                    <Label htmlFor={service.id} className="font-bold text-base sm:text-lg cursor-pointer text-foreground leading-tight">
-                                      {service.name}
-                                    </Label>
-                                    {service.popular && (
-                                      <Badge className="bg-yellow-100 text-yellow-800 text-xs px-2 py-0.5">Popular</Badge>
+                              <div className="flex flex-col space-y-3">
+                                <div className="flex items-start justify-between">
+                                  <div className="flex-1">
+                                    <div className="flex items-center gap-2 mb-1">
+                                      <Label htmlFor={service.id} className="font-bold text-sm sm:text-base cursor-pointer text-foreground leading-tight">
+                                        {service.name}
+                                      </Label>
+                                      {service.popular && (
+                                        <Badge className="bg-yellow-100 text-yellow-800 text-xs px-2 py-0.5">Popular</Badge>
+                                      )}
+                                    </div>
+                                    <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">{service.description}</p>
+                                  </div>
+
+                                  {/* Price - Mobile-first positioning */}
+                                  <div className="flex flex-col items-end ml-2">
+                                    <div className="text-base sm:text-lg font-bold text-primary">
+                                      {discountedPrice.toLocaleString()} MZN
+                                    </div>
+                                    {service.savings && (
+                                      <div className="text-xs text-green-600 font-medium bg-green-50 dark:bg-green-900/20 px-2 py-0.5 rounded-full">
+                                        -{service.savings}% desconto
+                                      </div>
                                     )}
                                   </div>
-                                  <p className="text-sm text-muted-foreground leading-relaxed">{service.description}</p>
-                                </div>
-
-                                {/* Price - Mobile-first positioning */}
-                                <div className="flex flex-col items-end sm:ml-4">
-                                  <div className="text-lg sm:text-xl font-bold text-primary">
-                                    {discountedPrice.toLocaleString()} MZN
-                                  </div>
-                                  {service.savings && (
-                                    <div className="text-xs text-green-600 font-medium bg-green-50 dark:bg-green-900/20 px-2 py-0.5 rounded-full">
-                                      -{service.savings}% desconto
-                                    </div>
-                                  )}
                                 </div>
                               </div>
 
                               {/* Features - Mobile-optimized */}
                               <div className="mb-4">
                                 <div className="flex flex-wrap gap-2">
-                                  {service.features.slice(0, isMobile ? 1 : 2).map((feature, index) => (
+                                  {service.features.slice(0, isMobile ? 2 : 3).map((feature: string, index: number) => (
                                     <div key={index} className="flex items-center space-x-1.5 bg-green-50 dark:bg-green-900/10 rounded-full px-2 py-1">
                                       <CheckCircle className="w-3 h-3 text-green-500 flex-shrink-0" />
                                       <span className="text-xs text-green-700 dark:text-green-300 font-medium">{feature}</span>
                                     </div>
                                   ))}
-                                  {service.features.length > (isMobile ? 1 : 2) && (
+                                  {service.features.length > (isMobile ? 2 : 3) && (
                                     <div className="text-xs text-muted-foreground bg-gray-50 dark:bg-gray-800/50 rounded-full px-2 py-1">
-                                      +{service.features.length - (isMobile ? 1 : 2)} mais
+                                      +{service.features.length - (isMobile ? 2 : 3)} mais
                                     </div>
                                   )}
                                 </div>
@@ -687,7 +689,7 @@ const PlanCustomizer = () => {
                   >
                     <CreditCard className="w-5 h-5 mr-2" />
                     <span className="hidden sm:inline">Finalizar Compra</span>
-                    <span className="sm:hidden">Comprar Agora</span>
+                    <span className="sm:hidden">Finalizar Compra</span>
                   </Button>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -698,7 +700,7 @@ const PlanCustomizer = () => {
                     >
                       <MessageCircle className="w-4 h-4 mr-2" />
                       <span className="hidden sm:inline">Negociar</span>
-                      <span className="sm:hidden">Falar</span>
+                      <span className="sm:hidden">Negociar</span>
                     </Button>
 
                     <Button
@@ -708,7 +710,7 @@ const PlanCustomizer = () => {
                     >
                       <ArrowLeft className="w-4 h-4 mr-2" />
                       <span className="hidden sm:inline">Voltar</span>
-                      <span className="sm:hidden">←</span>
+                      <span className="sm:hidden">Voltar</span>
                     </Button>
                   </div>
                 </div>

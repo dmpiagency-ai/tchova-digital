@@ -514,7 +514,8 @@ const PaymentModal: React.FC<PaymentModalProps> = ({
                     className="h-14 text-lg font-bold bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary shadow-xl hover:shadow-2xl transform hover:scale-[1.02] transition-all duration-300"
                   >
                     <Lock className="w-5 h-5 mr-2" />
-                    🔒 Confirmar Pagamento - {finalTotal.toLocaleString()} MZN
+                    <span className="hidden sm:inline">🔒 Confirmar Pagamento - {finalTotal.toLocaleString()} MZN</span>
+                    <span className="sm:hidden">Confirmar - {finalTotal.toLocaleString()} MZN</span>
                   </Button>
                 </div>
               </div>
@@ -749,18 +750,18 @@ const PaymentModal: React.FC<PaymentModalProps> = ({
                         }`}
                         onClick={() => handleMethodSelect(method)}
                       >
-                        <CardContent className="p-4">
+                        <CardContent className="p-3 sm:p-4">
                           <div className="flex items-center justify-between">
-                            <div className="flex items-center space-x-3">
-                              <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
+                            <div className="flex items-center space-x-2 sm:space-x-3">
+                              <div className="w-8 h-8 sm:w-10 sm:h-10 bg-white/20 rounded-lg flex items-center justify-center">
                                 {getMethodIcon(method.type)}
                               </div>
-                              <div>
+                              <div className="flex-1">
                                 <h3 className="font-bold text-sm">{method.name}</h3>
-                                <p className="text-xs text-muted-foreground">{method.description}</p>
+                                <p className="text-xs text-muted-foreground leading-tight">{method.description}</p>
                               </div>
                             </div>
-                            <Badge variant="outline" className="text-xs px-3 py-1 font-medium">
+                            <Badge variant="outline" className="text-xs px-2 py-1 sm:px-3 sm:py-1 font-medium ml-2">
                               {method.config.processingFee ? `${method.config.processingFee}% taxa` : 'Sem taxa'}
                             </Badge>
                           </div>
@@ -783,17 +784,17 @@ const PaymentModal: React.FC<PaymentModalProps> = ({
                   </p>
                 </div>
 
-                <div className="flex items-center space-x-4 p-4 bg-gradient-to-r from-primary/5 to-accent/5 rounded-2xl border border-primary/10">
-                  <div className="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center">
+                <div className="flex items-center space-x-3 sm:space-x-4 p-3 sm:p-4 bg-gradient-to-r from-primary/5 to-accent/5 rounded-2xl border border-primary/10">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white/20 rounded-2xl flex items-center justify-center">
                     {getMethodIcon(selectedMethod.type)}
                   </div>
                   <div className="flex-1">
-                    <h3 className="font-bold">{selectedMethod.name}</h3>
-                    <p className="text-sm text-muted-foreground">{selectedMethod.description}</p>
+                    <h3 className="font-bold text-sm sm:text-base">{selectedMethod.name}</h3>
+                    <p className="text-xs sm:text-sm text-muted-foreground">{selectedMethod.description}</p>
                     <div className="flex flex-col space-y-1 mt-2">
-                      <span className="font-semibold text-primary text-lg">{amount} MZN</span>
+                      <span className="font-semibold text-primary text-base sm:text-lg">{amount} MZN</span>
                       {selectedMethod.config.processingFee && (
-                        <span className="text-orange-600 text-sm font-medium">
+                        <span className="text-orange-600 text-xs sm:text-sm font-medium">
                           Taxa: {(parseFloat(amount) * selectedMethod.config.processingFee / 100).toFixed(2)} MZN
                         </span>
                       )}
@@ -827,7 +828,8 @@ const PaymentModal: React.FC<PaymentModalProps> = ({
                     className="h-12 text-base font-bold bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary shadow-lg hover:shadow-xl"
                   >
                     <Lock className="w-5 h-5 mr-2" />
-                    Confirmar Investimento - {finalTotal.toLocaleString()} MZN
+                    <span className="hidden sm:inline">Confirmar Investimento - {finalTotal.toLocaleString()} MZN</span>
+                    <span className="sm:hidden">Confirmar - {finalTotal.toLocaleString()} MZN</span>
                   </Button>
                 </div>
               </div>
