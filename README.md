@@ -190,8 +190,8 @@ Este projeto está sob a licença MIT. Veja o arquivo `LICENSE` para mais detalh
 
 **TchovaDigital**
 - 🌐 Website: [tchovadigital.com](https://tchovadigital.com)
-- 📱 WhatsApp: +258 84 123 4567
+- 📱 WhatsApp: +258 87 909 7249
 - 📧 Email: hello@tchovadigital.com
 - 🐙 GitHub: [dmpiagency-ai](https://github.com/dmpiagency-ai)
 
-**Desenvolvido com ❤️ em Moçambique**
+**Desenvolvido por TchovaDigital**
