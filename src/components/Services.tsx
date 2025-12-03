@@ -10,6 +10,54 @@ import { env } from '@/config/env';
 import { useAuth } from '@/contexts/AuthContext';
 import LoginModal from '@/components/LoginModal';
 
+// Componente de botão animado inteligente
+const AnimatedDetailButton = ({
+  isAuthenticated,
+  onClick,
+  className = ""
+}: {
+  isAuthenticated: boolean;
+  onClick: (e?: React.MouseEvent) => void;
+  className?: string;
+}) => {
+  const [currentText, setCurrentText] = useState("Ver detalhes");
+  const [showLock, setShowLock] = useState(!isAuthenticated);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      setCurrentText("Ver detalhes");
+      setShowLock(false);
+      return;
+    }
+
+    // Animação inicial: "Ver detalhes" por 3 segundos
+    const initialTimer = setTimeout(() => {
+      setCurrentText("Login para ver detalhes");
+      setShowLock(true);
+    }, 3000);
+
+    return () => clearTimeout(initialTimer);
+  }, [isAuthenticated]);
+
+  return (
+    <div
+      className={`bg-white/10 backdrop-blur-sm rounded-lg p-2 sm:p-2.5 lg:p-3 border border-white/20 cursor-pointer hover:bg-white/20 transition-colors ${className}`}
+      onClick={(e) => onClick(e)}
+    >
+      <div className="flex items-center justify-between">
+        <span className="text-xs font-medium text-shadow-sm transition-all duration-500 ease-in-out">
+          {currentText}
+        </span>
+        {showLock ? (
+          <Lock className="w-3 h-3 sm:w-3.5 sm:h-3.5 lg:w-4 lg:h-4 transition-all duration-500 ease-in-out opacity-100 scale-100" />
+        ) : (
+          <ExternalLink className="w-3 h-3 sm:w-3.5 sm:h-3.5 lg:w-4 lg:h-4 transition-all duration-500 ease-in-out opacity-100 scale-100" />
+        )}
+      </div>
+    </div>
+  );
+};
+
 const Services = () => {
   const navigate = useNavigate();
   const { isAuthenticated } = useAuth();
@@ -342,26 +390,13 @@ const Services = () => {
                             <span className="text-green-400 text-sm">💬</span>
                           </div>
                         </div>
-                        <div
-                          className="bg-white/10 backdrop-blur-sm rounded-lg p-2 sm:p-2.5 lg:p-3 border border-white/20 cursor-pointer hover:bg-white/20 transition-colors"
+                        <AnimatedDetailButton
+                          isAuthenticated={isAuthenticated}
                           onClick={(e) => {
-                            e.stopPropagation();
+                            e?.stopPropagation();
                             handleServiceDetails(item);
                           }}
-                        >
-                          <div className="flex items-center justify-between">
-                            <span className="text-xs font-medium text-shadow-sm">
-                              {item.category === 'Assistência GSM' ? 'Ver detalhes' : (isAuthenticated ? 'Ver detalhes' : 'Login necessário')}
-                            </span>
-                            {item.category === 'Assistência GSM' ? (
-                              <ExternalLink className="w-3 h-3 sm:w-3.5 sm:h-3.5 lg:w-4 lg:h-4" />
-                            ) : (isAuthenticated ? (
-                              <ExternalLink className="w-3 h-3 sm:w-3.5 sm:h-3.5 lg:w-4 lg:h-4" />
-                            ) : (
-                              <Lock className="w-3 h-3 sm:w-3.5 sm:h-3.5 lg:w-4 lg:h-4" />
-                            ))}
-                          </div>
-                        </div>
+                        />
                       </div>
                     </div>
                   </div>
