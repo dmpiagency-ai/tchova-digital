@@ -123,7 +123,15 @@ const Header = () => {
                   <Button
                     variant="outline"
                     size="sm"
-                    onClick={logout}
+                    onClick={() => {
+                      try {
+                        logout();
+                      } catch (error) {
+                        console.error('Erro ao fazer logout:', error);
+                        // Fallback: forçar reload da página
+                        window.location.reload();
+                      }
+                    }}
                     className="border-red-200 hover:bg-red-50 text-red-600 hover:text-red-700"
                   >
                     <LogOut className="w-3 h-3 xl:w-4 xl:h-4 mr-1.5 xl:mr-2" />

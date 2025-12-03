@@ -103,7 +103,15 @@ const AdminPanel: React.FC = () => {
                 Acessar Painel Admin
               </Button>
 
-              <Button variant="outline" onClick={logout} className="w-full">
+              <Button variant="outline" onClick={() => {
+                try {
+                  logout();
+                } catch (error) {
+                  console.error('Erro ao fazer logout:', error);
+                  // Fallback: forçar reload da página
+                  window.location.reload();
+                }
+              }} className="w-full">
                 <LogOut className="w-4 h-4 mr-2" />
                 Voltar ao Site
               </Button>
@@ -126,7 +134,15 @@ const AdminPanel: React.FC = () => {
             </h1>
             <p className="text-muted-foreground">Controle total do sistema TchovaDigital</p>
           </div>
-          <Button variant="outline" onClick={logout}>
+          <Button variant="outline" onClick={() => {
+            try {
+              logout();
+            } catch (error) {
+              console.error('Erro ao fazer logout:', error);
+              // Fallback: forçar reload da página
+              window.location.reload();
+            }
+          }}>
             <LogOut className="w-4 h-4 mr-2" />
             Sair
           </Button>

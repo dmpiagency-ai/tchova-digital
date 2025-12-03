@@ -72,7 +72,15 @@ const GSMDashboard: React.FC = () => {
             <h1 className="text-3xl font-bold">Painel GSM</h1>
             <p className="text-muted-foreground">Bem-vindo, {user.name}</p>
           </div>
-          <Button variant="outline" onClick={logout}>
+          <Button variant="outline" onClick={() => {
+            try {
+              logout();
+            } catch (error) {
+              console.error('Erro ao fazer logout:', error);
+              // Fallback: forçar reload da página
+              window.location.reload();
+            }
+          }}>
             Sair
           </Button>
         </div>

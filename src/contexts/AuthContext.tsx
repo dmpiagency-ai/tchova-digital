@@ -116,19 +116,26 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   const logout = (reason?: string) => {
-    setUser(null);
-    localStorage.removeItem('user');
+    try {
+      setUser(null);
+      localStorage.removeItem('user');
 
-    // Mostrar notificação se houver motivo
-    if (reason) {
-      // Criar evento personalizado para mostrar notificação
-      window.dispatchEvent(new CustomEvent('show-notification', {
-        detail: {
-          type: 'warning',
-          title: 'Sessão Encerrada',
-          message: reason
-        }
-      }));
+      // Mostrar notificação se houver motivo
+      if (reason) {
+        // Criar evento personalizado para mostrar notificação
+        window.dispatchEvent(new CustomEvent('show-notification', {
+          detail: {
+            type: 'warning',
+            title: 'Sessão Encerrada',
+            message: reason
+          }
+        }));
+      }
+    } catch (error) {
+      logger.error('Erro durante logout:', error);
+      // Mesmo com erro, garantir que o usuário seja deslogado
+      setUser(null);
+      localStorage.removeItem('user');
     }
   };
 
