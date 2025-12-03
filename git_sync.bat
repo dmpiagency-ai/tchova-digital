@@ -19,7 +19,7 @@ set datetime=%datetime:~0,8%_%datetime:~8,6%
 git commit -m "feat: Auto-sync - %datetime%"
 
 echo 🚀 Enviando para repositório remoto...
-git push origin master
+git push origin main
 
 echo ✅ Git sincronizado com sucesso!
 pause
