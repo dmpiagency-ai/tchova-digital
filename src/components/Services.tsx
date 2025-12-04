@@ -95,25 +95,25 @@ const Services = () => {
       id: 1,
       title: 'Design & Identidade Visual',
       category: 'Design Gráfico',
-      description: 'Transformamos marcas em presença visual forte e memorável.',
-      features: ['Logotipos exclusivos', 'Identidade visual completa'],
+      description: 'Transformamos marcas em presença visual forte e memorável com serviços completos de design.',
+      features: ['Logotipos Profissionais', 'Identidade Visual & Branding', 'Posts e Carrosséis'],
       popular: true,
       badge: 'Revisões Incluídas'
     },
     {
       id: 2,
-      title: 'Web & Mobile',
+      title: 'Desenvolvimento Digital (Sites, Apps & Plataformas)',
       category: 'Desenvolvimento Web',
-      description: 'Sites e apps modernos com tecnologia de ponta.',
-      features: ['Sites responsivos', 'Apps iOS/Android'],
+      description: 'Sites, apps e plataformas modernas com tecnologia de ponta e integração local.',
+      features: ['Websites Responsivos', 'Apps (no-code/low-code)', 'E-commerce'],
       badge: 'SEO Otimizado'
     },
     {
       id: 3,
-      title: 'Marketing Digital',
+      title: 'Marketing Digital & Tráfego Pago',
       category: 'Marketing Digital',
-      description: 'Campanhas com resultados mensuráveis e ROI otimizado.',
-      features: ['Redes sociais', 'Tráfego pago'],
+      description: 'Campanhas completas com resultados mensuráveis, tráfego pago e otimização com IA.',
+      features: ['Gestão de Redes Sociais', 'Tráfego Pago', 'Otimização com IA'],
       badge: 'Relatórios Mensais'
     },
     {
@@ -134,10 +134,10 @@ const Services = () => {
     },
     {
       id: 6,
-      title: 'Assistência Técnica GSM',
+      title: 'Assistência Técnica GSM & Software Profissional',
       category: 'Assistência GSM',
-      description: 'Reparos especializados com garantia alargada.',
-      features: ['Desbloqueio seguro', 'Suporte técnico'],
+      description: 'Ferramentas GSM completas e software profissional para técnicos especializados.',
+      features: ['Desbloqueio de Smartphones', 'Ferramentas Profissionais', 'Suporte Técnico'],
       badge: 'Peças Originais'
     }
   ];
@@ -351,16 +351,7 @@ const Services = () => {
                         {item.category}
                       </span>
                       <div className="flex flex-col gap-1">
-                        {item.badge && (
-                          <span className="bg-blue-500 text-white px-1.5 py-0.5 sm:px-2 sm:py-1 rounded-full text-xs font-bold text-shadow-xs">
-                            {item.badge}
-                          </span>
-                        )}
-                        {item.popular && (
-                          <span className="bg-yellow-400 text-black px-1.5 py-0.5 sm:px-2 sm:py-1 rounded-full text-xs font-bold animate-pulse text-shadow-xs">
-                            Popular
-                          </span>
-                        )}
+                        {/* Badges removed as requested */}
                       </div>
                     </div>
 
