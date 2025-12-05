@@ -9,7 +9,6 @@ import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import Header from '@/components/Header';
-import ScrollStack, { ScrollStackItem } from '@/components/ui/ScrollStack';
 import {
   Calculator,
   Plus,
@@ -449,311 +448,303 @@ const PlanCustomizer = () => {
           </div>
         </div>
 
-        <ScrollStack useWindowScroll={true} className="max-w-6xl mx-auto" itemDistance={100} itemStackDistance={25} baseScale={0.9}>
-          {/* Plano Base - Contexto */}
-          <ScrollStackItem>
-            <div className="backdrop-blur-xl bg-gradient-to-br from-white/10 via-white/5 to-white/5 border border-white/20 rounded-2xl shadow-2xl overflow-hidden">
-              <div className="bg-gradient-to-r from-primary/10 to-accent/10 p-4 sm:p-6 border-b border-white/20">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-10 h-10 bg-gradient-to-br from-primary/20 to-accent/20 rounded-lg flex items-center justify-center">
-                      <Package className="w-5 h-5 text-primary" />
-                    </div>
-                    <div>
-                      <h2 className="text-lg sm:text-xl font-bold text-foreground">{planName}</h2>
-                      <p className="text-sm text-muted-foreground">Plano base selecionado</p>
-                    </div>
-                  </div>
-                  <div className="text-right">
-                    <div className="text-xl sm:text-2xl font-bold text-primary">{basePrice.toLocaleString()} MZN</div>
-                    <p className="text-xs sm:text-sm text-muted-foreground">Valor base</p>
-                  </div>
-                </div>
-              </div>
+        <div className="max-w-6xl mx-auto space-y-6 sm:space-y-8">
+           {/* Plano Base - Contexto */}
+           <div className="backdrop-blur-xl bg-gradient-to-br from-white/10 via-white/5 to-white/5 border border-white/20 rounded-2xl shadow-2xl overflow-hidden">
+             <div className="bg-gradient-to-r from-primary/10 to-accent/10 p-4 sm:p-6 border-b border-white/20">
+               <div className="flex items-center justify-between">
+                 <div className="flex items-center space-x-3">
+                   <div className="w-10 h-10 bg-gradient-to-br from-primary/20 to-accent/20 rounded-lg flex items-center justify-center">
+                     <Package className="w-5 h-5 text-primary" />
+                   </div>
+                   <div>
+                     <h2 className="text-lg sm:text-xl font-bold text-foreground">{planName}</h2>
+                     <p className="text-sm text-muted-foreground">Plano base selecionado</p>
+                   </div>
+                 </div>
+                 <div className="text-right">
+                   <div className="text-xl sm:text-2xl font-bold text-primary">{basePrice.toLocaleString()} MZN</div>
+                   <p className="text-xs sm:text-sm text-muted-foreground">Valor base</p>
+                 </div>
+               </div>
+             </div>
 
-              <div className="p-4 sm:p-6">
-                <div className="grid grid-cols-3 gap-3 sm:gap-4">
-                  <div className="text-center p-3 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800">
-                    <Shield className="w-5 h-5 text-green-600 mx-auto mb-1" />
-                    <h4 className="font-bold text-green-800 dark:text-green-200 text-xs sm:text-sm">Seguro</h4>
-                  </div>
-                  <div className="text-center p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
-                    <Rocket className="w-5 h-5 text-blue-600 mx-auto mb-1" />
-                    <h4 className="font-bold text-blue-800 dark:text-blue-200 text-xs sm:text-sm">Rápido</h4>
-                  </div>
-                  <div className="text-center p-3 bg-purple-50 dark:bg-purple-900/20 rounded-lg border border-purple-200 dark:border-purple-800">
-                    <Award className="w-5 h-5 text-purple-600 mx-auto mb-1" />
-                    <h4 className="font-bold text-purple-800 dark:text-purple-200 text-xs sm:text-sm">Premium</h4>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </ScrollStackItem>
+             <div className="p-4 sm:p-6">
+               <div className="grid grid-cols-3 gap-3 sm:gap-4">
+                 <div className="text-center p-3 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800">
+                   <Shield className="w-5 h-5 text-green-600 mx-auto mb-1" />
+                   <h4 className="font-bold text-green-800 dark:text-green-200 text-xs sm:text-sm">Seguro</h4>
+                 </div>
+                 <div className="text-center p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
+                   <Rocket className="w-5 h-5 text-blue-600 mx-auto mb-1" />
+                   <h4 className="font-bold text-blue-800 dark:text-blue-200 text-xs sm:text-sm">Rápido</h4>
+                 </div>
+                 <div className="text-center p-3 bg-purple-50 dark:bg-purple-900/20 rounded-lg border border-purple-200 dark:border-purple-800">
+                   <Award className="w-5 h-5 text-purple-600 mx-auto mb-1" />
+                   <h4 className="font-bold text-purple-800 dark:text-purple-200 text-xs sm:text-sm">Premium</h4>
+                 </div>
+               </div>
+             </div>
+           </div>
 
-          {/* Serviços Extras - Seleção */}
-          <ScrollStackItem>
-            <div className="backdrop-blur-xl bg-gradient-to-br from-white/10 via-white/5 to-white/5 border border-white/20 rounded-2xl shadow-xl">
-              <div className="bg-gradient-to-r from-primary/10 to-accent/10 p-4 sm:p-6 border-b border-white/20">
-                <h2 className="text-lg sm:text-xl font-bold text-foreground flex items-center">
-                  <Sparkles className="w-5 h-5 text-primary mr-2" />
-                  <span className="hidden sm:inline">Adicionar Serviços</span>
-                  <span className="sm:hidden">Extras</span>
-                </h2>
-                <p className="text-sm text-muted-foreground">Personalize com funcionalidades extras</p>
-              </div>
+           {/* Serviços Extras - Seleção */}
+           <div className="backdrop-blur-xl bg-gradient-to-br from-white/10 via-white/5 to-white/5 border border-white/20 rounded-2xl shadow-xl">
+             <div className="bg-gradient-to-r from-primary/10 to-accent/10 p-4 sm:p-6 border-b border-white/20">
+               <h2 className="text-lg sm:text-xl font-bold text-foreground flex items-center">
+                 <Sparkles className="w-5 h-5 text-primary mr-2" />
+                 <span className="hidden sm:inline">Adicionar Serviços</span>
+                 <span className="sm:hidden">Extras</span>
+               </h2>
+               <p className="text-sm text-muted-foreground">Personalize com funcionalidades extras</p>
+             </div>
 
-              <div className="p-4 sm:p-6">
-                {/* Mobile-First Service Cards */}
-                <div className="grid gap-4 sm:gap-6 grid-cols-1">
-                  {availableServices.map((service) => {
-                    const isSelected = selectedServices.includes(service.id);
-                    const quantity = quantities[service.id] || 1;
-                    const discountedPrice = service.savings ? service.basePrice * (1 - service.savings / 100) : service.basePrice;
+             <div className="p-4 sm:p-6">
+               {/* Mobile-First Service Cards */}
+               <div className="grid gap-4 sm:gap-6 grid-cols-1">
+                 {availableServices.map((service) => {
+                   const isSelected = selectedServices.includes(service.id);
+                   const quantity = quantities[service.id] || 1;
+                   const discountedPrice = service.savings ? service.basePrice * (1 - service.savings / 100) : service.basePrice;
 
-                    return (
-                      <Card
-                        key={service.id}
-                        className={`cursor-pointer transition-all duration-300 touch-manipulation ${
-                          isSelected
-                            ? 'border-primary bg-primary/5 shadow-lg scale-[1.01] ring-2 ring-primary/20'
-                            : 'border-white/20 hover:border-primary/30 hover:shadow-md active:scale-[0.99]'
-                        } ${service.popular ? 'ring-1 ring-yellow-400/30' : ''}`}
-                        onClick={() => handleServiceToggle(service.id, !isSelected)}
-                      >
-                        <CardContent className="p-4 sm:p-5">
-                          <div className="flex items-start space-x-3 sm:space-x-4">
-                            {/* Mobile-First Checkbox */}
-                            <div className="flex-shrink-0 mt-1">
-                              <Checkbox
-                                id={service.id}
-                                checked={isSelected}
-                                onCheckedChange={(checked) => handleServiceToggle(service.id, checked as boolean)}
-                                className="w-5 h-5 sm:w-4 sm:h-4"
-                              />
-                            </div>
+                   return (
+                     <Card
+                       key={service.id}
+                       className={`cursor-pointer transition-all duration-300 touch-manipulation ${
+                         isSelected
+                           ? 'border-primary bg-primary/5 shadow-lg scale-[1.01] ring-2 ring-primary/20'
+                           : 'border-white/20 hover:border-primary/30 hover:shadow-md active:scale-[0.99]'
+                       } ${service.popular ? 'ring-1 ring-yellow-400/30' : ''}`}
+                       onClick={() => handleServiceToggle(service.id, !isSelected)}
+                     >
+                       <CardContent className="p-4 sm:p-5">
+                         <div className="flex items-start space-x-3 sm:space-x-4">
+                           {/* Mobile-First Checkbox */}
+                           <div className="flex-shrink-0 mt-1">
+                             <Checkbox
+                               id={service.id}
+                               checked={isSelected}
+                               onCheckedChange={(checked) => handleServiceToggle(service.id, checked as boolean)}
+                               className="w-5 h-5 sm:w-4 sm:h-4"
+                             />
+                           </div>
 
-                            <div className="flex-1 min-w-0">
-                              {/* Header - Better mobile hierarchy */}
-                              <div className="flex flex-col space-y-3">
-                                <div className="flex items-start justify-between">
-                                  <div className="flex-1">
-                                    <div className="flex items-center gap-2 mb-1">
-                                      <Label htmlFor={service.id} className="font-bold text-sm sm:text-base cursor-pointer text-foreground leading-tight">
-                                        {service.name}
-                                      </Label>
-                                      {service.popular && (
-                                        <Badge className="bg-yellow-100 text-yellow-800 text-xs px-2 py-0.5">Popular</Badge>
-                                      )}
-                                    </div>
-                                    <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">{service.description}</p>
-                                  </div>
+                           <div className="flex-1 min-w-0">
+                             {/* Header - Better mobile hierarchy */}
+                             <div className="flex flex-col space-y-3">
+                               <div className="flex items-start justify-between">
+                                 <div className="flex-1">
+                                   <div className="flex items-center gap-2 mb-1">
+                                     <Label htmlFor={service.id} className="font-bold text-sm sm:text-base cursor-pointer text-foreground leading-tight">
+                                       {service.name}
+                                     </Label>
+                                     {service.popular && (
+                                       <Badge className="bg-yellow-100 text-yellow-800 text-xs px-2 py-0.5">Popular</Badge>
+                                     )}
+                                   </div>
+                                   <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">{service.description}</p>
+                                 </div>
 
-                                  {/* Price - Mobile-first positioning */}
-                                  <div className="flex flex-col items-end ml-2">
-                                    <div className="text-base sm:text-lg font-bold text-primary">
-                                      {discountedPrice.toLocaleString()} MZN
-                                    </div>
-                                    {service.savings && (
-                                      <div className="text-xs text-green-600 font-medium bg-green-50 dark:bg-green-900/20 px-2 py-0.5 rounded-full">
-                                        -{service.savings}% desconto
-                                      </div>
-                                    )}
-                                  </div>
-                                </div>
-                              </div>
+                                 {/* Price - Mobile-first positioning */}
+                                 <div className="flex flex-col items-end ml-2">
+                                   <div className="text-base sm:text-lg font-bold text-primary">
+                                     {discountedPrice.toLocaleString()} MZN
+                                   </div>
+                                   {service.savings && (
+                                     <div className="text-xs text-green-600 font-medium bg-green-50 dark:bg-green-900/20 px-2 py-0.5 rounded-full">
+                                       -{service.savings}% desconto
+                                     </div>
+                                   )}
+                                 </div>
+                               </div>
+                             </div>
 
-                              {/* Features - Mobile-optimized */}
-                              <div className="mb-4">
-                                <div className="flex flex-wrap gap-2">
-                                  {service.features.slice(0, isMobile ? 2 : 3).map((feature: string, index: number) => (
-                                    <div key={index} className="flex items-center space-x-1.5 bg-green-50 dark:bg-green-900/10 rounded-full px-2 py-1">
-                                      <CheckCircle className="w-3 h-3 text-green-500 flex-shrink-0" />
-                                      <span className="text-xs text-green-700 dark:text-green-300 font-medium">{feature}</span>
-                                    </div>
-                                  ))}
-                                  {service.features.length > (isMobile ? 2 : 3) && (
-                                    <div className="text-xs text-muted-foreground bg-gray-50 dark:bg-gray-800/50 rounded-full px-2 py-1">
-                                      +{service.features.length - (isMobile ? 2 : 3)} mais
-                                    </div>
-                                  )}
-                                </div>
-                              </div>
+                             {/* Features - Mobile-optimized */}
+                             <div className="mb-4">
+                               <div className="flex flex-wrap gap-2">
+                                 {service.features.slice(0, isMobile ? 2 : 3).map((feature: string, index: number) => (
+                                   <div key={index} className="flex items-center space-x-1.5 bg-green-50 dark:bg-green-900/10 rounded-full px-2 py-1">
+                                     <CheckCircle className="w-3 h-3 text-green-500 flex-shrink-0" />
+                                     <span className="text-xs text-green-700 dark:text-green-300 font-medium">{feature}</span>
+                                   </div>
+                                 ))}
+                                 {service.features.length > (isMobile ? 2 : 3) && (
+                                   <div className="text-xs text-muted-foreground bg-gray-50 dark:bg-gray-800/50 rounded-full px-2 py-1">
+                                     +{service.features.length - (isMobile ? 2 : 3)} mais
+                                   </div>
+                                 )}
+                               </div>
+                             </div>
 
-                              {/* Quantity Controls - Enhanced mobile UX */}
-                              {isSelected && (
-                                <div className="bg-primary/5 rounded-lg p-3 border border-primary/20">
-                                  <div className="flex items-center justify-between">
-                                    <span className="text-sm font-medium text-foreground">Quantidade:</span>
-                                    <div className="flex items-center space-x-3 bg-white dark:bg-gray-800 rounded-lg p-1 border shadow-sm">
-                                      <Button
-                                        variant="outline"
-                                        size="sm"
-                                        onClick={(e) => {
-                                          e.stopPropagation();
-                                          handleQuantityChange(service.id, quantity - 1);
-                                        }}
-                                        disabled={quantity <= 1}
-                                        className="h-8 w-8 p-0 touch-manipulation"
-                                      >
-                                        <Minus className="w-4 h-4" />
-                                      </Button>
-                                      <span className="w-8 text-center font-bold text-base">{quantity}</span>
-                                      <Button
-                                        variant="outline"
-                                        size="sm"
-                                        onClick={(e) => {
-                                          e.stopPropagation();
-                                          handleQuantityChange(service.id, quantity + 1);
-                                        }}
-                                        className="h-8 w-8 p-0 touch-manipulation"
-                                      >
-                                        <Plus className="w-4 h-4" />
-                                      </Button>
-                                    </div>
-                                  </div>
-                                </div>
-                              )}
-                            </div>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    );
-                  })}
-                </div>
-              </div>
-            </div>
-          </ScrollStackItem>
+                             {/* Quantity Controls - Enhanced mobile UX */}
+                             {isSelected && (
+                               <div className="bg-primary/5 rounded-lg p-3 border border-primary/20">
+                                 <div className="flex items-center justify-between">
+                                   <span className="text-sm font-medium text-foreground">Quantidade:</span>
+                                   <div className="flex items-center space-x-3 bg-white dark:bg-gray-800 rounded-lg p-1 border shadow-sm">
+                                     <Button
+                                       variant="outline"
+                                       size="sm"
+                                       onClick={(e) => {
+                                         e.stopPropagation();
+                                         handleQuantityChange(service.id, quantity - 1);
+                                       }}
+                                       disabled={quantity <= 1}
+                                       className="h-8 w-8 p-0 touch-manipulation"
+                                     >
+                                       <Minus className="w-4 h-4" />
+                                     </Button>
+                                     <span className="w-8 text-center font-bold text-base">{quantity}</span>
+                                     <Button
+                                       variant="outline"
+                                       size="sm"
+                                       onClick={(e) => {
+                                         e.stopPropagation();
+                                         handleQuantityChange(service.id, quantity + 1);
+                                       }}
+                                       className="h-8 w-8 p-0 touch-manipulation"
+                                     >
+                                       <Plus className="w-4 h-4" />
+                                     </Button>
+                                   </div>
+                                 </div>
+                               </div>
+                             )}
+                           </div>
+                         </div>
+                       </CardContent>
+                     </Card>
+                   );
+                 })}
+               </div>
+             </div>
+           </div>
 
 
-          {/* Resumo Final - CTA */}
-          <ScrollStackItem>
-            <div className="backdrop-blur-xl bg-gradient-to-br from-white/10 via-white/5 to-white/5 border border-white/20 rounded-2xl shadow-2xl overflow-hidden">
-              <div className="bg-gradient-to-r from-primary/10 to-accent/10 p-4 sm:p-6 border-b border-white/20">
-                <h3 className="text-lg sm:text-xl font-bold text-foreground flex items-center">
-                  <Calculator className="w-5 h-5 text-primary mr-2" />
-                  <span className="hidden sm:inline">Resumo Final</span>
-                  <span className="sm:hidden">Total</span>
-                </h3>
-              </div>
+           {/* Resumo Final - CTA */}
+           <div className="backdrop-blur-xl bg-gradient-to-br from-white/10 via-white/5 to-white/5 border border-white/20 rounded-2xl shadow-2xl overflow-hidden">
+             <div className="bg-gradient-to-r from-primary/10 to-accent/10 p-4 sm:p-6 border-b border-white/20">
+               <h3 className="text-lg sm:text-xl font-bold text-foreground flex items-center">
+                 <Calculator className="w-5 h-5 text-primary mr-2" />
+                 <span className="hidden sm:inline">Resumo Final</span>
+                 <span className="sm:hidden">Total</span>
+               </h3>
+             </div>
 
-              <div className="p-4 sm:p-6 space-y-4">
-                {/* Mobile-First Price Breakdown */}
-                <div className="bg-gradient-to-r from-gray-50/50 to-slate-50/50 dark:from-gray-800/20 dark:to-slate-800/20 rounded-xl p-4 border border-gray-200/30 dark:border-gray-700/30 mb-4">
-                  <h4 className="font-semibold text-foreground mb-3 text-sm">Resumo do Pedido</h4>
-                  <div className="space-y-2">
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm text-muted-foreground">Plano base</span>
-                      <span className="font-semibold text-sm">{basePrice.toLocaleString()} MZN</span>
-                    </div>
+             <div className="p-4 sm:p-6 space-y-4">
+               {/* Mobile-First Price Breakdown */}
+               <div className="bg-gradient-to-r from-gray-50/50 to-slate-50/50 dark:from-gray-800/20 dark:to-slate-800/20 rounded-xl p-4 border border-gray-200/30 dark:border-gray-700/30 mb-4">
+                 <h4 className="font-semibold text-foreground mb-3 text-sm">Resumo do Pedido</h4>
+                 <div className="space-y-2">
+                   <div className="flex justify-between items-center">
+                     <span className="text-sm text-muted-foreground">Plano base</span>
+                     <span className="font-semibold text-sm">{basePrice.toLocaleString()} MZN</span>
+                   </div>
 
-                    {selectedServices.length > 0 && (
-                      <div className="flex justify-between items-center">
-                        <span className="text-sm text-muted-foreground">Extras ({selectedServices.length})</span>
-                        <span className="font-semibold text-sm text-primary">+{(totalPrice - basePrice).toLocaleString()} MZN</span>
-                      </div>
-                    )}
+                   {selectedServices.length > 0 && (
+                     <div className="flex justify-between items-center">
+                       <span className="text-sm text-muted-foreground">Extras ({selectedServices.length})</span>
+                       <span className="font-semibold text-sm text-primary">+{(totalPrice - basePrice).toLocaleString()} MZN</span>
+                     </div>
+                   )}
 
-                    {totalSavings > 0 && (
-                      <div className="flex justify-between items-center text-green-600 bg-green-50/50 dark:bg-green-900/10 rounded-lg px-2 py-1">
-                        <span className="text-sm font-medium">Desconto</span>
-                        <span className="font-bold text-sm">-{totalSavings.toLocaleString()} MZN</span>
-                      </div>
-                    )}
+                   {totalSavings > 0 && (
+                     <div className="flex justify-between items-center text-green-600 bg-green-50/50 dark:bg-green-900/10 rounded-lg px-2 py-1">
+                       <span className="text-sm font-medium">Desconto</span>
+                       <span className="font-bold text-sm">-{totalSavings.toLocaleString()} MZN</span>
+                     </div>
+                   )}
 
-                    <Separator className="bg-white/20 my-3" />
+                   <Separator className="bg-white/20 my-3" />
 
-                    <div className="flex justify-between items-center">
-                      <span className="font-bold text-foreground text-base">Total Final</span>
-                      <span className="font-bold text-primary text-lg">
-                        {finalPrice.toLocaleString()} MZN
-                      </span>
-                    </div>
-                  </div>
-                </div>
+                   <div className="flex justify-between items-center">
+                     <span className="font-bold text-foreground text-base">Total Final</span>
+                     <span className="font-bold text-primary text-lg">
+                       {finalPrice.toLocaleString()} MZN
+                     </span>
+                   </div>
+                 </div>
+               </div>
 
-                {/* Savings Highlight */}
-                {totalSavings > 0 && (
-                  <div className="text-center p-3 bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-xl border border-green-200 dark:border-green-800 mb-4">
-                    <div className="flex items-center justify-center space-x-2 text-green-700 dark:text-green-300">
-                      <Gift className="w-5 h-5" />
-                      <span className="font-bold">Você economiza {totalSavings.toLocaleString()} MZN!</span>
-                    </div>
-                  </div>
-                )}
+               {/* Savings Highlight */}
+               {totalSavings > 0 && (
+                 <div className="text-center p-3 bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-xl border border-green-200 dark:border-green-800 mb-4">
+                   <div className="flex items-center justify-center space-x-2 text-green-700 dark:text-green-300">
+                     <Gift className="w-5 h-5" />
+                     <span className="font-bold">Você economiza {totalSavings.toLocaleString()} MZN!</span>
+                   </div>
+                 </div>
+               )}
 
-                {/* Mobile-First Action Buttons */}
-                <div className="space-y-3">
-                  <Button
-                    onClick={handleDirectPurchase}
-                    className="w-full h-12 sm:h-14 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white shadow-xl hover:shadow-2xl transform hover:scale-[1.01] transition-all duration-300 rounded-xl font-bold text-sm sm:text-base touch-manipulation"
-                  >
-                    <CreditCard className="w-5 h-5 mr-2" />
-                    <span className="hidden sm:inline">Finalizar Compra</span>
-                    <span className="sm:hidden">Finalizar Compra</span>
-                  </Button>
+               {/* Mobile-First Action Buttons */}
+               <div className="space-y-3">
+                 <Button
+                   onClick={handleDirectPurchase}
+                   className="w-full h-12 sm:h-14 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white shadow-xl hover:shadow-2xl transform hover:scale-[1.01] transition-all duration-300 rounded-xl font-bold text-sm sm:text-base touch-manipulation"
+                 >
+                   <CreditCard className="w-5 h-5 mr-2" />
+                   <span className="hidden sm:inline">Finalizar Compra</span>
+                   <span className="sm:hidden">Finalizar Compra</span>
+                 </Button>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <Button
-                      onClick={handleSendProposal}
-                      variant="outline"
-                      className="h-10 sm:h-12 border-2 border-primary/30 hover:bg-primary/10 hover:border-primary text-primary hover:text-primary font-semibold rounded-xl text-sm touch-manipulation"
-                    >
-                      <MessageCircle className="w-4 h-4 mr-2" />
-                      <span className="hidden sm:inline">Negociar</span>
-                      <span className="sm:hidden">Negociar</span>
-                    </Button>
+                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                   <Button
+                     onClick={handleSendProposal}
+                     variant="outline"
+                     className="h-10 sm:h-12 border-2 border-primary/30 hover:bg-primary/10 hover:border-primary text-primary hover:text-primary font-semibold rounded-xl text-sm touch-manipulation"
+                   >
+                     <MessageCircle className="w-4 h-4 mr-2" />
+                     <span className="hidden sm:inline">Negociar</span>
+                     <span className="sm:hidden">Negociar</span>
+                   </Button>
 
-                    <Button
-                      onClick={() => navigate(-1)}
-                      variant="outline"
-                      className="h-10 sm:h-12 border-2 border-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 font-semibold rounded-xl text-sm touch-manipulation"
-                    >
-                      <ArrowLeft className="w-4 h-4 mr-2" />
-                      <span className="hidden sm:inline">Voltar</span>
-                      <span className="sm:hidden">Voltar</span>
-                    </Button>
-                  </div>
-                </div>
+                   <Button
+                     onClick={() => navigate(-1)}
+                     variant="outline"
+                     className="h-10 sm:h-12 border-2 border-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 font-semibold rounded-xl text-sm touch-manipulation"
+                   >
+                     <ArrowLeft className="w-4 h-4 mr-2" />
+                     <span className="hidden sm:inline">Voltar</span>
+                     <span className="sm:hidden">Voltar</span>
+                   </Button>
+                 </div>
+               </div>
 
-                {/* Confiança */}
-                <div className="flex justify-center space-x-4 pt-2 border-t border-white/20">
-                  <div className="flex items-center space-x-1">
-                    <Shield className="w-4 h-4 text-green-500" />
-                    <span className="text-xs font-medium text-green-600">Garantia</span>
-                  </div>
-                  <div className="flex items-center space-x-1">
-                    <Clock className="w-4 h-4 text-primary" />
-                    <span className="text-xs font-medium text-primary">Entrega</span>
-                  </div>
-                  <div className="flex items-center space-x-1">
-                    <Users className="w-4 h-4 text-blue-500" />
-                    <span className="text-xs font-medium text-blue-600">Suporte</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </ScrollStackItem>
+               {/* Confiança */}
+               <div className="flex justify-center space-x-4 pt-2 border-t border-white/20">
+                 <div className="flex items-center space-x-1">
+                   <Shield className="w-4 h-4 text-green-500" />
+                   <span className="text-xs font-medium text-green-600">Garantia</span>
+                 </div>
+                 <div className="flex items-center space-x-1">
+                   <Clock className="w-4 h-4 text-primary" />
+                   <span className="text-xs font-medium text-primary">Entrega</span>
+                 </div>
+                 <div className="flex items-center space-x-1">
+                   <Users className="w-4 h-4 text-blue-500" />
+                   <span className="text-xs font-medium text-blue-600">Suporte</span>
+                 </div>
+               </div>
+             </div>
+           </div>
 
-          {/* Suporte - Só se necessário */}
-          {selectedServices.length === 0 && (
-            <ScrollStackItem>
-              <div className="backdrop-blur-xl bg-gradient-to-br from-white/10 via-white/5 to-white/5 border border-white/20 rounded-2xl p-4 shadow-xl">
-                <h4 className="font-bold text-foreground mb-2 text-center">Dúvidas?</h4>
-                <p className="text-sm text-muted-foreground mb-4 text-center">
-                  Nossa equipe ajuda você a escolher os melhores extras
-                </p>
-                <Button
-                  variant="outline"
-                  className="w-full h-10 rounded-lg font-semibold border-green-500/50 hover:bg-green-500/10 hover:border-green-500 text-green-600 hover:text-green-700 text-sm"
-                  onClick={() => window.open('https://wa.me/258123456789', '_blank')}
-                >
-                  <Heart className="w-4 h-4 mr-2" />
-                  Falar com Especialista
-                </Button>
-              </div>
-            </ScrollStackItem>
-          )}
-        </ScrollStack>
+           {/* Suporte - Só se necessário */}
+           {selectedServices.length === 0 && (
+             <div className="backdrop-blur-xl bg-gradient-to-br from-white/10 via-white/5 to-white/5 border border-white/20 rounded-2xl p-4 shadow-xl">
+               <h4 className="font-bold text-foreground mb-2 text-center">Dúvidas?</h4>
+               <p className="text-sm text-muted-foreground mb-4 text-center">
+                 Nossa equipe ajuda você a escolher os melhores extras
+               </p>
+               <Button
+                 variant="outline"
+                 className="w-full h-10 rounded-lg font-semibold border-green-500/50 hover:bg-green-500/10 hover:border-green-500 text-green-600 hover:text-green-700 text-sm"
+                 onClick={() => window.open('https://wa.me/258123456789', '_blank')}
+               >
+                 <Heart className="w-4 h-4 mr-2" />
+                 Falar com Especialista
+               </Button>
+             </div>
+           )}
+         </div>
       </main>
     </div>
   );

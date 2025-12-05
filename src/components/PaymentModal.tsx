@@ -201,48 +201,48 @@ const PaymentModal: React.FC<PaymentModalProps> = ({
       case 'card':
         return (
           <div className="space-y-4">
-            <div className="grid grid-cols-1 gap-4">
+            <div className="space-y-3 sm:space-y-4">
               <div>
-                <Label htmlFor="cardNumber" className="text-sm font-semibold">Número do Cartão</Label>
+                <Label htmlFor="cardNumber" className="text-xs sm:text-sm font-semibold">Número do Cartão</Label>
                 <Input
                   id="cardNumber"
                   placeholder="1234 5678 9012 3456"
                   value={paymentData.cardNumber || ''}
                   onChange={(e) => setPaymentData({...paymentData, cardNumber: e.target.value})}
-                  className="mt-2 h-12"
+                  className="mt-1 sm:mt-2 h-10 sm:h-12 text-sm"
                 />
               </div>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-2 sm:gap-4">
                 <div>
-                  <Label htmlFor="expiry" className="text-sm font-semibold">Validade</Label>
+                  <Label htmlFor="expiry" className="text-xs sm:text-sm font-semibold">Validade</Label>
                   <Input
                     id="expiry"
                     placeholder="MM/AA"
                     value={paymentData.expiry || ''}
                     onChange={(e) => setPaymentData({...paymentData, expiry: e.target.value})}
-                    className="mt-2 h-12"
+                    className="mt-1 sm:mt-2 h-10 sm:h-12 text-sm"
                   />
                 </div>
                 <div>
-                  <Label htmlFor="cvv" className="text-sm font-semibold">CVV</Label>
+                  <Label htmlFor="cvv" className="text-xs sm:text-sm font-semibold">CVV</Label>
                   <Input
                     id="cvv"
                     placeholder="123"
                     type="password"
                     value={paymentData.cvv || ''}
                     onChange={(e) => setPaymentData({...paymentData, cvv: e.target.value})}
-                    className="mt-2 h-12"
+                    className="mt-1 sm:mt-2 h-10 sm:h-12 text-sm"
                   />
                 </div>
               </div>
               <div>
-                <Label htmlFor="cardName" className="text-sm font-semibold">Nome no Cartão</Label>
+                <Label htmlFor="cardName" className="text-xs sm:text-sm font-semibold">Nome no Cartão</Label>
                 <Input
                   id="cardName"
                   placeholder="João Silva"
                   value={paymentData.cardName || ''}
                   onChange={(e) => setPaymentData({...paymentData, cardName: e.target.value})}
-                  className="mt-2 h-12"
+                  className="mt-1 sm:mt-2 h-10 sm:h-12 text-sm"
                 />
               </div>
             </div>
@@ -339,8 +339,8 @@ const PaymentModal: React.FC<PaymentModalProps> = ({
   const finalTotal = totalPrice + processingFee;
 
   return (
-    <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4 animate-fade-in backdrop-blur-sm" data-modal-backdrop="payment">
-      <div className="bg-white dark:bg-card rounded-3xl shadow-2xl w-full max-w-4xl overflow-hidden animate-fade-up border border-white/20 relative flex flex-col lg:flex-row" data-modal="payment" style={{maxHeight: '90vh'}}>
+    <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-2 sm:p-4 animate-fade-in backdrop-blur-sm" data-modal-backdrop="payment">
+      <div className="bg-white dark:bg-card rounded-2xl sm:rounded-3xl shadow-2xl w-full max-w-4xl overflow-hidden animate-fade-up border border-white/20 relative flex flex-col lg:flex-row" data-modal="payment" style={{maxHeight: '95vh'}}>
         
         {/* Desktop Layout - Side by Side */}
         <div className="hidden lg:flex w-full">
@@ -707,7 +707,7 @@ const PaymentModal: React.FC<PaymentModalProps> = ({
           </div>
 
           {/* Content */}
-          <div className="flex-1 overflow-y-auto p-6 space-y-6">
+          <div className="flex-1 p-6 space-y-6">
             {step === 'methods' && (
               <div className="space-y-6">
                 <div className="text-center">
@@ -739,30 +739,30 @@ const PaymentModal: React.FC<PaymentModalProps> = ({
                   )}
                 </div>
 
-                <div className="space-y-4">
-                  <Label className="text-sm font-semibold">Escolha o Método de Pagamento</Label>
-                  <div className="grid grid-cols-1 gap-3">
+                <div className="space-y-3 sm:space-y-4">
+                  <Label className="text-xs sm:text-sm font-semibold">Escolha o Método de Pagamento</Label>
+                  <div className="space-y-2 sm:space-y-3">
                     {paymentMethods.map((method) => (
                       <Card
                         key={method.id}
-                        className={`cursor-pointer transition-all duration-200 border hover:scale-[1.02] hover:shadow-lg ${getMethodColor(method.type)} ${
-                          selectedMethod?.id === method.id ? 'ring-2 ring-primary shadow-lg scale-[1.02]' : 'hover:shadow-md'
+                        className={`cursor-pointer transition-all duration-200 border hover:scale-[1.01] hover:shadow-md ${getMethodColor(method.type)} ${
+                          selectedMethod?.id === method.id ? 'ring-1 sm:ring-2 ring-primary shadow-md scale-[1.01]' : 'hover:shadow-sm'
                         }`}
                         onClick={() => handleMethodSelect(method)}
                       >
-                        <CardContent className="p-3 sm:p-4">
+                        <CardContent className="p-2 sm:p-3">
                           <div className="flex items-center justify-between">
-                            <div className="flex items-center space-x-2 sm:space-x-3">
-                              <div className="w-8 h-8 sm:w-10 sm:h-10 bg-white/20 rounded-lg flex items-center justify-center">
+                            <div className="flex items-center space-x-2">
+                              <div className="w-6 h-6 sm:w-8 sm:h-8 bg-white/20 rounded-md sm:rounded-lg flex items-center justify-center flex-shrink-0">
                                 {getMethodIcon(method.type)}
                               </div>
-                              <div className="flex-1">
-                                <h3 className="font-bold text-sm">{method.name}</h3>
-                                <p className="text-xs text-muted-foreground leading-tight">{method.description}</p>
+                              <div className="flex-1 min-w-0">
+                                <h3 className="font-bold text-xs sm:text-sm truncate">{method.name}</h3>
+                                <p className="text-xs text-muted-foreground leading-tight line-clamp-2">{method.description}</p>
                               </div>
                             </div>
-                            <Badge variant="outline" className="text-xs px-2 py-1 sm:px-3 sm:py-1 font-medium ml-2">
-                              {method.config.processingFee ? `${method.config.processingFee}% taxa` : 'Sem taxa'}
+                            <Badge variant="outline" className="text-xs px-1.5 py-0.5 sm:px-2 sm:py-1 font-medium ml-1 sm:ml-2 flex-shrink-0">
+                              {method.config.processingFee ? `${method.config.processingFee}%` : 'Grátis'}
                             </Badge>
                           </div>
                         </CardContent>
@@ -814,22 +814,22 @@ const PaymentModal: React.FC<PaymentModalProps> = ({
                   </Alert>
                 )}
 
-                <div className="flex flex-col space-y-3">
+                <div className="flex flex-col space-y-2 sm:space-y-3">
                   <Button
                     variant="outline"
                     onClick={() => setStep('methods')}
-                    className="h-12 text-base font-medium border-2 hover:bg-gray-50 dark:hover:bg-gray-800"
+                    className="h-10 sm:h-12 text-sm sm:text-base font-medium border-2 hover:bg-gray-50 dark:hover:bg-gray-800"
                   >
                     ← Voltar
                   </Button>
                   <Button
                     onClick={handlePayment}
                     disabled={isProcessing}
-                    className="h-12 text-base font-bold bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary shadow-lg hover:shadow-xl"
+                    className="h-10 sm:h-12 text-sm sm:text-base font-bold bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary shadow-lg hover:shadow-xl"
                   >
-                    <Lock className="w-5 h-5 mr-2" />
-                    <span className="hidden sm:inline">Confirmar Investimento - {finalTotal.toLocaleString()} MZN</span>
-                    <span className="sm:hidden">Confirmar - {finalTotal.toLocaleString()} MZN</span>
+                    <Lock className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2" />
+                    <span className="hidden sm:inline">Confirmar - {finalTotal.toLocaleString()} MZN</span>
+                    <span className="sm:hidden">Confirmar</span>
                   </Button>
                 </div>
               </div>
