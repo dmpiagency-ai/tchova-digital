@@ -231,7 +231,7 @@ const GSMDashboard: React.FC = () => {
                       variant={userCredits >= service.cost ? 'default' : 'secondary'}
                     >
                       <ShoppingCart className="w-4 h-4 mr-2" />
-                      {userCredits >= service.cost ? 'Comprar' : 'Créditos Insuficientes'}
+                      {userCredits >= service.cost ? 'Pagar' : 'Créditos Insuficientes'}
                     </Button>
                   </CardContent>
                 </Card>

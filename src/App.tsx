@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "next-themes";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { AdminProvider } from "@/contexts/AdminContext";
+import { AICreditsProvider } from "@/contexts/AICreditsContext";
 import { Notification } from "@/components/Notification";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { PageLoader } from "@/components/PageLoader";
@@ -35,7 +36,8 @@ const App = () => (
       >
         <AdminProvider>
           <AuthProvider>
-            <TooltipProvider>
+            <AICreditsProvider>
+              <TooltipProvider>
               <Toaster />
               <Sonner />
               <Notification />
@@ -55,8 +57,9 @@ const App = () => (
                 </Suspense>
               </BrowserRouter>
             </TooltipProvider>
-          </AuthProvider>
-        </AdminProvider>
+          </AICreditsProvider>
+        </AuthProvider>
+      </AdminProvider>
       </ThemeProvider>
     </QueryClientProvider>
   </ErrorBoundary>

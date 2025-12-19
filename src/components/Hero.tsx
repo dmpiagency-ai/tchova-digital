@@ -1,6 +1,6 @@
 import { MessageCircle, Sparkles, Zap, ArrowDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { env } from '@/config/env';
 
 const Hero = () => {
@@ -8,6 +8,7 @@ const Hero = () => {
   const [showScrollIndicator, setShowScrollIndicator] = useState(true);
   const [isDesktop, setIsDesktop] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const heroRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     setIsLoaded(true);
@@ -44,6 +45,7 @@ const Hero = () => {
     };
   }, []);
 
+
   // Parallax scroll effect for background (desktop only, respects reduced-motion)
   useEffect(() => {
     if (!isDesktop || prefersReducedMotion) return;
@@ -74,26 +76,29 @@ const Hero = () => {
   }, [isDesktop, prefersReducedMotion]);
 
   return (
-    <section id="home" className="relative min-h-[85vh] sm:min-h-[90vh] lg:min-h-screen flex items-center justify-center overflow-hidden py-4 sm:py-6 lg:py-12 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 dark:from-gray-950 dark:via-gray-900 dark:to-gray-800">
+    <section
+      ref={heroRef}
+      id="home"
+      className="relative min-h-[85vh] sm:min-h-[90vh] lg:min-h-screen flex items-center justify-center overflow-hidden py-4 sm:py-6 lg:py-12"
+    >
       
-      {/* Enhanced Background with Parallax */}
-      <div
-        className="parallax-bg absolute inset-0 bg-cover bg-no-repeat dark:bg-gray-900 transition-transform duration-100 ease-out"
-        style={{
-          backgroundImage: `url('https://res.cloudinary.com/dwlfwnbt0/image/upload/v1764162732/bg-site_l56chg_2048x1148_dzunhj.jpg')`,
-          backgroundPosition: 'center 20%',
-          backgroundAttachment: isDesktop && !prefersReducedMotion ? 'fixed' : 'scroll',
-          willChange: isDesktop && !prefersReducedMotion ? 'transform' : 'auto'
-        }}
-      />
-      
-      {/* Enhanced Overlay for better text readability */}
-      <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/50 to-black/70 dark:from-black/80 dark:via-black/60 dark:to-black/80" />
-      
-      {/* Dynamic gradient effects */}
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0">
+        <div
+          className="w-full h-full bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: 'url(https://res.cloudinary.com/dwlfwnbt0/image/upload/v1764162732/bg-site_l56chg_2048x1148_dzunhj.jpg)'
+          }}
+        />
+
+        {/* Overlay for text readability */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent" />
+      </div>
+
+      {/* Subtle gradient effects only */}
       <div className="absolute inset-0 transition-all duration-1000 ease-out" style={{
-        backgroundImage: `radial-gradient(circle at 25% 25%, hsla(var(--primary) / ${isLoaded ? '0.2' : '0'}) 0%, transparent 50%),
-                         radial-gradient(circle at 75% 75%, hsla(var(--accent) / ${isLoaded ? '0.15' : '0'}) 0%, transparent 50%)`
+        backgroundImage: `radial-gradient(circle at 25% 25%, hsla(var(--primary) / ${isLoaded ? '0.1' : '0'}) 0%, transparent 50%),
+                         radial-gradient(circle at 75% 75%, hsla(var(--accent) / ${isLoaded ? '0.08' : '0'}) 0%, transparent 50%)`
       }} />
 
       {/* Enhanced Floating particles with staggered animation */}

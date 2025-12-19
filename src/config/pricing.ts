@@ -1,25 +1,28 @@
 // Single source of truth for all pricing and service data
+import { Zap, Star, TrendingUp, Building, Crown } from 'lucide-react';
 export interface Service {
-  id: number;
-  title: string;
-  category: string;
-  description: string;
-  shortDescription: string;
-  price: number;
-  priceNote: string;
-  features: string[];
-  benefits: string[];
-  deliveryTime: string;
-  revisions: string;
-  expertise: string;
-  projects: string;
-  rating: number;
-  clients: number;
-  tags: string[];
-  image: string;
-  isPopular?: boolean;
-  isIndividuallyAvailable?: boolean;
-}
+   id: number;
+   title: string;
+   category: string;
+   description: string;
+   shortDescription: string;
+   price: number;
+   priceNote: string;
+   features: string[];
+   benefits: string[];
+   deliveryTime: string;
+   revisions: string;
+   expertise: string;
+   projects: string;
+   rating: number;
+   clients: number;
+   tags: string[];
+   image: string;
+   isPopular?: boolean;
+   isIndividuallyAvailable?: boolean;
+   isAI?: boolean; // New field to distinguish AI vs Designer services
+   aiPrompts?: string[]; // AI-specific prompts for Mozambique context
+ }
 
 export interface Plan {
   name: string;
@@ -34,558 +37,478 @@ export interface Plan {
   buttonColor: string;
   buttonText: string;
   buttonAction: string;
-  icon: any;
+  icon: React.ComponentType<any>;
   badge?: string;
   savings?: string;
 }
 
-// Individual Services Pricing (Base prices)
+// Individual Services Pricing (Reestruturados - Serviços Essenciais)
 export const INDIVIDUAL_SERVICES: Service[] = [
   {
     id: 1,
-    title: 'Design & Identidade Visual',
+    title: 'Identidade Visual Completa',
     category: 'Design Gráfico',
-    description: 'Transformamos marcas em presença visual forte e memorável com serviços completos de design.',
-    shortDescription: 'Identidade visual profissional completa para sua marca.',
-    price: 3500,
-    priceNote: 'Preço pode variar conforme complexidade',
+    description: 'Sistema completo de identidade visual profissional que inclui logo, paleta de cores, tipografia e aplicações práticas. Criamos uma marca forte e memorável que se destaca no mercado moçambicano.',
+    shortDescription: 'Sistema completo de identidade visual profissional.',
+    price: 4500,
+    priceNote: 'Inclui 3 revisões e arquivos em todos os formatos',
     features: [
-      'Logotipos Profissionais',
-      'Identidade Visual & Branding',
-      'Posts e Carrosséis',
-      'Cartazes Publicitários',
-      'Banners e Materiais Impressos',
-      'Cartões de Visita Digitais com QR',
-      'Pacotes Semanais de Arte para Redes',
-      'Templates personalizados'
+      'Logo profissional (3 conceitos)',
+      'Manual da marca completo',
+      'Paleta de cores otimizada',
+      'Tipografia selecionada',
+      'Aplicações básicas (cartão, papel timbrado)',
+      'Arquivos em alta resolução',
+      'Direitos de uso comercial',
+      'Orientação de aplicação'
     ],
     benefits: [
-      'Diferenciação no mercado',
-      'Reconhecimento instantâneo',
-      'Profissionalismo aumentado',
-      'Coerência visual em todos os meios',
+      'Marca profissional e diferenciada',
+      'Consistência visual em todos os materiais',
+      'Reconhecimento instantâneo no mercado',
+      'Valorização da empresa',
       'Materiais prontos para uso imediato',
-      'Arte profissional para redes sociais'
+      'Suporte para implementação'
     ],
-    deliveryTime: '7-14 dias úteis',
-    revisions: '3 revisões inclusas',
+    deliveryTime: '10-15 dias úteis',
+    revisions: '3 revisões completas inclusas',
     expertise: '8+ anos de experiência',
-    projects: '150+ marcas criadas',
+    projects: '150+ identidades visuais criadas',
     rating: 4.9,
     clients: 150,
-    tags: ['Branding', 'Logo', 'Design', 'Identidade Visual', 'Social Media', 'Materiais Impressos'],
+    tags: ['Branding', 'Logo', 'Identidade Visual', 'Manual da Marca'],
     image: 'https://res.cloudinary.com/dwlfwnbt0/image/upload/v1762755337/Gemini_Generated_Image_qjaurwqjaurwqjau_k1fqgr.png',
     isIndividuallyAvailable: true,
-    isPopular: true
+    isPopular: true,
+    isAI: false
   },
   {
     id: 2,
-    title: 'Desenvolvimento Digital (Sites, Apps & Plataformas)',
+    title: 'Website Profissional',
     category: 'Desenvolvimento Web',
-    description: 'Sites, apps e plataformas modernas com tecnologia de ponta e integração local.',
-    shortDescription: 'Desenvolvimento completo de soluções digitais responsivas e integradas.',
-    price: 4000,
-    priceNote: 'Preço varia conforme complexidade e funcionalidades',
+    description: 'Website moderno e responsivo otimizado para conversão e experiência do usuário. Inclui integração com sistemas de pagamento locais e otimização para motores de busca.',
+    shortDescription: 'Website profissional responsivo com otimização completa.',
+    price: 6000,
+    priceNote: 'Inclui hospedagem por 1 ano e domínio',
     features: [
-      'Criação de Websites Responsivos (mobile-first)',
-      'Desenvolvimento de Landing Pages Profissionais',
-      'Criação de Plataformas Web (SaaS, Portais, Painéis)',
-      'Desenvolvimento de Apps (no-code e low-code)',
-      'Websites de Vendas / E-commerce',
-      'Integração com APIs de Carteiras Locais (e-Mola, M-Pesa, Mkesh)',
-      'Sistemas de Reservas e Agendamento',
-      'Criação de Sistemas Internos Empresariais',
-      'Otimização de velocidade',
-      'SEO Técnico avançado'
+      'Design responsivo (mobile-first)',
+      'Até 15 páginas otimizadas',
+      'Formulários de contato funcionais',
+      'Integração com WhatsApp Business',
+      'Otimização SEO básica',
+      'Certificado SSL incluído',
+      'Painel administrativo simples',
+      'Suporte técnico por 6 meses'
     ],
     benefits: [
-      'Presença digital profissional',
-      'Gestão independente do conteúdo',
+      'Presença digital profissional 24/7',
       'Melhor posicionamento no Google',
-      'Conversão de visitantes em clientes',
-      'Integração com pagamentos locais',
-      'Soluções escaláveis e modernas'
+      'Experiência mobile otimizada',
+      'Integração com ferramentas locais',
+      'Fácil gestão de conteúdo',
+      'Suporte técnico incluído'
     ],
-    deliveryTime: '15-21 dias úteis',
-    revisions: 'Revisões ilimitadas até aprovação',
+    deliveryTime: '15-20 dias úteis',
+    revisions: '2 revisões completas inclusas',
     expertise: '6+ anos de experiência',
-    projects: '200+ websites criados',
+    projects: '200+ websites entregues',
     rating: 4.8,
     clients: 200,
-    tags: ['Website', 'Web Development', 'SEO', 'Apps', 'E-commerce', 'APIs Locais'],
+    tags: ['Website', 'Responsivo', 'SEO', 'Mobile-First'],
     image: 'https://res.cloudinary.com/dwlfwnbt0/image/upload/v1762755411/Gemini_Generated_Image_3a9xn93a9xn93a9x_dhydbm.png',
     isIndividuallyAvailable: true,
-    isPopular: true
+    isPopular: true,
+    isAI: false
   },
   {
     id: 3,
-    title: 'Marketing Digital & Tráfego Pago',
+    title: 'Marketing Digital Completo',
     category: 'Marketing Digital',
-    description: 'Campanhas completas com resultados mensuráveis, tráfego pago e otimização com IA.',
-    shortDescription: 'Gestão completa da sua presença digital com foco em resultados e automação.',
-    price: 3000,
-    priceNote: 'Planos mensais disponíveis a partir de 2.000 MZN',
+    description: 'Estratégia completa de marketing digital com foco em resultados mensuráveis. Inclui gestão de redes sociais, tráfego pago otimizado e relatórios detalhados de performance.',
+    shortDescription: 'Marketing digital completo com resultados garantidos.',
+    price: 4500,
+    priceNote: 'Pacote mensal - mínimo 3 meses de compromisso',
     features: [
-      'Gestão Completa de Redes Sociais',
-      'Criação de Conteúdos (Reels, Spots, Anúncios)',
-      'Planeamento e Estratégia Digital',
-      'Gestão de Tráfego Pago (Facebook & Google)',
-      'Copywriting para Anúncios',
-      'Relatórios de Performance',
-      'Otimização contínua com IA',
-      'Automação marketing (pré-configurado)'
+      'Gestão profissional de 2 redes sociais',
+      '12 posts + stories por mês',
+      'Campanha Facebook Ads (orçamento de 2.000 MZN)',
+      'Otimização SEO básica do website',
+      'Relatórios semanais de performance',
+      'Consultoria mensal incluída',
+      'Suporte via WhatsApp prioritário',
+      'Estratégia personalizada'
     ],
     benefits: [
-      'Aumento do tráfego qualificado',
-      'Melhoria da taxa de conversão',
+      'Aumento de seguidores e engajamento',
+      'Tráfego qualificado para seu negócio',
       'ROI mensurável e transparente',
-      'Crescimento sustentável da marca',
-      'Automação inteligente de campanhas',
-      'Otimização com IA para melhores resultados'
+      'Presença digital consistente',
+      'Relatórios detalhados de resultados',
+      'Estratégia baseada em dados reais'
     ],
-    deliveryTime: '5-7 dias úteis para início',
-    revisions: 'Ajustes e otimizações contínuas',
+    deliveryTime: '7 dias úteis para início das campanhas',
+    revisions: 'Otimização contínua incluída',
     expertise: '7+ anos de experiência',
-    projects: '300+ campanhas realizadas',
+    projects: '300+ campanhas de sucesso',
     rating: 4.9,
     clients: 300,
-    tags: ['Marketing', 'SEO', 'Ads', 'Social Media', 'IA', 'Automação'],
+    tags: ['Marketing Digital', 'Redes Sociais', 'Tráfego Pago', 'ROI'],
     image: 'https://res.cloudinary.com/dwlfwnbt0/image/upload/v1762747013/1762701812733_p93nsd.png',
     isIndividuallyAvailable: true,
-    isPopular: true
+    isPopular: true,
+    isAI: false
   },
   {
     id: 4,
-    title: 'Produção Audiovisual Profissional',
+    title: 'Produção Audiovisual',
     category: 'Produção Audiovisual',
-    description: 'Pacotes completos de cobertura de eventos com filmagem profissional, fotografia, edição e efeitos especiais. Oferecemos 4 pacotes diferenciados para atender todas as necessidades do seu evento.',
-    shortDescription: 'Cobertura completa de eventos com vídeo, foto e edição profissional.',
-    price: 10000,
-    priceNote: 'Pacotes a partir de 10.000 MZN',
+    description: 'Cobertura profissional completa de eventos com filmagem em alta definição, fotografia e edição premium. Pacotes estruturados para diferentes necessidades e orçamentos.',
+    shortDescription: 'Cobertura completa de eventos com produção audiovisual profissional.',
+    price: 15000,
+    priceNote: 'Pacote completo - consulte pacotes específicos',
     features: [
-      '🎬 Pacote Básico (10.000 MZN): Filmagem de vídeos, Seção fotográfica, Edição de vídeo, USB de Fotos, USB de Vídeo, Edição de vídeo do evento',
-      '🎥 Pacote Médio (15.000 MZN): Filmagem de vídeos, Seção fotográfica, Edição de vídeo, Fogo de artifício, USB de Fotos, USB de Vídeo, Edição de vídeo do evento',
-      '🎪 Pacote Clássico (25.000 MZN): Filmagem de vídeo, Seção fotográfica, Edição de vídeo, Bolas de Fumaça, USB de Fotos, USB de Vídeo, Edição de vídeo do evento',
-      '👑 Pacote VIP (35.000 MZN): Filmagem de vídeo, Filmagem com drone, Seção fotográfica, Edição de vídeo, Bolas de Fumaça, Fogo de artifício, USB de Fotos, USB de Vídeo, Edição de vídeo do evento',
-      '✨ Adicionais: Filmagem com drone (5.000 MZN), Bolas de Fumaça (5.000 MZN), Fogo de artifício (5.000 MZN)',
-      '🎯 Equipamentos profissionais de última geração',
-      '👥 Equipe especializada e experiente',
-      '⚡ Entrega rápida com qualidade garantida'
+      'Filmagem profissional em 4K',
+      'Seção fotográfica completa',
+      'Edição de vídeo com motion graphics',
+      'Música e efeitos sonoros',
+      '2 DVDs com todo o material',
+      'Galeria online privada',
+      'Entrega em até 15 dias',
+      'Equipe profissional completa'
     ],
     benefits: [
-      'Cobertura completa do seu evento',
-      'Memórias inesquecíveis em alta qualidade',
-      'Pacotes flexíveis para todos os orçamentos',
-      'Adicionais disponíveis para personalização',
-      'Equipe profissional e equipamentos de ponta',
-      'Entrega rápida e suporte completo'
+      'Memórias profissionais do seu evento',
+      'Qualidade cinematográfica',
+      'Cobertura completa (pré-evento até final)',
+      'Edição criativa e moderna',
+      'Material para marketing futuro',
+      'Galeria online para compartilhamento',
+      'Suporte completo durante o evento'
     ],
-    deliveryTime: '7-15 dias úteis após o evento',
-    revisions: 'Edições inclusas no pacote',
+    deliveryTime: '10-15 dias úteis após o evento',
+    revisions: '1 revisão completa incluída',
     expertise: '8+ anos em produção audiovisual',
     projects: '200+ eventos cobertos',
     rating: 4.9,
     clients: 180,
-    tags: ['Eventos', 'Filmagem', 'Fotografia', 'Drone', 'Efeitos Especiais'],
+    tags: ['Eventos', 'Filmagem', 'Fotografia', 'Edição'],
     image: 'https://res.cloudinary.com/dwlfwnbt0/image/upload/v1762755464/1762703721009_w7posw.png',
-    isIndividuallyAvailable: true
+    isIndividuallyAvailable: true,
+    isAI: false
   },
   {
     id: 5,
-    title: 'E-commerce & Importação',
-    category: 'E-commerce',
-    description: 'Facilitamos compras seguras online e soluções completas de importação. Fazemos suas compras em plataformas como Alibaba, Shein e muito mais, com total segurança e rapidez. Assistência completa para importação internacional com documentação, frete e entrega garantida.',
-    shortDescription: 'Compras seguras online e assistência completa de importação internacional.',
+    title: 'IMPORTAÇÃO ASSISTIDA TCHOVADIGITAL',
+    category: 'Importação',
+    description: 'Este serviço funciona por consulta. Após análise e confirmação, o pagamento é realizado pela TchovaDigital e a importação é acompanhada num sistema privado até a chegada do produto. Serviço humano especializado de importação internacional.',
+    shortDescription: 'Consulta gratuita → Análise → Acompanhamento privado até chegar.',
     price: 0,
-    priceNote: 'Preços variam conforme valor da compra/importação',
+    priceNote: 'Serviço por consulta - sem custos iniciais',
     features: [
-      'Compras seguras em Alibaba, Shein, AliExpress e outras plataformas',
-      'Assistência completa para importação internacional',
-      'Documentação aduaneira e despachante incluído',
-      'Frete internacional otimizado e seguro',
-      'Rastreamento completo da encomenda',
-      'Suporte em português 24/7 durante todo o processo',
-      'Garantia de entrega e reembolso se necessário',
-      'Consultoria para escolher os melhores fornecedores'
+      'ETAPA 1: Consulta - Cliente solicita análise do produto',
+      'ETAPA 2: Análise - TchovaDigital analisa e valida fornecedor',
+      'ETAPA 3: Proposta - Envia orçamento final em metical',
+      'ETAPA 4: Confirmação - Cliente aceita proposta',
+      'ETAPA 5: Ativação - Sistema de acompanhamento é ativado'
     ],
     benefits: [
-      'Economia de até 70% em compras internacionais',
-      'Processo 100% seguro e acompanhado',
-      'Sem burocracias - cuidamos de tudo',
-      'Entrega porta a porta garantida',
-      'Produtos originais com garantia',
-      'Suporte completo em caso de problemas'
+      'Consulta gratuita sem compromisso',
+      'Análise completa do produto e fornecedor',
+      'Orçamento transparente em metical',
+      'Sistema privado ativado apenas após pagamento confirmado',
+      'Acompanhamento exclusivo por cliente',
+      'Dados em tempo real: produto, quantidade, fornecedor',
+      'Status do pedido com contagem regressiva',
+      'Atualizações oficiais do agente TchovaDigital',
+      'Histórico completo da importação',
+      'Segurança total - importações externas não têm acesso'
     ],
-    deliveryTime: '7-21 dias úteis (depende do destino)',
-    revisions: 'Acompanhamento completo até entrega',
+    deliveryTime: '30-60 dias úteis (depende do produto e destino)',
+    revisions: '2 revisões completas inclusas',
     expertise: '6+ anos em importação internacional',
     projects: '2000+ importações realizadas com sucesso',
     rating: 4.8,
     clients: 500,
-    tags: ['Importação', 'Compras Online', 'Alibaba', 'Shein', 'Seguro', 'Rápido'],
+    tags: ['Importação Assistida', 'China', 'Compras Internacionais', 'Seguro', 'Acompanhamento Privado', 'TchovaDigital'],
     image: 'https://res.cloudinary.com/dwlfwnbt0/image/upload/v1762756410/Gemini_Generated_Image_ni5h1ani5h1ani5h_p8vvov.png',
-    isIndividuallyAvailable: true
+    isIndividuallyAvailable: true,
+    isAI: false
   },
   {
     id: 6,
-    title: 'Assistência Técnica GSM & Software Profissional',
+    title: 'Ferramentas GSM Profissionais',
     category: 'Assistência GSM',
-    description: 'Ferramentas GSM completas e software profissional para técnicos. Desbloqueios, flashing, reparações e aluguer de boxes premium. Acesso ao painel profissional com mais de 500 ferramentas.',
-    shortDescription: 'Ferramentas GSM profissionais completas com suporte técnico avançado.',
-    price: 0,
-    priceNote: 'Faça login para ver os preços completos',
+    description: 'Acesso completo ao painel profissional de ferramentas GSM para desbloqueio, reparação e manutenção de dispositivos móveis. Mais de 500 ferramentas premium incluídas.',
+    shortDescription: 'Acesso completo a ferramentas GSM premium para técnicos.',
+    price: 1500,
+    priceNote: 'Acesso mensal - primeiro mês grátis para novos usuários',
     features: [
-      'Desbloqueio de Smartphones',
-      'Flashing / Atualização de Firmware',
+      'Mais de 500 ferramentas GSM',
+      'Desbloqueio remoto profissional',
       'Reparação IMEI legal',
-      'Aluguer de Box GSM (Hydra, CM2, Sigma, EFT, Pandora, MRT, etc.)',
-      'Diagnóstico e Reparações Lógicas',
-      'Software e Ferramentas Profissionais',
-      'Serviços avançados para técnicos independentes',
-      'Acesso ao painel profissional: https://4youtech-rent-painel.com/',
-      'Suporte técnico especializado 24/7'
+      'Flashing e atualização de firmware',
+      'Diagnóstico avançado',
+      'Suporte técnico 24/7',
+      'Atualizações constantes',
+      'Interface profissional intuitiva'
     ],
     benefits: [
-      'Mais de 500 ferramentas GSM profissionais',
-      'Desbloqueio remoto com 99% de taxa de sucesso',
-      'Atualizações constantes de ferramentas',
-      'Interface profissional intuitiva',
-      'Suporte completo para técnicos',
-      'Ferramentas premium para reparações avançadas'
+      'Ferramentas premium para reparações',
+      'Taxa de sucesso superior a 99%',
+      'Suporte técnico especializado',
+      'Atualizações automáticas',
+      'Interface intuitiva e profissional',
+      'Acesso remoto seguro'
     ],
-    deliveryTime: 'Acesso imediato após cadastro',
+    deliveryTime: 'Acesso imediato após ativação',
     revisions: 'Suporte técnico contínuo incluído',
     expertise: '15+ anos em ferramentas GSM',
-    projects: '100000+ desbloqueios realizados',
+    projects: '100000+ dispositivos atendidos',
     rating: 4.9,
     clients: 10000,
-    tags: ['GSM', 'Desbloqueio', 'IMEI', 'Ferramentas Pro', 'Reparações', 'Software'],
+    tags: ['GSM', 'Ferramentas', 'Desbloqueio', 'Reparação'],
     image: 'https://res.cloudinary.com/dwlfwnbt0/image/upload/v1762755441/Gemini_Generated_Image_66r0q266r0q266r0_kbpqc8.png',
-    isIndividuallyAvailable: true
+    isIndividuallyAvailable: true,
+    isAI: false
   },
   {
     id: 7,
-    title: 'Logotipo Simples',
+    title: 'Social Media Design',
     category: 'Design Gráfico',
-    description: 'Logotipo básico e funcional para pequenos negócios e startups.',
-    shortDescription: 'Logotipo simples e profissional para seu negócio.',
-    price: 1200,
-    priceNote: 'Preço médio para logotipo básico',
+    description: 'Pacote completo de design para redes sociais com posts, stories e capa profissional. Estratégia visual completa para sua presença digital.',
+    shortDescription: 'Design completo para suas redes sociais.',
+    price: 2500,
+    priceNote: 'Pacote mensal - 12 posts + stories',
     features: [
-      'Conceito de logotipo simples',
-      '2-3 opções de design',
-      'Arquivos em formatos digitais',
-      'Direito de uso comercial',
-      '1 revisão incluída'
-    ],
-    benefits: [
-      'Identidade visual básica',
-      'Pronto para uso imediato',
-      'Custo acessível para iniciantes',
-      'Diferenciação no mercado local'
-    ],
-    deliveryTime: '3-5 dias úteis',
-    revisions: '1 revisão incluída',
-    expertise: '8+ anos de experiência',
-    projects: '200+ logotipos criados',
-    rating: 4.8,
-    clients: 80,
-    tags: ['Logo', 'Design', 'Identidade Visual', 'Iniciante'],
-    image: 'https://res.cloudinary.com/dwlfwnbt0/image/upload/v1762755337/Gemini_Generated_Image_qjaurwqjaurwqjau_k1fqgr.png',
-    isIndividuallyAvailable: true
-  },
-  {
-    id: 8,
-    title: 'Posts Individuais para Redes Sociais',
-    category: 'Design Gráfico',
-    description: 'Posts únicos e atraentes para Instagram, Facebook e outras redes sociais.',
-    shortDescription: 'Posts profissionais para suas redes sociais.',
-    price: 200,
-    priceNote: 'Por post individual',
-    features: [
-      'Design de 1 post para rede social',
-      'Otimização para Instagram/Facebook',
-      'Elementos visuais modernos',
-      'Texto integrado ao design',
-      'Arquivos prontos para postagem'
-    ],
-    benefits: [
-      'Conteúdo visual profissional',
-      'Aumento do engajamento',
-      'Custo acessível',
-      'Resultado imediato'
-    ],
-    deliveryTime: '1-2 dias úteis',
-    revisions: '1 revisão incluída',
-    expertise: '6+ anos em design social',
-    projects: '1000+ posts criados',
-    rating: 4.7,
-    clients: 120,
-    tags: ['Social Media', 'Posts', 'Instagram', 'Facebook'],
-    image: 'https://res.cloudinary.com/dwlfwnbt0/image/upload/v1762755337/Gemini_Generated_Image_qjaurwqjaurwqjau_k1fqgr.png',
-    isIndividuallyAvailable: true
-  },
-  {
-    id: 9,
-    title: 'Pack Semanal de Posts (5 posts)',
-    category: 'Design Gráfico',
-    description: 'Pacote completo de 5 posts para uma semana de conteúdo nas redes sociais.',
-    shortDescription: 'Conteúdo semanal completo para suas redes.',
-    price: 900,
-    priceNote: 'Pack de 5 posts otimizados',
-    features: [
-      '5 posts para redes sociais',
-      'Temas variados e atraentes',
-      'Otimização para engajamento',
-      'Calendário de postagem sugerido',
+      '12 posts para Instagram/Facebook',
+      '8 stories destacáveis',
+      'Capa profissional para perfil',
+      'Templates otimizados para engajamento',
+      'Calendário de postagem',
+      'Otimização para algoritmos',
       'Arquivos em alta resolução'
     ],
     benefits: [
-      'Conteúdo para 1 semana',
-      'Consistência nas redes',
-      'Economia vs posts individuais',
-      'Maior alcance orgânico'
+      'Presença visual consistente',
+      'Aumento de engajamento',
+      'Profissionalismo nas redes',
+      'Conteúdo pronto para postar',
+      'Estratégia visual definida',
+      'Resultados mensuráveis'
     ],
-    deliveryTime: '3-5 dias úteis',
-    revisions: '2 revisões incluídas',
+    deliveryTime: '5-7 dias úteis',
+    revisions: '2 revisões completas inclusas',
     expertise: '6+ anos em design social',
-    projects: '500+ packs semanais',
+    projects: '200+ perfis redesenhados',
     rating: 4.8,
-    clients: 90,
-    tags: ['Social Media', 'Pack', 'Semanal', 'Conteúdo'],
+    clients: 120,
+    tags: ['Social Media', 'Posts', 'Stories', 'Instagram'],
     image: 'https://res.cloudinary.com/dwlfwnbt0/image/upload/v1762755337/Gemini_Generated_Image_qjaurwqjaurwqjau_k1fqgr.png',
-    isIndividuallyAvailable: true
+    isIndividuallyAvailable: true,
+    isAI: false
   },
   {
-    id: 10,
-    title: 'Pack Mensal de Posts (15-20 posts)',
+    id: 8,
+    title: 'Materiais Publicitários',
     category: 'Design Gráfico',
-    description: 'Pacote mensal completo com 15-20 posts para conteúdo consistente durante o mês.',
-    shortDescription: 'Conteúdo mensal profissional para suas redes.',
-    price: 2800,
-    priceNote: 'Pack mensal de 15-20 posts',
+    description: 'Conjunto completo de materiais publicitários para sua empresa: cartazes, banners, flyers e materiais impressos profissionais.',
+    shortDescription: 'Materiais publicitários completos para sua empresa.',
+    price: 1800,
+    priceNote: 'Kit completo com 5 materiais diferentes',
     features: [
-      '15-20 posts mensais',
-      'Estratégia de conteúdo incluída',
-      'Variação de formatos (imagem, carrossel)',
-      'Calendário editorial completo',
-      'Otimização para algoritmos'
-    ],
-    benefits: [
-      'Conteúdo para 1 mês inteiro',
-      'Crescimento consistente',
-      'Maior economia',
-      'Presença profissional contínua'
-    ],
-    deliveryTime: '7-10 dias úteis',
-    revisions: '3 revisões incluídas',
-    expertise: '6+ anos em design social',
-    projects: '300+ packs mensais',
-    rating: 4.9,
-    clients: 70,
-    tags: ['Social Media', 'Pack', 'Mensal', 'Estratégia'],
-    image: 'https://res.cloudinary.com/dwlfwnbt0/image/upload/v1762755337/Gemini_Generated_Image_qjaurwqjaurwqjau_k1fqgr.png',
-    isIndividuallyAvailable: true
-  },
-  {
-    id: 11,
-    title: 'Cartazes Publicitários',
-    category: 'Design Gráfico',
-    description: 'Cartazes profissionais para divulgação de produtos, serviços e eventos.',
-    shortDescription: 'Cartazes impactantes para sua publicidade.',
-    price: 400,
-    priceNote: 'Por cartaz individual',
-    features: [
-      'Design de cartaz A3/A4',
-      'Layout profissional e atrativo',
+      '2 cartazes A3 em diferentes formatos',
+      '1 banner personalizado',
+      '3 flyers para distribuição',
       'Otimização para impressão',
-      'Elementos visuais impactantes',
-      'Arquivos prontos para gráfica'
+      'Arquivos em CMYK',
+      'Marca d\'água de corte incluída',
+      'Orientação para gráfica'
     ],
     benefits: [
-      'Publicidade offline eficaz',
-      'Atrai clientes locais',
-      'Custo acessível',
-      'Resultado mensurável'
+      'Materiais prontos para impressão',
+      'Campanha publicitária completa',
+      'Visibilidade offline profissional',
+      'Custo-benefício otimizado',
+      'Qualidade gráfica garantida',
+      'Suporte para impressão'
     ],
-    deliveryTime: '2-3 dias úteis',
-    revisions: '1 revisão incluída',
-    expertise: '7+ anos em design gráfico',
-    projects: '400+ cartazes criados',
+    deliveryTime: '4-6 dias úteis',
+    revisions: '2 revisões completas inclusas',
+    expertise: '7+ anos em design publicitário',
+    projects: '150+ campanhas publicitárias',
     rating: 4.7,
     clients: 100,
-    tags: ['Cartazes', 'Publicidade', 'Impressão', 'Offline'],
+    tags: ['Cartazes', 'Banners', 'Publicidade', 'Impressão'],
     image: 'https://res.cloudinary.com/dwlfwnbt0/image/upload/v1762755337/Gemini_Generated_Image_qjaurwqjaurwqjau_k1fqgr.png',
-    isIndividuallyAvailable: true
+    isIndividuallyAvailable: true,
+    isAI: false
   },
   {
-    id: 12,
-    title: 'Cartão Digital com QR Code',
+    id: 9,
+    title: 'Pacote Design Completo',
     category: 'Design Gráfico',
-    description: 'Cartões de visita digitais modernos com QR code para compartilhamento fácil.',
-    shortDescription: 'Cartões digitais modernos com QR code.',
-    price: 350,
-    priceNote: 'Cartão digital profissional',
+    description: 'Pacote completo de design gráfico incluindo criação de logos, ferramentas IA, posts semanais, layout para camisetas, banners, adesivos, vinis, fotos para tela e todos os tipos de materiais impressos.',
+    shortDescription: 'Pacote completo de design com todos os materiais impressos.',
+    price: 3500,
+    priceNote: 'Pacote mensal - inclui todos os serviços de design',
     features: [
-      'Design de cartão digital',
-      'QR code integrado',
-      'Link para perfil/contato',
-      'Otimização para mobile',
-      'Arquivo digital para compartilhamento'
+      'Criação de logos profissionais',
+      'Ferramentas IA para logos',
+      'Posts semanais para redes sociais',
+      'Layout para camisetas personalizadas',
+      'Banners e faixas publicitárias',
+      'Adesivos e vinis para veículos',
+      'Fotos para tela e impressão',
+      'Cartazes e flyers promocionais',
+      'Materiais impressos diversos',
+      'Suporte técnico completo',
+      'Customização ilimitada'
     ],
     benefits: [
-      'Contato profissional digital',
-      'Fácil compartilhamento',
-      'Sempre atualizado',
-      'Ecológico e moderno'
+      'Todos os materiais de design incluídos',
+      'Soluções completas para impressão',
+      'Criatividade profissional garantida',
+      'Materiais prontos para produção',
+      'Suporte completo para gráficas',
+      'Qualidade premium assegurada',
+      'Economia vs serviços avulsos'
     ],
-    deliveryTime: '1-2 dias úteis',
-    revisions: '1 revisão incluída',
-    expertise: '5+ anos em design digital',
-    projects: '250+ cartões digitais',
-    rating: 4.8,
-    clients: 85,
-    tags: ['Cartão', 'Digital', 'QR Code', 'Contato'],
+    deliveryTime: '7-10 dias úteis',
+    revisions: 'Revisões ilimitadas inclusas',
+    expertise: '8+ anos em design e impressão',
+    projects: '500+ projetos de design completos',
+    rating: 4.9,
+    clients: 200,
+    tags: ['Design Completo', 'Impressão', 'Logos', 'Materiais', 'IA'],
     image: 'https://res.cloudinary.com/dwlfwnbt0/image/upload/v1762755337/Gemini_Generated_Image_qjaurwqjaurwqjau_k1fqgr.png',
-    isIndividuallyAvailable: true
-  },
-  {
-    id: 13,
-    title: 'Banner Impresso Digitalizado',
-    category: 'Design Gráfico',
-    description: 'Banners profissionais para fachadas, eventos e pontos de venda.',
-    shortDescription: 'Banners impactantes para sua visibilidade.',
-    price: 600,
-    priceNote: 'Banner personalizado',
-    features: [
-      'Design de banner personalizado',
-      'Otimização para impressão em grande formato',
-      'Elementos visuais de alto impacto',
-      'Texto claro e legível',
-      'Arquivos prontos para gráfica'
-    ],
-    benefits: [
-      'Visibilidade máxima',
-      'Atrai clientes de longe',
-      'Profissionalismo instantâneo',
-      'ROI comprovado'
-    ],
-    deliveryTime: '3-4 dias úteis',
-    revisions: '2 revisões incluídas',
-    expertise: '7+ anos em design gráfico',
-    projects: '180+ banners criados',
-    rating: 4.8,
-    clients: 65,
-    tags: ['Banner', 'Impresso', 'Visibilidade', 'Publicidade'],
-    image: 'https://res.cloudinary.com/dwlfwnbt0/image/upload/v1762755337/Gemini_Generated_Image_qjaurwqjaurwqjau_k1fqgr.png',
-    isIndividuallyAvailable: true
+    isIndividuallyAvailable: true,
+    isAI: true
   }
 ];
 
-// Package Plans (Pre-configured combinations)
+// Planos Reestruturados - Foco em Público Jovem Moçambicano
 export const SERVICE_PLANS: Plan[] = [
   {
-    name: 'KIT VENDER RÁPIDO',
-    price: 3500,
+    name: 'START RÁPIDO IA',
+    price: 699,
     period: 'MZN',
-    description: 'Solução rápida para começar a vender online com o essencial.',
+    description: 'Para quem está começando agora e quer algo rápido, barato e funcional. Logo simples OU 3 posts gerados com IA.',
     features: [
-      'Website básico responsivo',
-      'Identidade visual inicial (logo + cores)',
-      'Gestão de redes sociais (1 mês)',
-      'Suporte via WhatsApp',
-      'Tutorial de configuração',
-      'SSL certificate incluído'
+      'Logo simples OU 3 posts para redes sociais',
+      'Templates modernos prontos para usar',
+      'Conteúdo adaptado ao contexto de Moçambique',
+      'Linguagem jovem e direta',
+      'Entrega rápida (até 24h)',
+      'Extra opcional: Refinamento com designer (+300-600 MZN)'
     ],
     highlighted: false,
     borderColor: 'border-green-500 dark:border-green-400',
     priceColor: 'text-green-600 dark:text-green-400',
     buttonColor: 'bg-green-600 hover:bg-green-700 dark:bg-green-500 dark:hover:bg-green-400',
-    buttonText: 'Começar agora',
-    buttonAction: 'kit-vender',
-    icon: 'Star',
-    badge: 'Ideal para Iniciantes',
-    savings: 'Economize 25% vs serviços individuais'
+    buttonText: 'Começar Agora',
+    buttonAction: 'start-rapido-ia',
+    icon: Zap,
+    badge: 'Mais Barato',
+    savings: 'Perfeito para Iniciantes'
   },
   {
-    name: 'DESCOLAR DIGITAL',
-    price: 6500,
-    originalPrice: 8000,
+    name: 'STARTUP DESIGN',
+    price: 2299,
     period: 'MZN',
-    description: 'Pacote completo para presença digital profissional e crescimento.',
+    description: 'Para pequenos negócios que precisam da primeira presença digital profissional. Tudo que você precisa para começar.',
     features: [
-      'Website profissional completo',
-      'Identidade visual premium',
-      'Marketing Digital (2 meses)',
-      'Motion Design básico',
-      'Suporte prioritário (60 dias)',
-      'Relatórios mensais de performance',
-      'Otimização SEO incluída'
+      'Logotipo profissional (3 conceitos)',
+      'Landing page simples + Link Bio',
+      '4 posts para redes sociais',
+      'Cartão digital com QR Code',
+      'Ajustes manuais por designer',
+      'Suporte técnico por 30 dias'
+    ],
+    highlighted: false,
+    borderColor: 'border-yellow-500 dark:border-yellow-400',
+    priceColor: 'text-yellow-600 dark:text-yellow-400',
+    buttonColor: 'bg-yellow-600 hover:bg-yellow-700 dark:bg-yellow-500 dark:hover:bg-yellow-400',
+    buttonText: 'Criar Minha Marca',
+    buttonAction: 'startup-design',
+    icon: Star,
+    badge: 'Mais Popular',
+    savings: 'Pacote Completo Essencial'
+  },
+  {
+    name: 'CRESCIMENTO DIGITAL',
+    price: 5500,
+    originalPrice: 7500,
+    period: 'MZN',
+    description: 'Para negócios que já vendem e querem crescer no digital. Website profissional + identidade visual completa.',
+    features: [
+      'Website profissional responsivo (até 10 páginas)',
+      'Identidade visual completa (logo + cores + tipografia)',
+      '5 posts profissionais para redes sociais',
+      'Estrutura preparada para anúncios',
+      'Otimização SEO básica incluída',
+      'Suporte inicial por 60 dias'
     ],
     highlighted: true,
     borderColor: 'border-blue-500 dark:border-blue-400',
     priceColor: 'text-blue-600 dark:text-blue-400',
     buttonColor: 'bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-400',
-    buttonText: 'Descolar Digital',
-    buttonAction: 'descolagem',
-    icon: 'Zap',
-    badge: 'MAIS POPULAR',
-    savings: 'Economize 35% vs serviços individuais'
+    buttonText: 'Quero Crescer',
+    buttonAction: 'crescimento-digital',
+    icon: TrendingUp,
+    badge: 'Promoção',
+    savings: 'Antes 7.500 MZN - Economize 2.000 MZN'
   },
   {
-    name: 'ACELERAÇÃO MENSAL',
-    price: 16000,
-    period: 'MZN + 4.900/Mês',
-    description: 'Crescimento acelerado com acompanhamento contínuo e suporte VIP.',
+    name: 'EMPRESA DIGITAL',
+    price: 12000,
+    period: 'MZN + 3.500/Mês',
+    description: 'Para empresas e marcas que querem vender online de forma estruturada. E-commerce + suporte mensal.',
     features: [
-      'Website avançado + E-commerce',
-      'Identidade visual completa',
-      'Marketing Digital Avançado (mensal)',
-      'Motion Design & Vídeos Premium',
-      'Suporte prioritário 24/7',
-      'Consultoria estratégica mensal',
-      'Gestão completa de campanhas',
-      'Relatórios executivos detalhados'
+      'Website avançado + Blog integrado',
+      'E-commerce básico (até 50 produtos)',
+      'Identidade visual premium',
+      'Integração com M-Pesa e e-Mola',
+      'Suporte mensal e atualizações',
+      'Relatórios de vendas automáticos',
+      'Backup e segurança incluídos'
     ],
     highlighted: false,
-    borderColor: 'border-yellow-500',
-    priceColor: 'text-yellow-600',
-    buttonColor: 'bg-yellow-500 hover:bg-yellow-600',
-    buttonText: 'Acelerar crescimento',
-    buttonAction: 'aceleracao',
-    icon: 'Zap',
-    badge: 'Crescimento Garantido',
-    savings: 'ROI médio 300% em 6 meses'
+    borderColor: 'border-purple-500 dark:border-purple-400',
+    priceColor: 'text-purple-600 dark:text-purple-400',
+    buttonColor: 'bg-purple-600 hover:bg-purple-700 dark:bg-purple-500 dark:hover:bg-purple-400',
+    buttonText: 'Estruturar Meu Negócio',
+    buttonAction: 'empresa-digital',
+    icon: Building,
+    badge: 'Para Quem Vende',
+    savings: 'Setup + Manutenção Mensal'
   },
   {
-    name: 'ECOSSISTEMA MASTER',
+    name: 'DOMÍNIO TOTAL',
     price: 25000,
-    period: 'MZN + 9.500/Mês',
-    description: 'Solução 360º para empresas que querem dominar completamente o mercado digital.',
+    period: 'MZN + 8.500/Mês',
+    description: 'Para negócios grandes ou em forte crescimento que querem tudo num só lugar. Solução completa 360º.',
     features: [
-      'Plataforma personalizada completa',
-      'Design gráfico premium ilimitado',
-      'Marketing Digital Master (ilimitado)',
-      'Motion Design Master (ilimitado)',
-      'Suporte executivo dedicado',
-      'Relatórios executivos VIP',
+      'Plataforma web personalizada + E-commerce avançado',
+      'Design gráfico ilimitado (todos os materiais)',
+      'Marketing digital completo e ilimitado',
+      'Produção audiovisual profissional',
+      'Suporte total 360º com prioridade máxima',
       'Consultoria estratégica semanal',
-      'Acesso direto aos fundadores',
-      'Garantia de resultados ou dinheiro de volta'
+      'Acesso direto à equipe fundadora'
     ],
     highlighted: false,
-    borderColor: 'border-orange-500',
-    priceColor: 'text-orange-600',
-    buttonColor: 'bg-orange-600 hover:bg-orange-700',
-    buttonText: 'Orçamento exclusivo',
-    buttonAction: 'master',
-    icon: 'Smartphone',
-    badge: 'Para Grandes Ambientes',
-    savings: 'Solução completa com economia de 50%+'
+    borderColor: 'border-orange-500 dark:border-orange-400',
+    priceColor: 'text-orange-600 dark:text-orange-400',
+    buttonColor: 'bg-orange-600 hover:bg-orange-700 dark:bg-orange-500 dark:hover:bg-orange-400',
+    buttonText: 'Orçamento VIP',
+    buttonAction: 'dominio-total',
+    icon: Crown,
+    badge: 'Solução Completa',
+    savings: 'Tudo incluído + Suporte Premium'
   }
 ];
 
-// Service Categories for filtering
+// Service Categories for filtering (Atualizadas)
 export const SERVICE_CATEGORIES = [
   'Todos',
   'Design Gráfico',
@@ -596,21 +519,25 @@ export const SERVICE_CATEGORIES = [
   'Assistência GSM'
 ];
 
-// WhatsApp message templates
+// WhatsApp message templates (Atualizados para nova estrutura)
 export const WHATSAPP_MESSAGES = {
   service: {
-    'Design Gráfico & Identidade Visual': '🎨 Olá! Gostaria de orçamento para design gráfico e identidade visual.',
-    'Website Profissional': '💻 Olá! Preciso de um website profissional para meu negócio.',
-    'Marketing Digital Completo': '📈 Olá! Interessado em marketing digital para minha empresa.',
-    'Produção Audiovisual Profissional': '🎬 Olá! Gostaria de orçamento para produção audiovisual.',
-    'E-commerce & Importação': '🛒 Olá! Preciso de ajuda com compras seguras online ou importação internacional.',
-    'Assistência Técnica GSM': '📱 Olá! Preciso de assistência técnica GSM para meus dispositivos.'
+    'Identidade Visual Completa': '🎨 Olá! Gostaria de orçamento para identidade visual completa da minha marca.',
+    'Website Profissional': '💻 Olá! Preciso de um website profissional responsivo para meu negócio.',
+    'Marketing Digital Completo': '📈 Olá! Interessado em pacote completo de marketing digital.',
+    'Produção Audiovisual': '🎬 Olá! Gostaria de orçamento para cobertura audiovisual do meu evento.',
+    'IMPORTAÇÃO ASSISTIDA TCHOVADIGITAL': '📦 Olá! Gostaria de saber mais sobre o serviço de importação assistida TchovaDigital.',
+    'Ferramentas GSM Profissionais': '📱 Olá! Interessado em ferramentas GSM profissionais.',
+    'Social Media Design': '📱 Olá! Gostaria de design completo para minhas redes sociais.',
+    'Materiais Publicitários': '📢 Olá! Preciso de materiais publicitários para minha empresa.',
+    'Pacote Design Completo': '🎨 Olá! Interessado no pacote completo de design com todos os materiais impressos.'
   },
   plan: {
-    'KIT VENDER RÁPIDO': '🚀 Olá! Gostaria de contratar o Kit Vender Rápido.',
-    'DESCOLAR DIGITAL': '⚡ Olá! Interessado no plano Descolar Digital.',
-    'ACELERAÇÃO MENSAL': '📈 Olá! Gostaria de saber mais sobre o plano Aceleração Mensal.',
-    'ECOSSISTEMA MASTER': '👑 Olá! Quero conhecer o Ecossistema Master.'
+    'START RÁPIDO IA': '🤖 Olá! Gostaria de saber mais sobre o plano Start Rápido IA.',
+    'STARTUP DESIGN': '🎨 Olá! Interessado no plano Startup Design.',
+    'CRESCIMENTO DIGITAL': '📈 Olá! Gostaria de informações sobre o plano Crescimento Digital.',
+    'EMPRESA DIGITAL': '🏢 Olá! Quero conhecer o plano Empresa Digital.',
+    'DOMÍNIO TOTAL': '👑 Olá! Interessado no plano Domínio Total.'
   }
 };
 

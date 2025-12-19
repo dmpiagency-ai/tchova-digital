@@ -1,7 +1,6 @@
-import { Check, Star, Zap, Smartphone, MessageCircle, LogOut, Shield, CreditCard, Lock } from 'lucide-react';
+import { Check, MessageCircle, CreditCard, Lock, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/contexts/AuthContext';
-import { useAdmin } from '@/contexts/AdminContext';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { handleWhatsAppClick, getPricingMessage } from '@/lib/whatsapp';
@@ -12,28 +11,8 @@ import LoginModal from '@/components/LoginModal';
 const Pricing = () => {
   const navigate = useNavigate();
   const { isAuthenticated, user, logout } = useAuth();
-  const { isAdmin } = useAdmin();
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
-  type HandleServiceAccess = (serviceType: string, serviceData?: { title?: string; type?: string; requiresLogin?: boolean }) => void;
-
-  const invokeGsmRoute = (): boolean => {
-    const route = (window as unknown as { handleServiceAccess?: HandleServiceAccess }).handleServiceAccess;
-    if (typeof route === 'function') {
-      route('gsm-rental', { title: 'GSM', type: 'gsm', requiresLogin: true });
-      return true;
-    }
-    return false;
-  };
-
-  const handleGsmAccess = () => {
-    if (invokeGsmRoute()) return;
-    if (isAuthenticated) {
-      window.open('https://gsm.tchova.digital', '_blank');
-    } else {
-      invokeGsmRoute();
-    }
-  };
 
   const handlePlanPurchase = (plan: { name: string; price: number; }) => {
     navigate(`/payment?service=${encodeURIComponent(plan.name)}&amount=${plan.price.toString()}`);
@@ -69,57 +48,6 @@ const Pricing = () => {
           </p>
         </div>
 
-        {/* Status do Usuário - Compacto e Não Distrativo */}
-        {(isAdmin || isAuthenticated) && (
-          <div className="mb-4 sm:mb-6 flex justify-center">
-            <div className="flex gap-2 sm:gap-3">
-              {isAdmin && (
-                <a
-                  href="/admin/gsm"
-                  className="inline-flex items-center gap-1.5 sm:gap-2 bg-gradient-to-r from-orange-500 to-red-500 text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-medium hover:from-orange-600 hover:to-red-600 transition-all duration-300 shadow-md hover:shadow-lg hover:scale-105"
-                >
-                  <Shield className="w-3 h-3 sm:w-4 sm:h-4" />
-                  <span className="hidden sm:inline">Admin</span>
-                </a>
-              )}
-
-              {isAuthenticated && (
-                <div className="bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-lg sm:rounded-xl px-3 py-1.5 sm:px-4 sm:py-2 border border-green-200 dark:border-green-800 shadow-sm">
-                  <div className="flex items-center gap-2 sm:gap-3">
-                    <div className="w-5 h-5 sm:w-6 sm:h-6 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full flex items-center justify-center">
-                      <span className="text-white font-bold text-xs">
-                        {user?.name?.charAt(0).toUpperCase() || 'U'}
-                      </span>
-                    </div>
-                    <div className="text-left hidden sm:block">
-                      <p className="text-xs font-semibold text-green-800 dark:text-green-200">GSM Ativo</p>
-                      <p className="text-xs text-green-600 dark:text-green-400">{user?.name}</p>
-                    </div>
-                    <div className="flex gap-1">
-                      <Button
-                        variant="default"
-                        size="sm"
-                        className="bg-green-600 hover:bg-green-700 text-white text-xs h-6 sm:h-7 px-1.5 sm:px-2"
-                        onClick={handleGsmAccess}
-                      >
-                        <span className="hidden sm:inline">GSM</span>
-                        <Smartphone className="w-3 h-3 sm:hidden" />
-                      </Button>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={logout}
-                        className="text-green-600 hover:text-red-600 dark:text-green-400 dark:hover:text-red-400 text-xs h-6 sm:h-7 px-1.5 sm:px-2"
-                      >
-                        <LogOut className="w-3 h-3" />
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-        )}
 
         {/* Planos - Foco no Essencial */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 pricing-grid-mobile">
@@ -183,12 +111,9 @@ const Pricing = () => {
                   <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out"></div>
                   <CreditCard className="w-3 h-3 mr-1 relative z-10" />
                   <span className="hidden sm:inline relative z-10">
-                    {plan.buttonAction === 'kit-vender' ? '🚀 Começar Agora' : 
-                     plan.buttonAction === 'descolagem' ? '⚡ Descolar Digital' :
-                     plan.buttonAction === 'aceleracao' ? '📈 Acelerar Crescimento' :
-                     '👑 Orçamento VIP'}
+                    {plan.buttonText}
                   </span>
-                  <span className="sm:hidden relative z-10">Comprar</span>
+                  <span className="sm:hidden relative z-10">Aderir</span>
                 </Button>
 
                 <Button

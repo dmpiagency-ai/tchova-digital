@@ -34,7 +34,7 @@ const Footer = () => {
               TchovaDigital
             </h3>
             <p className="text-muted-foreground mb-3 leading-relaxed text-sm">
-              Transformação digital em Moçambique.
+              Transformação digital local.
             </p>
             <div className="flex justify-center md:justify-start">
               <button
@@ -66,7 +66,7 @@ const Footer = () => {
           <div className="text-center md:text-right">
             <h4 className="font-bold text-foreground mb-3 text-sm">Contacto</h4>
             <div className="space-y-1.5 text-muted-foreground text-xs">
-              <p>Maputo, Moçambique</p>
+              <p>Maputo</p>
               <p>+258 123 456 789</p>
               <p>hello@tchovadigital.com</p>
             </div>
@@ -115,7 +115,7 @@ const Footer = () => {
             <p className="text-muted-foreground text-xs flex items-center">
               Feito com
               <span className="mx-1">💚</span>
-              em Moçambique
+              localmente
             </p>
           </div>
         </div>

@@ -1387,14 +1387,15 @@ section {
   .text-xs {
     font-size: 0.75rem;
   }
-  
+
   /* Improve button spacing on mobile */
   button {
     margin: 0.125rem;
   }
-  
+
   /* Optimize card spacing */
   .card {
     margin-bottom: 1rem;
   }
 }
+
