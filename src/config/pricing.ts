@@ -201,7 +201,7 @@ export const INDIVIDUAL_SERVICES: Service[] = [
     title: 'IMPORTAÇÃO ASSISTIDA TCHOVADIGITAL',
     category: 'Importação',
     description: 'Este serviço funciona por consulta. Após análise e confirmação, o pagamento é realizado pela TchovaDigital e a importação é acompanhada num sistema privado até a chegada do produto. Serviço humano especializado de importação internacional.',
-    shortDescription: 'Consulta gratuita → Análise → Acompanhamento privado até chegar.',
+    shortDescription: 'Importação assistida com acompanhamento privado até a entrega.',
     price: 0,
     priceNote: 'Serviço por consulta - sem custos iniciais',
     features: [
