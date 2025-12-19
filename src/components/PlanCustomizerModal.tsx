@@ -38,12 +38,21 @@ interface Plan {
   maxAdditionalServices: number;
 }
 
+interface Customization {
+  basePlan: string;
+  selectedServices: string[];
+  quantities: Record<string, number>;
+  customizations: Record<string, unknown>;
+  totalPrice: number;
+  timestamp: string;
+}
+
 interface PlanCustomizerModalProps {
   isOpen: boolean;
   onClose: () => void;
   basePlan: Plan | null;
   availableServices: Service[];
-  onSendProposal: (customization: any) => void;
+  onSendProposal: (customization: Customization) => void;
 }
 
 const PlanCustomizerModal: React.FC<PlanCustomizerModalProps> = ({
@@ -55,7 +64,7 @@ const PlanCustomizerModal: React.FC<PlanCustomizerModalProps> = ({
 }) => {
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
   const [quantities, setQuantities] = useState<Record<string, number>>({});
-  const [customizations, setCustomizations] = useState<Record<string, any>>({});
+  const [customizations, setCustomizations] = useState<Record<string, unknown>>({});
 
   // Reset state when modal opens with new plan
   useEffect(() => {

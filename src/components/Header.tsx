@@ -127,7 +127,8 @@ const Header = () => {
                       try {
                         logout();
                       } catch (error) {
-                        console.error('Erro ao fazer logout:', error);
+                        // Error during logout (removed console.error for production)
+                        // Error details: ${error}
                         // Fallback: forçar reload da página
                         window.location.reload();
                       }

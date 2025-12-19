@@ -229,7 +229,7 @@ const ServiceDetails = () => {
             <div className="relative h-36 sm:h-48 lg:h-56 xl:h-64 overflow-hidden rounded-xl sm:rounded-2xl lg:rounded-3xl">
               <img
                 src={service.image}
-                alt={service.title}
+                alt={`Imagem ilustrativa do serviço ${service.title} oferecido pela TchovaDigital`}
                 className={`w-full h-full object-cover transition-all duration-700 ${imageLoaded ? 'scale-105 opacity-100' : 'scale-110 opacity-0'}`}
                 onLoad={() => setImageLoaded(true)}
               />
@@ -759,8 +759,20 @@ const ServiceDetails = () => {
                   >
                     <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out"></div>
                     <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6 mr-2 relative z-10" />
-                    <span className="hidden sm:inline relative z-10">Criar Meu Design Agora</span>
-                    <span className="sm:hidden relative z-10">Criar Design</span>
+                    <span className="hidden sm:inline relative z-10">
+                      {service.category === 'Produção Audiovisual' ? 'PEDIR ORÇAMENTO' :
+                       service.category === 'Marketing Digital' ? 'PEDIR ORÇAMENTO' :
+                       service.category === 'Desenvolvimento Web' ? 'PEDIR ORÇAMENTO' :
+                       service.category === 'Assistência GSM' ? 'ALUGAR FERRAMENTAS' :
+                       'CRIAR MEU DESIGN AGORA'}
+                    </span>
+                    <span className="sm:hidden relative z-10">
+                      {service.category === 'Produção Audiovisual' ? 'Orçamento' :
+                       service.category === 'Marketing Digital' ? 'Orçamento' :
+                       service.category === 'Desenvolvimento Web' ? 'Orçamento' :
+                       service.category === 'Assistência GSM' ? 'Alugar' :
+                       'Criar Design'}
+                    </span>
                   </Button>
                 )}
 

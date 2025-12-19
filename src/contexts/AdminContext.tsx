@@ -55,7 +55,8 @@ export const AdminProvider: React.FC<AdminProviderProps> = ({ children }) => {
         }));
         setSessions(parsedSessions);
       } catch (error) {
-        console.error('Erro ao carregar sessões:', error);
+        // Error loading sessions (removed console.error for production)
+        // Error details: ${error}
       }
     }
 

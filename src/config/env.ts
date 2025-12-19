@@ -16,6 +16,9 @@ export const env = {
   API_BASE_URL: import.meta.env.VITE_API_BASE_URL || 'https://api.tchova.digital',
   PAYMENT_API_URL: import.meta.env.VITE_PAYMENT_API_URL || 'https://payment.tchova.digital',
 
+  // Admin Configuration
+  ADMIN_PASSWORD: import.meta.env.VITE_ADMIN_PASSWORD || 'admin123',
+
   // Feature Flags
   ENABLE_GSM_FEATURES: import.meta.env.VITE_ENABLE_GSM_FEATURES === 'true',
   ENABLE_PAYMENT_FEATURES: import.meta.env.VITE_ENABLE_PAYMENT_FEATURES === 'true',

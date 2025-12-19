@@ -223,7 +223,7 @@ export const INDIVIDUAL_SERVICES: Service[] = [
       'Histórico completo da importação',
       'Segurança total - importações externas não têm acesso'
     ],
-    deliveryTime: '30-60 dias úteis (depende do produto e destino)',
+    deliveryTime: '7-14 dias úteis no máximo',
     revisions: '2 revisões completas inclusas',
     expertise: '6+ anos em importação internacional',
     projects: '2000+ importações realizadas com sucesso',
