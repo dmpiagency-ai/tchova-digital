@@ -67,7 +67,7 @@ const Footer = () => {
             <h4 className="font-bold text-foreground mb-3 text-sm">Contacto</h4>
             <div className="space-y-1.5 text-muted-foreground text-xs">
               <p>Maputo</p>
-              <p>+258 123 456 789</p>
+              <p>+258 87 909 7249</p>
               <p>hello@tchovadigital.com</p>
             </div>
 
